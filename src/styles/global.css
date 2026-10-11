@@ -516,6 +516,10 @@ html.reduced .board .track { transform: none !important; }
 .postcard .card { background: #f1ead9; padding: clamp(10px, 1.2vw, 16px) clamp(10px, 1.2vw, 16px) 0; transform: rotate(var(--r, 0deg)); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.85); }
 .postcard .img { overflow: hidden; background: #1a1814; }
 .postcard img { width: 100%; }
+/* each in-article postcard is held by a James clip, colours taking turns through the city palette */
+.postcard .card { position: relative; }
+.postcard .pclip { position: absolute; z-index: 3; top: -34px; left: var(--cx, 22%); width: 26px; height: auto; max-width: none; color: var(--clip, var(--accent)); transform: rotate(-8deg); filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.45)); pointer-events: none; }
+.postcard:nth-of-type(even) .pclip { transform: rotate(7deg); }
 .postcard figcaption { font-family: var(--f-hand); color: #2b2724; font-size: clamp(24px, 2vw, 30px); line-height: 1.1; padding: 12px 6px 16px; }
 @media (max-width: 720px) { .postcard { margin-inline: 0; } }
 

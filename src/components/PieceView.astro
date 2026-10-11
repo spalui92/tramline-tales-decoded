@@ -3,7 +3,8 @@ import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Icon from './Icon.astro';
 import Stamp from './Stamp.astro';
-import { cfg, SECTIONS, href, absolute, longDate, pad, chai, byKind, type Tale } from '../lib/site';
+import Clip from './Clip.astro';
+import { COLOURS, cfg, SECTIONS, href, absolute, longDate, pad, chai, byKind, type Tale } from '../lib/site';
 
 interface Props { piece: Tale }
 const { piece: tale } = Astro.props as Props;
@@ -54,10 +55,13 @@ const jsonld = {
         if (b.t === 'list') return (
           <ol class="az">{b.items.map((li) => <li><span class="mk" aria-hidden="true">{li.mark}</span><span>{li.x}</span></li>)}</ol>
         );
-        const r = [-1.6, 1.2, -0.8, 1.8][photo++ % 4];
+        const r = [-1.6, 1.2, -0.8, 1.8][photo % 4];
+        const clipHex = Object.values(COLOURS)[photo % Object.keys(COLOURS).length].hex;
+        const cx = [18, 70, 30, 62][photo++ % 4];
         return (
-          <figure class="postcard" style={`--r:${r}deg`} data-postcard>
+          <figure class="postcard" style={`--r:${r}deg;--clip:${clipHex};--cx:${cx}%`} data-postcard>
             <div class="card">
+              <Clip class="pclip" />
               <div class="img" data-clip>
                 <Image src={b.image} alt={b.caption} widths={fit(b.image.width, [640, 1000, 1400])} sizes="(max-width: 760px) 100vw, 760px" loading="lazy" data-parallax />
               </div>
