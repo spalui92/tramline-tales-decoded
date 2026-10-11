@@ -83,7 +83,7 @@ const lines = KINDS.map((k, i) => {
 </section>
 
 <script>
-  // Each line is a window onto its stops. It opens on the newest stop; the arrows and the edge
+  // Each line is a window onto its stops. It opens on the first stop (01); the arrows and the edge
   // fades only appear when there is more to see (more than three stops).
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll<HTMLElement>('[data-rm]').forEach((line) => {
@@ -110,7 +110,7 @@ const lines = KINDS.map((k, i) => {
     });
     sc.addEventListener('scroll', update, { passive: true });
     new ResizeObserver(update).observe(sc);
-    sc.scrollLeft = sc.scrollWidth;
+    sc.scrollLeft = 0;
     update();
   });
 </script>
