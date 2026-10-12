@@ -303,17 +303,12 @@ function tale() {
   const article = $('.tale');
   if (!article) return;
   // tram on the overhead wire = how far you have read
-  const fill = $('.wire .fill'), tram = $('.wire .tram');
-  if (fill && tram) {
-    const prose = $('[data-prose]')!;
-    const wire = $('.wire')!;
+  const prose = $('[data-prose]');
+  if (prose && $('.wire')) {
     ScrollTrigger.create({
       trigger: prose, start: 'top 60%', end: 'bottom bottom',
-      onUpdate: (self) => {
-        wire.style.setProperty('--p', self.progress.toFixed(4));
-        fill.style.transform = `scaleX(${self.progress})`;
-        tram.style.transform = `translateX(calc(${self.progress} * (100vw - 46px) + 0px))`;
-      },
+      onUpdate: (self) => setWire(self.progress),
+      onRefresh: (self) => setWire(self.progress),
     });
   }
 
@@ -388,18 +383,30 @@ function cursor() {
 }
 
 /* ---------- landing page: the tram rides the wire as the whole page is read ---------- */
-function pageWire() {
+function setWire(p: number) {
   const wire = $('.wire'), fill = $('.wire .fill'), tram = $('.wire .tram');
-  if (!wire || !fill || !tram || $('.tale')) return; // tale pages track their own prose
-  ScrollTrigger.create({
-    trigger: document.body, start: 'top top', end: 'bottom bottom',
-    onUpdate: (self) => {
-      wire.style.setProperty('--p', self.progress.toFixed(4));
-      fill.style.transform = `scaleX(${self.progress})`;
-      tram.style.transform = `translateX(calc(${self.progress} * (100vw - 46px) + 0px))`;
-    },
-  });
+  if (!wire || !fill || !tram) return;
+  const q = Math.min(1, Math.max(0, Number.isFinite(p) ? p : 0));
+  wire.style.setProperty('--p', q.toFixed(4));
+  fill.style.transform = `scaleX(${q})`;
+  tram.style.transform = `translateX(calc(${q} * (100vw - 46px)))`;
 }
+function pageWire() {
+  if (!$('.wire') || $('.tale')) return; // tale pages track their own prose
+  // plain scroll maths rather than a trigger, so the tram is placed on arrival, on back/forward and whenever the page grows
+  const update = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    setWire(max > 0 ? scrollY / max : 0);
+  };
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  addEventListener('load', update);
+  addEventListener('pageshow', update);
+  if ('ResizeObserver' in window) new ResizeObserver(update).observe(document.body);
+  update();
+}
+// every page: put the tram in place straight away, even before the first scroll
+setWire(0);
 
 /* ---------- start ---------- */
 cursor();

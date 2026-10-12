@@ -124,7 +124,7 @@ html.js [data-draw] path, html.js [data-draw] line { stroke-dasharray: 1; stroke
 .wire { position: fixed; z-index: 60; left: 0; right: 0; top: 0; height: 30px; pointer-events: none; }
 .wire::before { content: ''; position: absolute; left: 0; right: 0; top: 3px; height: 1px; background: var(--line-strong); }
 .wire .fill { position: absolute; left: 0; top: 2px; height: 3px; width: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }
-.wire .tram { position: absolute; top: 4px; left: 0; width: 46px; color: var(--accent); transform: translateX(-50%); }
+.wire .tram { position: absolute; top: 4px; left: 0; width: 46px; color: var(--accent); transform: translateX(0); }
 /* a faint frosted haze over the stretch the tram has already covered; --p is the reading progress (0 to 1) */
 .wire::after {
   content: ''; position: absolute; z-index: -1; left: 0; top: 0; height: 100%;
