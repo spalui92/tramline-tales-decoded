@@ -61,16 +61,29 @@ const jsonld = {
       <Icon name="tram" class="zr-tram" />
       <span class="zr-ting">ting ting</span>
     </div>
-    <p class="wrap also mono" data-reveal>
-      <span class="al">Also running</span>
-      {latestDepot
-        ? <a href={href(latestDepot.path)} style={`--c:${latestDepot.colour}`} data-cursor="Read" data-wipe={latestDepot.colour} data-wipe-to={latestDepot.title}><b>Depot File No. {pad(latestDepot.no)}</b> {latestDepot.title} <span aria-hidden="true">&rarr;</span></a>
-        : <a href={href('depot/')} style="--c:#f6c531" data-cursor="link"><b>Depot Files</b> first teardown soon <span aria-hidden="true">&rarr;</span></a>}
-      <span class="sep" aria-hidden="true">·</span>
-      {latestNotice
-        ? <a href={href(latestNotice.path)} style={`--c:${latestNotice.colour}`} data-cursor="Read" data-wipe={latestNotice.colour} data-wipe-to={latestNotice.title}><b>Notice No. {pad(latestNotice.no)}</b> {latestNotice.title} <span aria-hidden="true">&rarr;</span></a>
-        : <a href={href('notice/')} style="--c:#7fb0d8" data-cursor="link"><b>Notice Board</b> first notice soon <span aria-hidden="true">&rarr;</span></a>}
-    </p>
+    <div class="wrap ticket-section" data-reveal>
+      <div class="ticket-heading"><div><span class="mono ticket-overline">MORE STOPS ALONG THE LINE</span><h2>Also running</h2></div><span class="mono ticket-heading-note">KEEP YOUR TICKET</span></div>
+      <div class="ticket-stack">
+        {latestDepot
+          ? <a class="route-ticket ticket-depot" href={href(latestDepot.path)} data-cursor="Read" data-wipe={latestDepot.colour} data-wipe-to={latestDepot.title}>
+              <span class="ticket-stub"><strong>{pad(latestDepot.no)}</strong><span class="mono">DEPOT<br />FILES</span></span>
+              <span class="ticket-body"><span class="mono ticket-category">THE BRAND AUTOPSY</span><span class="ticket-title">{latestDepot.title}</span><span class="ticket-description">A closer look behind the creative work.</span></span>
+              <span class="ticket-arrow" aria-hidden="true">↗</span>
+            </a>
+          : <a class="route-ticket ticket-depot" href={href('depot/')} data-cursor="link"><span class="ticket-stub"><strong>02</strong><span class="mono">DEPOT<br />FILES</span></span><span class="ticket-body"><span class="mono ticket-category">THE BRAND AUTOPSY</span><span class="ticket-title">First teardown coming soon</span></span><span class="ticket-arrow" aria-hidden="true">↗</span></a>}
+        {latestNotice
+          ? <a class="route-ticket ticket-notice" href={href(latestNotice.path)} data-cursor="Read" data-wipe={latestNotice.colour} data-wipe-to={latestNotice.title}>
+              <span class="ticket-stub"><strong>{pad(latestNotice.no)}</strong><span class="mono">NOTICE<br />BOARD</span></span>
+              <span class="ticket-body"><span class="mono ticket-category">PLATFORM DISPATCH</span><span class="ticket-title">{latestNotice.title}</span><span class="ticket-description">A dispatch from the platform.</span></span>
+              <span class="ticket-arrow" aria-hidden="true">↗</span>
+            </a>
+          : <div class="route-ticket ticket-notice is-upcoming" aria-label="Notice Board: first dispatch coming soon">
+              <span class="ticket-stub"><strong>03</strong><span class="mono">NOTICE<br />BOARD</span></span>
+              <span class="ticket-body"><span class="mono ticket-category">PLATFORM DISPATCH</span><span class="ticket-title">Dispatches from the platform</span><span class="ticket-description">First dispatch coming soon.</span></span>
+              <span class="ticket-soon mono">SOON</span>
+            </div>}
+      </div>
+    </div>
   </section>
 
   <!-- THE LATEST THREE TALES -->
