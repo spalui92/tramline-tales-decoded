@@ -75,8 +75,9 @@ const jsonld = {
         const clipHex = Object.values(COLOURS)[photo % Object.keys(COLOURS).length].hex;
         const cx = [18, 70, 30, 62][photo++ % 4];
         const override = IMAGE_OVERRIDES[b.src];
+        const portrait = b.image.height > b.image.width * 1.08;
         return (
-          <figure class="postcard" style={`--r:${r}deg;--clip:${clipHex};--cx:${cx}%`} data-postcard>
+          <figure class:list={["postcard", portrait && "is-portrait"]} style={`--r:${r}deg;--clip:${clipHex};--cx:${cx}%`} data-postcard>
             <div class="card">
               <Clip class="pclip" />
               <div class="img" data-clip>
@@ -110,3 +111,59 @@ const jsonld = {
     </a>
   )}
 </Base>
+
+<style is:global>
+  /* Keep the page title semantically H1, but give it less visual weight on desktop. */
+  @media (min-width: 721px) {
+    .tale-title {
+      max-width: 16ch;
+      font-size: clamp(54px, 7.2vw, 132px);
+      line-height: 0.99;
+    }
+  }
+
+  /* Portrait source images keep their full frame; the caption becomes the postcard's side note. */
+  .postcard.is-portrait .card {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(180px, 0.72fr);
+    gap: clamp(14px, 2vw, 26px);
+    align-items: stretch;
+    padding-bottom: clamp(10px, 1.2vw, 16px);
+  }
+
+  .postcard.is-portrait .img {
+    min-width: 0;
+    display: grid;
+    place-items: center;
+  }
+
+  .postcard.is-portrait .img img {
+    width: 100%;
+    height: 100%;
+    max-height: 760px;
+    object-fit: contain;
+  }
+
+  .postcard.is-portrait figcaption {
+    align-self: end;
+    padding: 18px 12px 10px 0;
+    font-size: clamp(24px, 2.25vw, 32px);
+    line-height: 1.08;
+  }
+
+  @media (max-width: 720px) {
+    .postcard.is-portrait .card {
+      display: block;
+      padding-bottom: 0;
+    }
+
+    .postcard.is-portrait .img img {
+      height: auto;
+      max-height: none;
+    }
+
+    .postcard.is-portrait figcaption {
+      padding: 12px 6px 16px;
+    }
+  }
+</style>
