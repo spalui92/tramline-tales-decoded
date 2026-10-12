@@ -14,6 +14,22 @@ const idx = siblings.findIndex((p) => p.slug === tale.slug);
 const next = siblings[(idx + 1) % siblings.length];
 const fit = (w: number, list: number[]) => { const ok = list.filter((x) => x <= w); return ok.length ? ok : [w]; };
 const og = tale.cover ? absolute((await getImage({ src: tale.cover.image, width: 1200, format: 'jpg' })).src.replace(import.meta.env.BASE_URL, '')) : undefined;
+
+// A few externally hosted source-quality images are used for the Jaguar case file.
+// They keep the exact same postcard/card/clip treatment as every Tale, while avoiding
+// the heavily downsampled copies that were originally committed with Depot File 02.
+const IMAGE_OVERRIDES: Record<string, string> = {
+  'images/jaguar-rebrand-autopsy.jpg': 'https://cherrysauce.com/wp-content/uploads/2025/11/Jaguar-Rebrand-2024-2048x1145.jpg',
+  'images/jaguar-xf-2008.jpg': 'https://www.carscoops.com/wp-content/uploads/2017/09/e9a09750-jaguar-xf-1.jpg',
+  'images/jaguar-pre-rebrand-luxury.jpg': 'https://cdn.sanity.io/images/otg9j4oh/production-v3/675e0cd376f0092b4650c913b828f8896364f91d-690x461.jpg?fm=jpg&w=1200',
+  'images/jaguar-leaper-grille.jpg': 'https://www.motortrend.com/files/660c682ff84dea0008732d94/1955-jaguar-mark-vii-m-hood-orna.jpg?format=webp&q=85&w=1200&width=1200',
+  'images/jaguar-copy-nothing-campaign.jpg': 'https://img.zeit.de/mobilitaet/2024-11/automarke-jaguar-imagekampagne-shitstorm-bild/wide__1300x731',
+  'images/jaguar-real-recognises-real.jpg': 'https://espirituracer.com/archivos/2025/11/jaguar-1.png',
+  'images/jaguar-project-roar-electric.jpg': 'https://cloudfront-us-east-1.images.arcpublishing.com/copesa/BIMXE5DL4APCSSGE5LIBHUBAQY.jpg',
+  'images/jaguar-type00-prowl.jpg': 'https://jlr.scene7.com/is/image/jlr/FJ_W13_JAG26GL_303104414_FUTURE-JAG_DVH-5-1?wid=1400&hei=1750&fit=constrain',
+  'images/jaguar-heritage-red-f-type.jpg': 'https://www.jaguar.ca/content/dam/jdx/global/x152/21my/markets/us/X152_21MY_138_US.jpg.res/JLRHASHCC2E422378EAB21765D2F60323D83B6466C71C8F/X152_21MY_138_US.jpg',
+};
+
 let section = 0, photo = 0;
 const isNewest = next.no === 1 && siblings.length > 1;
 const lower = sec.singular.toLowerCase();
@@ -58,12 +74,15 @@ const jsonld = {
         const r = [-1.6, 1.2, -0.8, 1.8][photo % 4];
         const clipHex = Object.values(COLOURS)[photo % Object.keys(COLOURS).length].hex;
         const cx = [18, 70, 30, 62][photo++ % 4];
+        const override = IMAGE_OVERRIDES[b.src];
         return (
           <figure class="postcard" style={`--r:${r}deg;--clip:${clipHex};--cx:${cx}%`} data-postcard>
             <div class="card">
               <Clip class="pclip" />
               <div class="img" data-clip>
-                <Image src={b.image} alt={b.caption} widths={fit(b.image.width, [640, 1000, 1400])} sizes="(max-width: 760px) 100vw, 760px" loading="lazy" data-parallax />
+                {override
+                  ? <img src={override} alt={b.caption} loading="lazy" decoding="async" referrerpolicy="no-referrer" data-parallax />
+                  : <Image src={b.image} alt={b.caption} widths={fit(b.image.width, [640, 1000, 1400])} sizes="(max-width: 760px) 100vw, 760px" loading="lazy" data-parallax />}
               </div>
               <figcaption>{b.caption}</figcaption>
             </div>
