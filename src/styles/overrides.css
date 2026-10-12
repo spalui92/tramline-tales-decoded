@@ -126,22 +126,19 @@
 .foot-base > span { flex-basis:100%; }
 .foot-base > span:first-child { font-size: 0.85em; }
 
-/* One-time vintage typewriter for the English hero tagline, with underscore caret. */
+/* Full-width typewriter reveal: no ch-based clipping on letter-spaced mobile text. */
 .kicker .tagline-typewriter {
   position:relative; display:inline-block; white-space:nowrap;
-  overflow:hidden; max-width:100%; width:25ch;
+  width:max-content; max-width:none; overflow:visible;
 }
 html.js .kicker .tagline-typewriter {
-  width:0;
-  animation:hero-tagline-type 1.8s steps(25,end) 2.1s forwards;
+  animation:hero-tagline-reveal 1.8s steps(25,end) 2.1s both;
 }
-.kicker .tagline-typewriter::after {
-  content:"_"; position:absolute; right:0; bottom:0; color:var(--paper-dim);
-  animation:hero-tagline-caret .65s steps(1,end) 6;
+.kicker .tagline-typewriter::after { content:none; }
+@keyframes hero-tagline-reveal {
+  from { clip-path:inset(0 100% 0 0); }
+  to { clip-path:inset(0 0 0 0); }
 }
-@keyframes hero-tagline-type { from { width:0; } to { width:25ch; } }
-@keyframes hero-tagline-caret { 50% { opacity:0; } }
 @media (prefers-reduced-motion:reduce) {
-  html.js .kicker .tagline-typewriter { width:auto; animation:none; }
-  .kicker .tagline-typewriter::after { content:none; animation:none; }
+  html.js .kicker .tagline-typewriter { animation:none; clip-path:none; }
 }
