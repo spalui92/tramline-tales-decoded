@@ -40,13 +40,14 @@ const jsonld = {
           <span class="l1" data-hero-line aria-hidden="true"><span class="dv" lang="hi">ट</span><span class="en">ramline</span></span>
           <span class="l2" data-hero-line aria-hidden="true"><span class="dv" lang="hi">ट</span><span class="en">ales</span></span>
         </h1>
-        <p class="kicker" data-reveal><span class="bn" lang="bn">ট্রামলাইনের টুকিটাকি</span><span class="sep" aria-hidden="true">·</span><span class="en">Old tracks, new thoughts.</span></p>
+        <p class="kicker" data-reveal><span class="bn" lang="bn"><span class="bn-initial">ট্রা</span>মলাইনের টুকিটাকি</span><span class="sep" aria-hidden="true">·</span><span class="en">Old tracks, new thoughts.</span></p>
       </div>
     </div>
   </section>
 
   <!-- THE SCOREBOARD: the newest tale, straight after the masthead -->
   <section class="scoreboard" style={`--c:${latest.colour}`} aria-label="Latest tale">
+    <div class="wrap editorial-rule mono" aria-hidden="true"><span>TRAMLINE TALES</span><span class="editorial-rule-center">THE FRONT PAGE</span><span>EST. KOLKATA</span></div>
     <a class="wrap sb" href={href(latest.path)} data-cursor="Read" data-wipe={latest.colour} data-wipe-to={latest.title}>
       <span class="sb-meta mono" data-reveal><b>Latest · Tale No. {pad(latest.no)}</b><span>{shortDate(latest.date)}</span>{latest.tag && <span>{latest.tag}</span>}</span>
       <span class="sb-title" data-reveal>{latest.title}</span>
