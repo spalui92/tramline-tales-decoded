@@ -62,7 +62,20 @@ const jsonld = {
       <span class="zr-ting">ting ting</span>
     </div>
     <div class="wrap ticket-section" data-reveal>
-      <div class="ticket-heading"><div><span class="mono ticket-overline">MORE STOPS ALONG THE LINE</span><h2>Also running</h2></div><span class="mono ticket-heading-note">KEEP YOUR TICKET</span></div>
+      <div class="ticket-heading"><div><span class="mono ticket-overline">MORE STOPS ALONG THE LINE</span><h2>Also running</h2></div><svg class="ticket-tram-sketch" viewBox="0 0 260 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 126H245M32 132H252M55 118L48 136M95 118L89 136M135 118L129 136M175 118L169 136M215 118L209 136" stroke-width="1.1" opacity=".55"/>
+          <path d="M45 102L48 44Q49 37 58 35L191 28Q203 28 208 38L216 105L45 110Z" stroke-width="2"/>
+          <path d="M56 43L194 36M55 49L55 95M206 47L211 96M44 101L215 97M44 110L216 105" stroke-width="1.4"/>
+          <path d="M67 49L195 44L201 85L62 91Z" stroke-width="1.3"/>
+          <path d="M97 47L95 89M132 46L132 87M168 45L170 86M63 92L204 87M49 100L214 96" stroke-width="1.2"/>
+          <path d="M56 33L62 24L189 18L199 28M105 23L111 9L145 7L151 21M128 8L133 1M130 2L172 1" stroke-width="1.4"/>
+          <path d="M66 112L68 121L84 124L90 111M171 109L174 119L191 119L196 107" stroke-width="1.8"/>
+          <path d="M43 105L37 108L36 116M216 102L226 103L228 111M69 57L89 56M139 55L161 53M178 53L194 52" stroke-width=".8"/>
+          <path d="M17 140H253" stroke-width="1" stroke-dasharray="5 6"/>
+          <circle cx="76" cy="114" r="2.5" fill="currentColor"/><circle cx="183" cy="111" r="2.5" fill="currentColor"/>
+        </g>
+      </svg></div>
       <div class="ticket-stack">
         {latestDepot
           ? <a class="route-ticket ticket-depot" href={href(latestDepot.path)} data-cursor="Read" data-wipe={latestDepot.colour} data-wipe-to={latestDepot.title}>
