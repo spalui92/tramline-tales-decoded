@@ -12,7 +12,7 @@ export const cfg = config as {
 };
 
 const rawArticles = import.meta.glob('/articles/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
-const imageFiles = import.meta.glob('/images/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG}', { import: 'default', eager: true }) as Record<string, ImageMetadata>;
+const imageFiles = { ...import.meta.glob('/images/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG}', { import: 'default', eager: true }), ...import.meta.glob('/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG}', { import: 'default', eager: true }) } as Record<string, ImageMetadata>;
 
 // Each tale takes one colour from the city. Set `colour:` in an article's header
 // to choose one; otherwise they take turns in this order.
