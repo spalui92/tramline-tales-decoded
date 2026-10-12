@@ -120,3 +120,7 @@
 /* Give the English masthead room to breathe; keep the red Devanagari initials untouched. */
 .hero-title .l1 .en { letter-spacing: 0.025em; }
 .hero-title .l2 .en { letter-spacing: 0.015em; }
+
+/* Center the copyright and closing tagline as a single footer sign-off. */
+.foot-base { justify-content:center; text-align:center; }
+.foot-base > span { flex-basis:100%; }
