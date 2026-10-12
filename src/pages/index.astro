@@ -21,7 +21,7 @@ const jsonld = {
   blogPost: tales.map((t) => ({ '@type': 'BlogPosting', headline: t.title, datePublished: t.date, description: t.summary, url: absolute(t.path), author: { '@type': 'Person', name: cfg.author } })),
 };
 ---
-<Base page="home" jsonld={jsonld}>
+<Base page="home" wire jsonld={jsonld}>
   <!-- HERO: Howrah Bridge across the night, and a highway rolling out beneath it to the reader,
        with the masthead set on the road (desktop: the bridge runs edge to edge; phones: the centre span) -->
   <section class="hero" aria-labelledby="hero-title">

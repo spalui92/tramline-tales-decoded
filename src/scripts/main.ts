@@ -387,8 +387,23 @@ function cursor() {
   document.addEventListener('mouseenter', () => gsap.to(c, { opacity: 1, duration: 0.2 }));
 }
 
+/* ---------- landing page: the tram rides the wire as the whole page is read ---------- */
+function pageWire() {
+  const wire = $('.wire'), fill = $('.wire .fill'), tram = $('.wire .tram');
+  if (!wire || !fill || !tram || $('.tale')) return; // tale pages track their own prose
+  ScrollTrigger.create({
+    trigger: document.body, start: 'top top', end: 'bottom bottom',
+    onUpdate: (self) => {
+      wire.style.setProperty('--p', self.progress.toFixed(4));
+      fill.style.transform = `scaleX(${self.progress})`;
+      tram.style.transform = `translateX(calc(${self.progress} * (100vw - 46px) + 0px))`;
+    },
+  });
+}
+
 /* ---------- start ---------- */
 cursor();
+pageWire();
 tale();
 taleList();
 zipper();
