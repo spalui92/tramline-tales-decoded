@@ -134,10 +134,10 @@ function reveals() {
   // text that rises line by line from behind a mask
   $$('[data-split]').forEach((el) => {
     SplitText.create(el, {
-      type: 'lines', mask: 'lines', autoSplit: true,
+      type: 'lines', mask: 'lines', linesClass: 'split-line', autoSplit: true,
       onSplit(self) {
         gsap.set(el, { visibility: 'visible' });
-        return gsap.from(self.lines, { yPercent: 110, duration: 1.3, ease: 'expo.out', stagger: 0.09, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+        return gsap.from(self.lines, { yPercent: 125, duration: 1.3, ease: 'expo.out', stagger: 0.09, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
       },
     });
   });
