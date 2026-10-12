@@ -9,27 +9,41 @@ interface Props { items: Tale[]; showKind?: boolean }
 const { items, showKind = false } = Astro.props;
 const lean = [-2.2, 1.8, -1.2, 2.4];
 const fit = (w: number, list: number[]) => { const ok = list.filter((x) => x <= w); return ok.length ? ok : [w]; };
+const COVER_OVERRIDES: Record<string, string> = {
+  'images/jaguar-rebrand-autopsy.jpg': 'https://cherrysauce.com/wp-content/uploads/2025/11/Jaguar-Rebrand-2024-2048x1145.jpg',
+};
 ---
 <ol class="tale-list">
-  {items.map((t, i) => (
-    <li class="tale-row" style={`--c:${t.colour}`} data-row={t.slug} data-reveal>
-      <a href={href(t.path)} data-cursor="Read" data-wipe={t.colour} data-wipe-to={t.title}>
-        {t.cover && (
-          <span class="thumb"><span class="pinned" style={`--r:${lean[i % lean.length]}deg`}><Clip /><Image src={t.cover.image} alt="" widths={fit(t.cover.image.width, [480, 900])} sizes="86vw" loading="lazy" /></span></span>
-        )}
-        <span class="no mono">{showKind ? `${SECTIONS[t.kind].singular} ` : ''}No. {pad(t.no)}</span>
-        <span class="t">{t.title}</span>
-        <span class="tag mono">{t.tag} · {t.minutes} min</span>
-        <span class="d mono"><time datetime={t.date}>{shortDate(t.date)}</time></span>
-        <span class="sum">{t.summary}</span>
-      </a>
-    </li>
-  ))}
+  {items.map((t, i) => {
+    const override = t.cover ? COVER_OVERRIDES[t.cover.src] : undefined;
+    return (
+      <li class="tale-row" style={`--c:${t.colour}`} data-row={t.slug} data-reveal>
+        <a href={href(t.path)} data-cursor="Read" data-wipe={t.colour} data-wipe-to={t.title}>
+          {t.cover && (
+            <span class="thumb"><span class="pinned" style={`--r:${lean[i % lean.length]}deg`}><Clip />{override
+              ? <img src={override} alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+              : <Image src={t.cover.image} alt="" widths={fit(t.cover.image.width, [480, 900])} sizes="86vw" loading="lazy" />}</span></span>
+          )}
+          <span class="no mono">{showKind ? `${SECTIONS[t.kind].singular} ` : ''}No. {pad(t.no)}</span>
+          <span class="t">{t.title}</span>
+          <span class="tag mono">{t.tag} · {t.minutes} min</span>
+          <span class="d mono"><time datetime={t.date}>{shortDate(t.date)}</time></span>
+          <span class="sum">{t.summary}</span>
+        </a>
+      </li>
+    );
+  })}
 </ol>
 <div class="peek" aria-hidden="true" data-peek>
-  {items.map((t, i) => t.cover && (
-    <div class="pinned peek-card" data-peek-img={t.slug} style={`--c:${t.colour};--r:${lean[i % lean.length]}deg`}>
-      <Clip /><Image src={t.cover.image} alt="" widths={fit(t.cover.image.width, [400, 700])} sizes="340px" loading="lazy" />
-    </div>
-  ))}
+  {items.map((t, i) => {
+    if (!t.cover) return null;
+    const override = COVER_OVERRIDES[t.cover.src];
+    return (
+      <div class="pinned peek-card" data-peek-img={t.slug} style={`--c:${t.colour};--r:${lean[i % lean.length]}deg`}>
+        <Clip />{override
+          ? <img src={override} alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+          : <Image src={t.cover.image} alt="" widths={fit(t.cover.image.width, [400, 700])} sizes="340px" loading="lazy" />}
+      </div>
+    );
+  })}
 </div>
