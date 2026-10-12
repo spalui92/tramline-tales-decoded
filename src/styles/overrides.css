@@ -126,11 +126,22 @@
 .foot-base > span { flex-basis:100%; }
 .foot-base > span:first-child { font-size: 0.85em; }
 
-/* Vintage typewriter tagline: an underscore cursor, never a vertical bar. */
-.kicker .tagline-typewriter { position:relative; display:inline-block; white-space:nowrap; overflow:visible; }
-.kicker .tagline-typewriter::after {
-  content:"_"; position:absolute; left:100%; bottom:0; margin-left:.15em;
-  color:var(--paper-dim); animation:tagline-underscore-blink .7s steps(1,end) 4;
+/* One-time vintage typewriter for the English hero tagline, with underscore caret. */
+.kicker .tagline-typewriter {
+  position:relative; display:inline-block; white-space:nowrap;
+  overflow:hidden; max-width:100%; width:25ch;
 }
-@keyframes tagline-underscore-blink { 50% { opacity:0; } }
-@media (prefers-reduced-motion:reduce) { .kicker .tagline-typewriter::after { animation:none; content:none; } }
+html.js .kicker .tagline-typewriter {
+  width:0;
+  animation:hero-tagline-type 1.8s steps(25,end) 2.1s forwards;
+}
+.kicker .tagline-typewriter::after {
+  content:"_"; position:absolute; right:0; bottom:0; color:var(--paper-dim);
+  animation:hero-tagline-caret .65s steps(1,end) 6;
+}
+@keyframes hero-tagline-type { from { width:0; } to { width:25ch; } }
+@keyframes hero-tagline-caret { 50% { opacity:0; } }
+@media (prefers-reduced-motion:reduce) {
+  html.js .kicker .tagline-typewriter { width:auto; animation:none; }
+  .kicker .tagline-typewriter::after { content:none; animation:none; }
+}
