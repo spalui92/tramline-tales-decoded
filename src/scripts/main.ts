@@ -159,31 +159,23 @@ function hero() {
   if (!motion) return;
 
   const tl = gsap.timeline();
-  // Cinematic red dust crosses the title while its lettering develops from the haze.
+  // Crisp, lightweight editorial title-card reveal, without blurred smoke.
   const lines = $$('[data-hero-line]', hero);
-  const dvs = $$('.dv', hero);
-  lines.forEach((line) => {
-    gsap.set(line, { visibility: 'visible', clipPath: 'inset(-25% 100% -25% -12%)' });
-  });
-  gsap.set(dvs, { opacity: 1 });
+  lines.forEach((line) => gsap.set(line, { visibility: 'visible', clipPath: 'inset(0 100% 0 0)' }));
   tl.to(lines, {
-    clipPath: 'inset(-25% -12% -25% -12%)', duration: 2.1,
-    stagger: 0.18, ease: 'power2.inOut',
+    clipPath: 'inset(0 0 0 0)', duration: 0.85, stagger: 0.14, ease: 'power2.out',
     onComplete: () => gsap.set(lines, { clearProps: 'clipPath' }),
-  }, 0.15);
-  tl.fromTo(lines, { filter: 'blur(7px)' }, {
-    filter: 'blur(0px)', duration: 1.9, stagger: 0.18, ease: 'power2.out',
-    onComplete: () => gsap.set(lines, { clearProps: 'filter' }),
-  }, 0.15);
-  // Bengali ink settles on the page after the title, before the typewriter tagline.
+  }, 0.1);
   const bn = $('.kicker .bn', hero);
-  if (bn) tl.fromTo(bn, { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
-    { clipPath: 'inset(0 0 0 0)', opacity: 1, duration: 0.95, ease: 'power2.inOut',
-      onComplete: () => gsap.set(bn, { clearProps: 'clipPath' }) }, 1.65);
+  if (bn) tl.fromTo(bn, { clipPath: 'inset(0 100% 0 0)' },
+    { clipPath: 'inset(0 0 0 0)', duration: 0.6, ease: 'power2.out',
+      onComplete: () => gsap.set(bn, { clearProps: 'clipPath' }) }, 0.75);
+  tl.fromTo($$('.hero-intro, .hero-explore', hero), { opacity: 0, y: 9 },
+    { opacity: 1, y: 0, duration: 0.45, stagger: 0.12, ease: 'power2.out' }, 1.5);
   const draw = $$('[data-draw] path', hero);
   tl.to(draw, { strokeDashoffset: 0, duration: 2.6, ease: 'power2.inOut', stagger: 0.12 }, 0.1);
   tl.from($$('.bridge .lamp', hero), { opacity: 0, duration: 0.4, stagger: { each: 0.03, from: 'center' } }, 1.4);
-  tl.fromTo($('[data-reveal]', hero), { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.55);
+  tl.fromTo($('[data-reveal]', hero), { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.65);
 
   // on the way out, the title lifts away and the bridge settles into the river haze
   gsap.timeline({ scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } })
