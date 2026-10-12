@@ -122,7 +122,7 @@ html.js [data-draw] path, html.js [data-draw] line { stroke-dasharray: 1; stroke
 .has-wire .site-header { top: 30px; }
 .has-wire .site-header::before { top: -30px; }
 /* film-strip edges: a hairline with tiny sprocket holes, grey and quiet, above and below the bar */
-.has-wire .site-header::after {
+.site-header::after {
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.55;
   --film: rgba(150, 147, 140, 0.55);
   background:
