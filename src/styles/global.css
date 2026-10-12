@@ -539,6 +539,7 @@ html.reduced .board .track { transform: none !important; }
 .next .taxi { width: clamp(120px, 14vw, 220px); transition: transform 0.9s var(--ease-out); }
 .next:hover .taxi { transform: translateX(24px); }
 .next .arrow { font-family: var(--f-display); font-size: clamp(40px, 5vw, 80px); line-height: 1; }
+@media (max-width: 640px) { .next { padding-bottom: 24px; } }
 
 /* 404 */
 .lost { min-height: 100svh; display: grid; place-content: center; text-align: center; padding: var(--gutter); gap: 18px; }
