@@ -42,7 +42,8 @@ function scrollToY(target: number | HTMLElement) {
   addEventListener('scroll', () => {
     const y = scrollY;
     if (header) {
-      header.classList.toggle('is-hidden', y > last && y > 160);
+      // tale pages keep the whole bar under the tram in both directions; other pages tuck it away going down
+      header.classList.toggle('is-hidden', y > last && y > 160 && !document.body.classList.contains('has-wire'));
       header.classList.toggle('is-solid', y > 40);
     }
     last = y;
