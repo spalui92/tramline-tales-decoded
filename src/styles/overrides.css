@@ -125,3 +125,12 @@
 .foot-base { justify-content:center; text-align:center; }
 .foot-base > span { flex-basis:100%; }
 .foot-base > span:first-child { font-size: 0.85em; }
+
+/* Vintage typewriter tagline: an underscore cursor, never a vertical bar. */
+.kicker .tagline-typewriter { position:relative; display:inline-block; white-space:nowrap; overflow:visible; }
+.kicker .tagline-typewriter::after {
+  content:"_"; position:absolute; left:100%; bottom:0; margin-left:.15em;
+  color:var(--paper-dim); animation:tagline-underscore-blink .7s steps(1,end) 4;
+}
+@keyframes tagline-underscore-blink { 50% { opacity:0; } }
+@media (prefers-reduced-motion:reduce) { .kicker .tagline-typewriter::after { animation:none; content:none; } }
