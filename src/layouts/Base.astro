@@ -14,7 +14,7 @@ interface Props {
   wire?: boolean;
   jsonld?: object;
 }
-const { title, description = cfg.description, image, accent = '#f6c531', page, article, wire, jsonld } = Astro.props;
+const { title, description = cfg.description, image, accent = '#f6c531', page, article, wire = true, jsonld } = Astro.props;
 const fullTitle = title ? `${title} · ${cfg.name}` : `${cfg.name} · ${cfg.author}`;
 const canonical = absolute(Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), ''));
 const ogImage = image ?? absolute('og-cover.jpg');
