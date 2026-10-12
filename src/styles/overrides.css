@@ -124,3 +124,4 @@
 /* Center the copyright and closing tagline as a single footer sign-off. */
 .foot-base { justify-content:center; text-align:center; }
 .foot-base > span { flex-basis:100%; }
+.foot-base > span:first-child { font-size: 0.85em; }
