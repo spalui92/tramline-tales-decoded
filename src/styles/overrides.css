@@ -106,10 +106,10 @@
 @media (prefers-reduced-motion:reduce) { .route-ticket { transition:none; } }
 
 /* Faded engraving on the ticket booklet masthead, never over the ticket copy. */
-.ticket-heading { position:relative; min-height:106px; overflow:hidden; align-items:center; padding:9px 0 26px; border-bottom:1px dashed rgba(236,228,210,.22); }
+.ticket-heading { position:relative; min-height:106px; overflow:hidden; align-items:center; padding:9px 0 26px; border-bottom:none; }
 .ticket-heading > div { position:relative; z-index:1; }
 .ticket-tram-sketch { position:absolute; right:0; bottom:-5px; width:clamp(145px,24vw,240px); height:auto; color:#dbc49a; opacity:.78; transform:rotate(-3deg); pointer-events:none; }
-.ticket-heading::after { content:"";position:absolute;bottom:10px;right:0;width:43%;border-bottom:1px solid rgba(170,148,113,.22);pointer-events:none; }
+.ticket-heading::after { content:none; }
 @media (max-width:480px) {
  .ticket-heading { min-height:94px; }
  .ticket-heading h2 { font-size:34px; }
