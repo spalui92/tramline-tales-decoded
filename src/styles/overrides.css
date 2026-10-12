@@ -116,3 +116,7 @@
  .ticket-tram-sketch { width:148px;right:-12px;bottom:2px;opacity:.72; }
  .ticket-overline { font-size:8px; }
 }
+
+/* Give the English masthead room to breathe; keep the red Devanagari initials untouched. */
+.hero-title .l1 .en { letter-spacing: 0.025em; }
+.hero-title .l2 .en { letter-spacing: 0.015em; }
