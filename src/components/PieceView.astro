@@ -82,7 +82,10 @@ const jsonld = {
               <Clip class="pclip" />
               <div class="img" data-clip>
                 {override
-                  ? <img src={override} alt={b.caption} loading="lazy" decoding="async" referrerpolicy="no-referrer" data-parallax />
+                  ? <>
+                      <img src={override} alt={b.caption} loading="lazy" decoding="async" referrerpolicy="no-referrer" data-parallax onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+                      <Image src={b.image} alt={b.caption} widths={fit(b.image.width, [640, 1000, 1400])} sizes="(max-width: 760px) 100vw, 760px" loading="lazy" style="display:none" data-parallax />
+                    </>
                   : <Image src={b.image} alt={b.caption} widths={fit(b.image.width, [640, 1000, 1400])} sizes="(max-width: 760px) 100vw, 760px" loading="lazy" data-parallax />}
               </div>
               <figcaption>{b.caption}</figcaption>
