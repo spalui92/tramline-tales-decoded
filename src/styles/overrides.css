@@ -143,30 +143,18 @@ html.js .kicker .tagline-typewriter {
   html.js .kicker .tagline-typewriter { animation:none; clip-path:none; }
 }
 
-/* Red vermilion dust drifts across the title as the cinematic wipe reveals it. */
-.hero-title .l1, .hero-title .l2 { position:relative; isolation:isolate; }
-html.js.motion .hero-title .l1::after,
-html.js.motion .hero-title .l2::after {
-  content:""; position:absolute; z-index:2; pointer-events:none;
-  inset:-22% -6%; opacity:0;
-  background:
-    radial-gradient(ellipse 10% 32% at 50% 50%, rgba(229,53,42,.85),transparent 90%),
-    radial-gradient(ellipse 20% 52% at 46% 53%, rgba(184,30,27,.5),transparent 95%),
-    radial-gradient(circle at 35% 30%, rgba(255,126,80,.85) 0 1px, transparent 2px),
-    radial-gradient(circle at 65% 68%, rgba(235,63,43,.8) 0 1px, transparent 2px);
-  background-size:100% 100%,100% 100%,29px 31px,41px 37px;
-  animation:hero-vermilion-drift 2.25s ease-out .1s both;
-}
-html.js.motion .hero-title .l2::after { animation-delay:.28s; }
-@keyframes hero-vermilion-drift {
-  0% { opacity:0; transform:translateX(-58%) scale(.65); filter:blur(13px); }
-  18% { opacity:.9; }
-  64% { opacity:.72; filter:blur(8px); }
-  100% { opacity:0; transform:translateX(62%) scale(1.2); filter:blur(18px); }
-}
-/* The Bengali line now develops like ink rather than replaying the old red sweep. */
+/* Editorial title card: no simulated smoke or blur. */
 .kicker .bn::after { content:none; display:none; animation:none; }
-@media(prefers-reduced-motion:reduce) {
-  html.js.motion .hero-title .l1::after,
-  html.js.motion .hero-title .l2::after { content:none; animation:none; }
+.kicker { margin-top:clamp(20px,3vw,30px); }
+.kicker .en { letter-spacing:.13em; }
+html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-delay:1.15s; }
+.hero-intro { max-width:410px; margin:22px auto 0; color:var(--paper-dim); font-family:var(--f-body); font-size:clamp(13px,1.25vw,16px); line-height:1.5; text-align:center; text-wrap:balance; }
+.hero-explore { display:inline-flex; align-items:center; gap:12px; margin-top:18px; padding:8px 0; border-bottom:1px solid currentColor; color:var(--paper); font-family:var(--f-mono); font-size:10px; letter-spacing:.14em; text-decoration:none; transition:color .2s; }
+.hero-explore:hover { color:var(--accent); }
+.hero-explore span { font-size:17px; }
+@media(max-width:720px) {
+  .kicker .en { letter-spacing:.12em; font-size:10px; }
+  .hero-intro { max-width:290px; margin-top:16px; font-size:12px; }
+  .hero-explore { margin-top:12px; font-size:9px; }
 }
+@media(prefers-reduced-motion:reduce) { .hero-explore { transition:none; } }
