@@ -26,7 +26,7 @@ const sub = items.length === 0
   </header>
   <section class="wrap archive-list" id="tales" aria-label={`All ${heading}`}>
     {items.length > 0
-      ? <TaleList items={items} showKind={kind === 'all'} />
+      ? <TaleList items={items} showKind={kind === 'all'} hoverPreview={kind === 'tale'} />
       : <p class="archive-empty mono">{sec ? sec.empty : 'Nothing here yet.'}</p>}
   </section>
 </Base>
