@@ -1,2 +1,64 @@
 /* Small visual overrides kept separate from the main stylesheet for quick tuning. */
 .peek { width: 320px; }
+
+/* Mobile navigation: preserve the film-strip dots without crowding the wordmark. */
+@media (max-width: 640px) {
+  .site-header { gap: 10px; }
+  .nav { --ng: 13px; gap: var(--ng); font-size: 11px; letter-spacing: 0.015em; flex: 0 0 auto; }
+  .brand { min-width: 0; gap: 7px; }
+  .brand-tram { width: 26px; }
+  .brand .w1 { font-size: 12px; }
+  .brand .w2 { font-size: 20px; }
+}
+@media (max-width: 360px) {
+  .nav { --ng: 10px; font-size: 10.5px; }
+  .site-header { gap: 6px; }
+}
+
+/* The bridge and title read as one composition, with the title slightly higher. */
+@media (max-width: 720px) {
+  .hero-inner { padding-bottom: 44px; }
+  .hero-title { font-size: clamp(46px, 13.8vw, 54px); }
+  .sb-title { font-size: clamp(30px, 8.1vw, 38px); line-height: 1.025; }
+}
+@media (min-width: 721px) {
+  .hero-inner { padding-bottom: clamp(28px, 4vh, 44px); }
+}
+
+/* A restrained newspaper folio between the cinematic hero and lead story. */
+.editorial-rule {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding-block: 13px 11px; border-bottom: 1px solid var(--line-strong);
+  font-size: 10px; letter-spacing: 0.13em; color: var(--paper-dim);
+}
+.editorial-rule-center { color: #E34C3C; }
+.scoreboard::before { background: linear-gradient(90deg, transparent, #E34C3C 50%, transparent); height: 1px; }
+@media (max-width: 480px) {
+  .editorial-rule { font-size: 8px; letter-spacing: 0.08em; gap: 6px; }
+  .editorial-rule span:last-child { display: none; }
+  .editorial-rule-center { margin-left: auto; }
+}
+
+/* Noto Serif Bengali is already locally loaded. One red sweep, then cream with a red initial. */
+.kicker .bn {
+  position: relative; display: inline-block; isolation: isolate;
+  font-family: 'Noto Serif Bengali', serif; font-weight: 400;
+  color: #E9DFCD; -webkit-text-fill-color: #E9DFCD;
+  background: none; animation: none; line-height: 1.55;
+}
+.kicker .bn-initial { color: #E34C3C; -webkit-text-fill-color: #E34C3C; }
+.kicker .bn::after {
+  content: attr(data-text); position: absolute; inset: 0; white-space: nowrap;
+  color: #E34C3C; -webkit-text-fill-color: #E34C3C;
+  clip-path: inset(0 100% 0 0); opacity: 0;
+  pointer-events: none; animation: bengali-red-sweep 2s ease-out 0.4s both;
+}
+@keyframes bengali-red-sweep {
+  0% { clip-path: inset(0 100% 0 0); opacity: 0; }
+  12% { opacity: 1; }
+  60% { clip-path: inset(0 0 0 0); opacity: 0.95; }
+  100% { clip-path: inset(0 0 0 0); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kicker .bn::after { animation: none; display: none; }
+}
