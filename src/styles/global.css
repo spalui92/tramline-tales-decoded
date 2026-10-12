@@ -115,12 +115,12 @@ html.js [data-draw] path, html.js [data-draw] line { stroke-dasharray: 1; stroke
 @media (max-width: 640px) { .clock { display: none; } }
 
 /* tram-wire reading progress (tale pages) */
-.wire { position: fixed; z-index: 49; left: 0; right: 0; top: 0; height: 22px; pointer-events: none; }
+.wire { position: fixed; z-index: 60; left: 0; right: 0; top: 0; height: 30px; pointer-events: none; }
 .wire::before { content: ''; position: absolute; left: 0; right: 0; top: 3px; height: 1px; background: var(--line-strong); }
 .wire .fill { position: absolute; left: 0; top: 2px; height: 3px; width: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }
 .wire .tram { position: absolute; top: 4px; left: 0; width: 46px; color: var(--accent); transform: translateX(-50%); }
-.has-wire .site-header { top: 18px; }
-.has-wire .site-header::before { top: -18px; }
+.has-wire .site-header { top: 30px; }
+.has-wire .site-header::before { top: -30px; }
 
 /* ---------- custom cursor ---------- */
 .cursor { position: fixed; left: 0; top: 0; z-index: 120; pointer-events: none; display: none; }
