@@ -29,7 +29,7 @@ const fit = (w: number, list: number[]) => { const ok = list.filter((x) => x <= 
 <div class="peek" aria-hidden="true" data-peek>
   {items.map((t, i) => t.cover && (
     <div class="pinned peek-card" data-peek-img={t.slug} style={`--c:${t.colour};--r:${lean[i % lean.length]}deg`}>
-      <Clip /><Image src={t.cover.image} alt="" widths={fit(t.cover.image.width, [640, 1000])} sizes="320px" loading="lazy" />
+      <Clip /><Image src={t.cover.image} alt={`Preview for ${t.title}`} widths={fit(t.cover.image.width, [640, 1000])} sizes="320px" loading="eager" decoding="async" />
     </div>
   ))}
 </div>
