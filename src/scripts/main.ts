@@ -159,28 +159,31 @@ function hero() {
   if (!motion) return;
 
   const tl = gsap.timeline();
-  // the English letters rise first, leaving a space where each ट belongs
+  // Cinematic red dust crosses the title while its lettering develops from the haze.
+  const lines = $$('[data-hero-line]', hero);
   const dvs = $$('.dv', hero);
-  gsap.set(dvs, { opacity: 0, clipPath: 'inset(-30% 100% -30% -10%)' });
-  $$('[data-hero-line]', hero).forEach((line, i) => {
-    const split = SplitText.create($('.en', line) ?? line, { type: 'chars', mask: 'chars' });
-    gsap.set(line, { visibility: 'visible' });
-    tl.from(split.chars, { yPercent: 115, duration: 1.4, ease: 'expo.out', stagger: 0.045 }, 0.1 + i * 0.18);
+  lines.forEach((line) => {
+    gsap.set(line, { visibility: 'visible', clipPath: 'inset(-25% 100% -25% -12%)' });
   });
-  // then the Hindi letters arrive last, written in like a pen stroke, the ink settling as it dries
-  dvs.forEach((dv, i) => {
-    const at = 1.25 + i * 0.5;
-    tl.set(dv, { opacity: 1 }, at)
-      .to(dv, { clipPath: 'inset(-30% -10% -30% -10%)', duration: 1.15, ease: 'power2.inOut' }, at)
-      .fromTo(dv, { filter: 'blur(7px)', y: 8, scale: 1.07 }, {
-        filter: 'blur(0px)', y: 0, scale: 1, duration: 1.6, ease: 'expo.out', transformOrigin: '30% 85%',
-        onComplete: () => gsap.set(dv, { clearProps: 'filter,clipPath' }),
-      }, at);
-  });
+  gsap.set(dvs, { opacity: 1 });
+  tl.to(lines, {
+    clipPath: 'inset(-25% -12% -25% -12%)', duration: 2.1,
+    stagger: 0.18, ease: 'power2.inOut',
+    onComplete: () => gsap.set(lines, { clearProps: 'clipPath' }),
+  }, 0.15);
+  tl.fromTo(lines, { filter: 'blur(7px)' }, {
+    filter: 'blur(0px)', duration: 1.9, stagger: 0.18, ease: 'power2.out',
+    onComplete: () => gsap.set(lines, { clearProps: 'filter' }),
+  }, 0.15);
+  // Bengali ink settles on the page after the title, before the typewriter tagline.
+  const bn = $('.kicker .bn', hero);
+  if (bn) tl.fromTo(bn, { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
+    { clipPath: 'inset(0 0 0 0)', opacity: 1, duration: 0.95, ease: 'power2.inOut',
+      onComplete: () => gsap.set(bn, { clearProps: 'clipPath' }) }, 1.65);
   const draw = $$('[data-draw] path', hero);
   tl.to(draw, { strokeDashoffset: 0, duration: 2.6, ease: 'power2.inOut', stagger: 0.12 }, 0.1);
   tl.from($$('.bridge .lamp', hero), { opacity: 0, duration: 0.4, stagger: { each: 0.03, from: 'center' } }, 1.4);
-  tl.fromTo($$('[data-reveal]', hero), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.2, ease: 'expo.out', stagger: 0.1 }, 0.6);
+  tl.fromTo($('[data-reveal]', hero), { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.55);
 
   // on the way out, the title lifts away and the bridge settles into the river haze
   gsap.timeline({ scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } })
