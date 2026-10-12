@@ -305,9 +305,11 @@ function tale() {
   const fill = $('.wire .fill'), tram = $('.wire .tram');
   if (fill && tram) {
     const prose = $('[data-prose]')!;
+    const wire = $('.wire')!;
     ScrollTrigger.create({
       trigger: prose, start: 'top 60%', end: 'bottom bottom',
       onUpdate: (self) => {
+        wire.style.setProperty('--p', self.progress.toFixed(4));
         fill.style.transform = `scaleX(${self.progress})`;
         tram.style.transform = `translateX(calc(${self.progress} * (100vw - 46px) + 0px))`;
       },

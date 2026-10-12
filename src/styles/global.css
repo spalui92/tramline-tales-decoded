@@ -86,7 +86,8 @@ html.js [data-draw] path, html.js [data-draw] line { stroke-dasharray: 1; stroke
   mix-blend-mode: difference; color: #fff;
   transition: transform 0.45s var(--ease-out);
 }
-.site-header.is-hidden { transform: translateY(calc(-100% + 9px)); } /* leaves the lower film-strip edge showing so it is always on */
+.site-header.is-hidden { transform: translateY(-100%); }
+.has-wire .site-header.is-hidden { transform: translateY(calc(-100% - 30px)); } /* clears its own backdrop too, which reaches up behind the wire */
 .site-header::before { content: ''; position: absolute; inset: 0; z-index: -1; background: rgba(12, 11, 9, 0.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); opacity: 0; transition: opacity 0.4s; }
 .site-header.is-solid { mix-blend-mode: normal; color: var(--paper); }
 .site-header.is-solid::before { opacity: 1; }
@@ -124,6 +125,13 @@ html.js [data-draw] path, html.js [data-draw] line { stroke-dasharray: 1; stroke
 .wire::before { content: ''; position: absolute; left: 0; right: 0; top: 3px; height: 1px; background: var(--line-strong); }
 .wire .fill { position: absolute; left: 0; top: 2px; height: 3px; width: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }
 .wire .tram { position: absolute; top: 4px; left: 0; width: 46px; color: var(--accent); transform: translateX(-50%); }
+/* a faint frosted haze over the stretch the tram has already covered; --p is the reading progress (0 to 1) */
+.wire::after {
+  content: ''; position: absolute; z-index: -1; left: 0; top: 0; height: 100%;
+  width: calc(var(--p, 0) * (100% - 46px) + 23px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px);
+}
 .has-wire .site-header { top: 30px; }
 .has-wire .site-header::before { top: -30px; }
 /* film-strip edges: a hairline with tiny sprocket holes, grey and quiet, above and below the bar */
