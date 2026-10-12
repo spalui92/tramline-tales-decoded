@@ -298,8 +298,8 @@ html.js.arriving .wipe { visibility: visible; }
 .tale-row::before { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--c); transform: scaleX(0); transform-origin: left; transition: transform 0.8s var(--ease-out); }
 .tale-row .sum { grid-column: 2 / 3; max-width: 60ch; color: var(--paper-dim); font-size: 16px; line-height: 1.5; margin: 6px 0 0; }
 @media (hover: hover) {
-  .tale-row:hover::before { transform: scaleX(1); }
-  .tale-row:hover .t { transform: translateX(18px); color: var(--c); }
+  .tale-list.with-peek .tale-row:hover::before { transform: scaleX(1); }
+  .tale-list.with-peek .tale-row:hover .t { transform: translateX(18px); color: var(--c); }
 }
 .tale-row .thumb { display: none; }
 @media (max-width: 860px) {
