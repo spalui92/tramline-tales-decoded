@@ -159,9 +159,30 @@ html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-d
 }
 @media(prefers-reduced-motion:reduce) { .hero-explore { transition:none; } }
 
-/* Navbar: a solid black bar at all times, so it never melts into the hero. */
+/* Top of the page, one piece: the tram wire and the navbar share a single ink-black panel,
+   the old double film-strip edges are replaced by one quiet sprocket rule along the bottom,
+   and the panel melts into the hero with a soft shadow instead of a hard seam. */
 .site-header, .site-header.is-solid { mix-blend-mode: normal; color: var(--paper); }
-.site-header::before, .site-header.is-solid::before { opacity: 1; background: #000; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.site-header::before, .site-header.is-solid::before {
+  opacity: 1; background: var(--ink); -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 0;
+  box-shadow: 0 18px 26px -10px rgba(12, 11, 9, 0.95);
+}
+.has-wire .site-header::before { top: 0; }
+.wire { background: var(--ink); }
+.wire::before { background: rgba(236, 228, 210, 0.22); }
+/* one hairline with tiny sprocket holes, warm and quiet, only under the bar */
+.site-header::after {
+  opacity: 1; --film: rgba(246, 197, 49, 0.28);
+  background:
+    linear-gradient(90deg, transparent, var(--film) 12%, var(--film) 88%, transparent) 0 100% / 100% 1px no-repeat,
+    repeating-linear-gradient(90deg, var(--film) 0 3px, transparent 3px 10px) 0 calc(100% - 5px) / 100% 2px no-repeat;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+/* links: calmer, with a taxi-yellow underline for the page you are on */
+.nav { letter-spacing: 0.14em; }
+.nav a { color: var(--paper-dim); transition: color 0.3s; }
+.nav a:hover, .nav a[aria-current="page"] { color: var(--paper); }
+.nav a[aria-current="page"]::after { transform: scaleX(1); background: var(--accent); }
 
 /* Hero: no intro line any more; the masthead sits lower, clear of the bridge. */
 @media (max-width: 720px) {
@@ -171,6 +192,3 @@ html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-d
   .hero-inner { padding-bottom: clamp(14px, 2vh, 24px); }
 }
 
-/* Tram wire strip: warm brown, like the sky behind it. The black navbar starts below it. */
-.has-wire .site-header::before { top: 0; }
-.wire { background: #2a1a0e; border-bottom: 1px solid rgba(150, 147, 140, 0.25); }
