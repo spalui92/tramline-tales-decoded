@@ -170,3 +170,7 @@ html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-d
 @media (min-width: 721px) {
   .hero-inner { padding-bottom: clamp(14px, 2vh, 24px); }
 }
+
+/* Tram wire strip: warm brown, like the sky behind it. The black navbar starts below it. */
+.has-wire .site-header::before { top: 0; }
+.wire { background: #2a1a0e; border-bottom: 1px solid rgba(150, 147, 140, 0.25); }
