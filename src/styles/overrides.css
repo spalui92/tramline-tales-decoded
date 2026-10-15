@@ -158,3 +158,15 @@ html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-d
   .hero-explore { margin-top:12px; font-size:9px; }
 }
 @media(prefers-reduced-motion:reduce) { .hero-explore { transition:none; } }
+
+/* Navbar: a solid black bar at all times, so it never melts into the hero. */
+.site-header, .site-header.is-solid { mix-blend-mode: normal; color: var(--paper); }
+.site-header::before, .site-header.is-solid::before { opacity: 1; background: #000; -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* Hero: no intro line any more; the masthead sits lower, clear of the bridge. */
+@media (max-width: 720px) {
+  .hero-inner { padding-bottom: 18px; }
+}
+@media (min-width: 721px) {
+  .hero-inner { padding-bottom: clamp(14px, 2vh, 24px); }
+}
