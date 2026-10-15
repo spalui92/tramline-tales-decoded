@@ -61,6 +61,20 @@ function scrollToY(target: number | HTMLElement) {
   }
 }
 
+/* ---------- the brass alarm clock on the front page: HH:MM:SS in Howrah, and a chime on press ---------- */
+{
+  const btn = $('[data-alarm]') as HTMLElement | null;
+  const out = btn?.querySelector('[data-al-time]');
+  if (btn && out) {
+    const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+    const tick = () => { if (btn.offsetParent !== null) out.innerHTML = fmt.format(new Date()).replace(/:/g, '<b>:</b>'); };
+    tick(); setInterval(tick, 1000);
+    btn.addEventListener('click', () => {
+      btn.classList.remove('ting'); void btn.offsetWidth; btn.classList.add('ting');
+    });
+  }
+}
+
 /* ---------- same-page anchors and the rickshaw back to the top ---------- */
 document.addEventListener('click', (e) => {
   const a = (e.target as Element).closest<HTMLAnchorElement>('a[href*="#"]');

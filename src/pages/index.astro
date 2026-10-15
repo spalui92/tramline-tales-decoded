@@ -7,6 +7,8 @@ import Frame from '../components/Frame.astro';
 import Heartbeat from '../components/Heartbeat.astro';
 import RouteMap from '../components/RouteMap.astro';
 import Icon from '../components/Icon.astro';
+import Clip from '../components/Clip.astro';
+import { Image } from 'astro:assets';
 import { cfg, tales, newestFirst, depotFiles, notices, href, absolute, shortDate, pad } from '../lib/site';
 import { windows } from '../lib/kolkata';
 
@@ -48,14 +50,41 @@ const jsonld = {
   <!-- THE SCOREBOARD: the newest tale, straight after the masthead -->
   <section class="scoreboard" style={`--c:${latest.colour}`} aria-label="Latest tale">
     <div class="wrap editorial-rule mono" aria-hidden="true"><span>TRAMLINE TALES</span><span class="editorial-rule-center">THE FRONT PAGE</span><span>EST. KOLKATA</span></div>
-    <a class="wrap sb" href={href(latest.path)} data-cursor="Read" data-wipe={latest.colour} data-wipe-to={latest.title}>
+    <div class="wrap sb">
       <span class="sb-meta mono" data-reveal><b>Latest · Tale No. {pad(latest.no)}</b><span>{shortDate(latest.date)}</span>{latest.tag && <span>{latest.tag}</span>}</span>
-      <span class="sb-title" data-reveal>{latest.title}</span>
-      <span class="sb-side" data-reveal>
-        <span class="sb-sum">{latest.summary}</span>
-        <span class="sb-cta mono">Board here <span aria-hidden="true">&rarr;</span></span>
-      </span>
-    </a>
+      <a class="sb-main" href={href(latest.path)} data-cursor="Read" data-wipe={latest.colour} data-wipe-to={latest.title}>
+        <span class="sb-title" data-reveal>{latest.title}</span>
+        <span class="sb-side" data-reveal>
+          <span class="sb-sum">{latest.summary}</span>
+          <span class="sb-cta mono">Board here <span aria-hidden="true">&rarr;</span></span>
+        </span>
+      </a>
+      <div class="sb-desk">
+        <span class="sb-ghost" aria-hidden="true">{pad(latest.no)}</span>
+        {latest.cover && (
+          <a class="sb-cardlink" href={href(latest.path)} tabindex="-1" aria-hidden="true" data-cursor="Read" data-wipe={latest.colour} data-wipe-to={latest.title}>
+            <figure class="postcard sb-card" style={`--r:2.2deg;--clip:${latest.colour};--cx:62%`}>
+              <div class="card">
+                <Clip class="pclip" />
+                <div class="img"><Image src={latest.cover.image} alt="" widths={[480, 800]} sizes="400px" loading="eager" /></div>
+                <figcaption>{latest.cover.caption.replace(/\s*\([^)]*\)\s*$/, '')}</figcaption>
+              </div>
+            </figure>
+          </a>
+        )}
+        <button class="alarm" type="button" data-alarm aria-label="Howrah time. Press to make it chime.">
+          <span class="al-bell l"></span><span class="al-bell r"></span><span class="al-hammer"></span>
+          <span class="al-body">
+            <span class="al-screen">
+              <span class="al-ghost" aria-hidden="true">88:88:88</span>
+              <span class="al-time" data-al-time aria-hidden="true">00:00:00</span>
+            </span>
+            <span class="al-label">HOWRAH <i>·</i> IST</span>
+          </span>
+          <span class="al-leg l"></span><span class="al-leg r"></span>
+        </button>
+      </div>
+    </div>
     <div class="zip-rule" aria-hidden="true" data-zip-rule>
       <span class="zr-track"></span>
       <Icon name="tram" class="zr-tram" />
