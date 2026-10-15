@@ -164,12 +164,12 @@ html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-d
    and the panel melts into the hero with a soft shadow instead of a hard seam. */
 .site-header, .site-header.is-solid { mix-blend-mode: normal; color: var(--paper); }
 .site-header::before, .site-header.is-solid::before {
-  opacity: 1; background: var(--ink); -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 0;
-  box-shadow: 0 18px 26px -10px rgba(12, 11, 9, 0.95);
+  opacity: 1; background: linear-gradient(to bottom, #0c0b09 0%, #150e08 45%, #26170b 100%); -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 0;
+  box-shadow: 0 16px 24px -12px rgba(12, 11, 9, 0.9);
 }
 .has-wire .site-header::before { top: 0; }
-.wire { background: var(--ink); }
-.wire::before { background: rgba(236, 228, 210, 0.22); }
+.wire { background: #2a1a0e; border-bottom: 1px solid rgba(246, 197, 49, 0.18); }
+.wire::before { background: rgba(236, 228, 210, 0.28); }
 /* one hairline with tiny sprocket holes, warm and quiet, only under the bar */
 .site-header::after {
   opacity: 1; --film: rgba(246, 197, 49, 0.28);
@@ -192,3 +192,7 @@ html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-d
   .hero-inner { padding-bottom: clamp(14px, 2vh, 24px); }
 }
 
+
+/* Bridge breathing room: a taller hero, so the span no longer touches the navbar. */
+.hero { height: calc(clamp(470px, 68svh, 780px) + 40px); }
+@media (max-width: 720px) { .hero { height: calc(clamp(480px, 64svh, 600px) + 36px); } }
