@@ -41,7 +41,8 @@ const jsonld = {
           <span class="sr">Tramline Tales</span>
           <!-- the lockup: TRAMLINE in condensed caps with a tram standing in for the I; below it, Tales in a
                light italic whose T is a tram pole, its crossbar running on as the overhead wire -->
-          <svg class="lockup" data-hero-line viewBox="0 0 270 112" aria-hidden="true" focusable="false">
+          <svg class="lockup" viewBox="0 0 270 112" aria-hidden="true" focusable="false">
+            <g class="lk-left">
             <text class="lk-caps" x="0" y="40" textLength="98" lengthAdjust="spacingAndGlyphs">TRAML</text>
             <g class="lk-tram" transform="translate(102 12) scale(0.6538 0.6667)">
               <rect x="0" y="1" width="26" height="2" class="gold" />
@@ -55,6 +56,8 @@ const jsonld = {
               <rect x="0" y="39" width="26" height="2" class="gold" />
             </g>
             <text class="lk-caps" x="123" y="40" textLength="38" lengthAdjust="spacingAndGlyphs">NE</text>
+            </g>
+            <g class="lk-right">
             <g class="lk-pole" transform="translate(98 108) skewX(-11)">
               <line x1="0" y1="-56" x2="155" y2="-56" />
               <line x1="0" y1="-56" x2="0" y2="-45" />
@@ -63,9 +66,10 @@ const jsonld = {
               <circle class="lk-signal" cx="155" cy="-56" r="3.4" />
             </g>
             <text class="lk-script" x="138" y="108" textLength="118" lengthAdjust="spacing">ales</text>
+            </g>
           </svg>
         </h1>
-        <p class="kicker" data-reveal><span class="bn" lang="bn" data-text="ট্রামলাইনের টুকিটাকি"><span class="bn-initial">ট্রা</span>মলাইনের টুকিটাকি</span><span class="sep" aria-hidden="true">·</span><span class="en tagline-typewriter">Old tracks, new thoughts.</span></p>
+        <p class="kicker" data-reveal><span class="bn" lang="bn" data-text="ট্রামলাইনের টুকিটাকি"><span class="bn-initial">ট্রা</span>মলাইনের টুকিটাকি</span><span class="tape"><span class="en tagline-typewriter">old tracks, new thoughts.</span></span></p>
       </div>
     </div>
   </section>

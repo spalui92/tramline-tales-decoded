@@ -277,3 +277,36 @@ html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-d
   .hero-title .lockup { width: min(86vw, 340px); }
   .masthead .kicker { align-items: flex-end; gap: 7px; margin-top: 10px; }
 }
+
+/* The annotator (17 Oct 2026): the tagline handwritten on a strip of highlighter tape, stamped under the lockup.
+   TRAMLINE rolls in from the left, Tales from the right, then the tape lands. */
+.lockup .lk-left, .lockup .lk-right { transform-box: view-box; }
+.masthead .kicker { align-self: stretch; flex-direction: column; align-items: center; gap: 12px; margin-top: 10px; text-align: center; }
+.masthead .kicker .tape {
+  position: relative; display: inline-block; padding: 2px 26px 6px; transform: rotate(-2.5deg);
+  background: var(--taxi); color: #14110d;
+  clip-path: polygon(1% 8%, 6% 0, 18% 6%, 34% 1%, 52% 5%, 70% 0, 86% 4%, 99% 0, 100% 46%, 98% 93%, 84% 100%, 66% 95%, 48% 100%, 30% 94%, 14% 100%, 2% 95%, 0 52%);
+}
+.masthead .kicker .tape .en {
+  font-family: 'Sacramento', cursive; text-transform: none; letter-spacing: 0; color: #14110d;
+  font-size: clamp(26px, 2.4vw, 34px); line-height: 1.55; padding-bottom: 0.08em; white-space: nowrap;
+}
+html.js.motion .lockup .lk-left { animation: lk-from-left 0.9s cubic-bezier(.2,.8,.2,1) 0.15s both; }
+html.js.motion .lockup .lk-right { animation: lk-from-right 0.9s cubic-bezier(.2,.8,.2,1) 0.35s both; }
+html.js.motion .masthead .kicker .tape { animation: tape-stamp 0.45s cubic-bezier(.3,1.6,.5,1) 1.05s both; }
+@keyframes lk-from-left { from { transform: translateX(-60px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes lk-from-right { from { transform: translateX(60px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes tape-stamp { from { transform: rotate(-2.5deg) scale(1.35); opacity: 0; } to { transform: rotate(-2.5deg) scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .lockup .lk-left, .lockup .lk-right, .masthead .kicker .tape { animation: none !important; }
+}
+/* Phones: drop the Bengali line, leave just the tape. */
+@media (max-width: 720px) {
+  .masthead .kicker .bn { display: none; }
+  .masthead .kicker { margin-top: 12px; }
+  .masthead .kicker .tape .en { font-size: 26px; }
+}
+/* Desktop: Bengali line and tape share one row, keeping the lockup down on the road, clear of the bridge. */
+@media (min-width: 721px) {
+  .masthead .kicker { flex-direction: row; justify-content: center; align-items: center; gap: 22px; margin-top: 4px; }
+}
