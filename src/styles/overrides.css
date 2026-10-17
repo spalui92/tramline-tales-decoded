@@ -265,6 +265,7 @@ html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-d
 .lockup .lk-pole { fill: var(--taxi); stroke: var(--taxi); }
 .lockup .lk-pole line { stroke-width: 2; }
 .lockup .lk-pole rect { stroke: none; }
+.lockup .lk-pole .lk-signal { fill: var(--sindoor); stroke: none; }
 .lockup .gold { fill: var(--taxi); }
 .lockup .wire { stroke: var(--paper); stroke-width: 1.6; fill: none; }
 .lockup .body { fill: var(--paper); }
