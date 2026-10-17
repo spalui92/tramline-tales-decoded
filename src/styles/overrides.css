@@ -321,3 +321,11 @@ html.js.motion .masthead .kicker .tape { animation: tape-stamp 0.45s cubic-bezie
   html.js.motion .masthead .bn-over { animation: lk-from-left 0.9s cubic-bezier(.2,.8,.2,1) 0.6s both; }
   .masthead .kicker:not(.bn-over) { margin-top: 10px; }
 }
+/* Tape sized to the lockup, not the viewport extremes: smaller on phones, a touch smaller on desktop. */
+.masthead .kicker .tape { padding: 1px 20px 5px; }
+.masthead .kicker .tape .en { font-size: clamp(20px, 1.6vw, 26px); }
+@media (max-width: 720px) {
+  .masthead .kicker { margin-top: 10px; }
+  .masthead .kicker .tape { padding: 0 14px 3px; }
+  .masthead .kicker .tape .en { font-size: clamp(17px, 5vw, 20px); }
+}
