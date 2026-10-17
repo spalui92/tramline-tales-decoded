@@ -39,8 +39,30 @@ const jsonld = {
       <div class="masthead">
         <h1 class="hero-title" id="hero-title">
           <span class="sr">Tramline Tales</span>
-          <span class="l1" data-hero-line aria-hidden="true"><span class="dv" lang="hi">ट</span><span class="en">ramline</span></span>
-          <span class="l2" data-hero-line aria-hidden="true"><span class="dv" lang="hi">ट</span><span class="en">ales</span></span>
+          <!-- the lockup: TRAMLINE in condensed caps with a tram standing in for the I; below it, Tales in a
+               light italic whose T is a tram pole, its crossbar running on as the overhead wire -->
+          <svg class="lockup" data-hero-line viewBox="0 0 270 112" aria-hidden="true" focusable="false">
+            <text class="lk-caps" x="0" y="40" textLength="98" lengthAdjust="spacingAndGlyphs">TRAML</text>
+            <g class="lk-tram" transform="translate(102 12) scale(0.6538 0.6667)">
+              <rect x="0" y="1" width="26" height="2" class="gold" />
+              <path d="M13 3 L7 11 M13 3 L19 11" class="wire" />
+              <rect x="3" y="10" width="20" height="28" rx="2" class="body" />
+              <rect x="6" y="12" width="14" height="4" rx="1" class="glass" />
+              <rect x="6" y="18" width="6" height="10" rx="1" class="glass" />
+              <rect x="14" y="18" width="6" height="10" rx="1" class="glass" />
+              <rect x="3" y="30" width="20" height="2" class="gold" />
+              <circle cx="13" cy="35" r="1.6" class="lamp-red" />
+              <rect x="0" y="39" width="26" height="2" class="gold" />
+            </g>
+            <text class="lk-caps" x="123" y="40" textLength="38" lengthAdjust="spacingAndGlyphs">NE</text>
+            <g class="lk-pole" transform="translate(98 108) skewX(-11)">
+              <line x1="0" y1="-56" x2="155" y2="-56" />
+              <line x1="0" y1="-56" x2="0" y2="-45" />
+              <rect x="20" y="-56" width="6" height="56" />
+              <line x1="12" y1="-1.5" x2="34" y2="-1.5" />
+            </g>
+            <text class="lk-script" x="138" y="108" textLength="118" lengthAdjust="spacing">ales</text>
+          </svg>
         </h1>
         <p class="kicker" data-reveal><span class="bn" lang="bn" data-text="ট্রামলাইনের টুকিটাকি"><span class="bn-initial">ট্রা</span>মলাইনের টুকিটাকি</span><span class="sep" aria-hidden="true">·</span><span class="en tagline-typewriter">Old tracks, new thoughts.</span></p>
       </div>

@@ -253,3 +253,26 @@ html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-d
   .alarm.ting .al-bell.r { animation: alBellR 0.5s ease-in-out 4; }
   .alarm.ting .al-time { animation: alFlare 0.5s ease-in-out 4; }
 }
+
+
+/* Masthead lockup (17 Oct 2026): TRAMLINE in condensed caps with a tram as the I, and a larger
+   italic Tales whose T is a tram pole carrying the overhead wire. Capped so it never swamps the bridge. */
+.masthead { width: auto; display: flex; flex-direction: column; align-items: center; }
+.hero-title { font-size: inherit; line-height: 1; }
+.hero-title .lockup { display: block; width: clamp(300px, 38vw, 540px); height: auto; overflow: visible; }
+.lockup .lk-caps { font-family: 'Bebas Neue', var(--f-display); font-size: 40px; fill: var(--paper); }
+.lockup .lk-script { font-family: 'Cormorant Garamond', var(--f-display); font-style: italic; font-weight: 500; font-size: 80px; fill: var(--taxi); }
+.lockup .lk-pole { fill: var(--taxi); stroke: var(--taxi); }
+.lockup .lk-pole line { stroke-width: 2; }
+.lockup .lk-pole rect { stroke: none; }
+.lockup .gold { fill: var(--taxi); }
+.lockup .wire { stroke: var(--paper); stroke-width: 1.6; fill: none; }
+.lockup .body { fill: var(--paper); }
+.lockup .glass { fill: #0c0b09; }
+.lockup .lamp-red { fill: var(--sindoor); }
+/* the Bengali line and tagline sit under Tales, flush with its right edge */
+.masthead .kicker { align-self: stretch; justify-content: flex-end; text-align: right; margin-top: clamp(8px, 1.4vh, 14px); }
+@media (max-width: 720px) {
+  .hero-title .lockup { width: min(86vw, 340px); }
+  .masthead .kicker { align-items: flex-end; gap: 7px; margin-top: 10px; }
+}
