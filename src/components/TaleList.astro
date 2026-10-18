@@ -14,7 +14,7 @@ const fit = (w: number, list: number[]) => { const ok = list.filter((x) => x <= 
   {items.map((t, i) => (
     <li class="tale-row" style={`--c:${t.colour}`} data-row={t.slug} data-reveal>
       <a href={href(t.path)} data-cursor="Read" data-wipe={t.colour} data-wipe-to={t.title}>
-        {t.cover && !(t.kind === 'depot' && t.no === 2) && (
+        {t.cover && t.kind !== 'depot' && (
           <span class="thumb"><span class="pinned" style={`--r:${lean[i % lean.length]}deg`}><Clip /><Image src={t.cover.image} alt="" widths={fit(t.cover.image.width, [480, 900])} sizes="86vw" loading="lazy" /></span></span>
         )}
         <span class="no mono">{showKind ? `${SECTIONS[t.kind].singular} ` : ''}No. {pad(t.no)}</span>
@@ -27,7 +27,7 @@ const fit = (w: number, list: number[]) => { const ok = list.filter((x) => x <= 
   ))}
 </ol>
 {hoverPreview && <div class="peek" aria-hidden="true" data-peek>
-  {items.map((t, i) => t.cover && (
+  {items.map((t, i) => t.cover && t.kind !== 'depot' && (
     <div class="pinned peek-card" data-peek-img={t.slug} style={`--c:${t.colour};--r:${lean[i % lean.length]}deg`}>
       <Clip /><Image src={t.cover.image} alt={`Preview for ${t.title}`} widths={fit(t.cover.image.width, [640, 1000])} sizes="320px" loading="eager" decoding="async" />
     </div>
