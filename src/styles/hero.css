@@ -53,11 +53,13 @@
   .hero { --tw: 72vw; }
   .hero .t-near { width: calc(var(--tw) * 0.56); top: calc(var(--hy, 55%) - 1.4vh + var(--tw) * 0.006); }
   .hero-quote { top: calc(var(--hy, 55%) - 1.4vh + var(--tw) * 0.224 + 18px); gap: 10px; }
-  .hero-quote p { gap: 7px; }
-  .hero-quote .ln { gap: 9px; }
-  .hero-quote .setup { font-size: clamp(11px, 3.2vw, 14px); letter-spacing: 0.14em; }
-  .hero-quote .setup::before, .hero-quote .setup::after { width: 14px; }
-  .hero-quote .punch { font-size: clamp(22px, 6.6vw, 28px); }
+  .hero-quote p { gap: 6px; }
+  .hero-quote .ln { gap: 8px; }
+  /* the quote is an accessory to the title: the punchline's caps stand 0.3x as tall as TRAMLINE's
+     (TRAMLINE's caps are 0.173 x --tw tall, Oswald's caps 0.81em, so 0.3 x 0.173 / 0.81 = 0.064) */
+  .hero-quote .setup { font-size: max(10.5px, calc(var(--tw) * 0.036)); letter-spacing: 0.14em; }
+  .hero-quote .setup::before, .hero-quote .setup::after { width: 12px; }
+  .hero-quote .punch { font-size: calc(var(--tw) * 0.064); }
 }
 
 /* one arrival: the lamps strike on first, then TRAMLINE surfaces from the haze, Tales slides in, the quote lands */
