@@ -33,7 +33,8 @@ const jsonld = {
       <!-- TRAMLINE in condensed caps, a tram standing in for the I -->
       <svg class="t-far" viewBox="0 11 161 30.5" aria-hidden="true" focusable="false">
         <text class="caps" x="0" y="40" textLength="98" lengthAdjust="spacing">TRAML</text>
-        <g transform="translate(102 12) scale(0.6538 0.6667)">
+        <!-- the tram spans exactly the caps' height: Oswald's caps are 0.81em, so y 12.14 to the baseline at 40 -->
+        <g transform="translate(102 11.44) scale(0.6538 0.6966)">
           <rect x="0" y="1" width="26" height="2" class="gold" />
           <path d="M13 3 L7 11 M13 3 L19 11" class="wire" />
           <rect x="3" y="10" width="20" height="28" rx="2" class="body" />
