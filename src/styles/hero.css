@@ -1,74 +1,103 @@
-/* ---------- hero: driving across Howrah Bridge at night ----------
-   The scene (src/scripts/gateway.ts) draws the deck, the girders, the lamps and the Hooghly below on two
-   canvases and sets --hy, its horizon, on the hero. TRAMLINE stands inside the bridge between the two
-   canvases, so the nearest girders pass in front of it; Tales sits in front of everything at its lower
-   right; the quote closes the hero, centred underneath. Every position hangs off --hy and --tw (the width
-   of TRAMLINE), so the type and the road can never drift apart. Phones get the same composition, scaled. */
-.hero { --tw: min(80vw, 1240px, 150svh); position: relative; height: clamp(600px, 94svh, 940px); overflow: hidden; isolation: isolate; background: #06070b; }
-.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
-.hero .scene-back { z-index: 0; }
-.hero .scene-front { z-index: 2; }
+/* ---------- hero: a night tram on an old iron bridge, with the diary's paper props ----------
+   One composition: the photograph sits behind, a scrim keeps the left calm for the title, and the props
+   (a clipping, a tram ticket, a bridge photograph, a rubber stamp) are cut-outs laid on top, right side
+   on wide screens and in two rows below the copy on phones. Everything is scoped to .hero so no other
+   page is touched. */
+@font-face { font-family: 'Anton'; src: url('../assets/fonts/anton-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 
-.hero-title { margin: 0; }
-.hero .t-far, .hero .t-near { position: absolute; display: block; height: auto; max-width: none; overflow: visible; pointer-events: none; }
-.hero .t-far { z-index: 1; width: var(--tw); left: calc((100% - var(--tw)) / 2); bottom: calc(100% - var(--hy, 50%) + 1.4vh);
-  filter: drop-shadow(0 0 28px rgba(255, 168, 86, 0.28)) drop-shadow(0 0 2px rgba(255, 220, 170, 0.35)); }
-.hero .t-near { z-index: 3; width: calc(var(--tw) * 0.38); right: calc((100% - var(--tw)) / 2); top: calc(var(--hy, 50%) - 1.4vh + var(--tw) * 0.004);
-  filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.8)); }
-/* a light condensed cut, so TRAMLINE stays big without shouting */
-.t-far .caps { font-family: 'Oswald Variable', 'Bebas Neue', var(--f-display); font-weight: 300; font-size: 34.4px; fill: var(--paper); } /* caps as tall as the tram */
-.t-far .gold { fill: var(--taxi); }
-.t-far .wire { stroke: var(--paper); stroke-width: 1.6; fill: none; }
-.t-far .body { fill: var(--paper); }
-.t-far .glass { fill: #0c0b09; }
-.t-far .lamp-red { fill: var(--sindoor); }
-.t-near .script { font-family: 'Cormorant Garamond', var(--f-display); font-style: italic; font-weight: 500; font-size: 80px; fill: var(--taxi); }
-.t-near .pole { fill: var(--taxi); stroke: var(--taxi); }
-.t-near .pole line { stroke-width: 2; }
-.t-near .pole rect { stroke: none; }
-.t-near .signal { fill: var(--sindoor); stroke: none; }
-
-.hero-quote { position: absolute; z-index: 3; margin: 0; left: var(--gutter); right: var(--gutter); top: calc(var(--hy, 50%) - 1.4vh + var(--tw) * 0.152 + 22px);
-  display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
-.hero-quote blockquote { margin: 0; }
-/* set in caps, on two lines on every device, broken at the full stop: the setup small and tracked out
-   between two rules, the punchline big and bold underneath */
-.hero-quote p { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; font-family: 'Oswald Variable', 'Bebas Neue', sans-serif; text-transform: uppercase; color: var(--paper); text-shadow: 0 2px 18px rgba(0, 0, 0, 0.9); }
-.hero-quote .ln { display: flex; align-items: center; gap: 14px; white-space: nowrap; }
-.hero-quote .setup { font-weight: 400; font-size: clamp(14px, 1.35vw, 20px); letter-spacing: 0.2em; line-height: 1; }
-.hero-quote .setup::before, .hero-quote .setup::after { content: ''; width: clamp(20px, 3vw, 44px); height: 1px; background: var(--taxi); opacity: 0.7; }
-.hero-quote .punch { font-weight: 650; font-size: clamp(30px, 3.5vw, 52px); letter-spacing: 0.05em; line-height: 0.95; color: var(--taxi); }
-
-.hero-next {
-  position: absolute; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); z-index: 3; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--paper); text-decoration: none;
-  font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
+.hero {
+  --amber: #d9a441; --parch: #e0cfa5; --paper-ink: #33261a; --red: #7a2a1f;
+  --display: 'Anton', 'Oswald Variable', 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  --head-h: calc(30px + var(--header-h));
+  --pad-x: clamp(20px, 4.6vw, 72px);
+  position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center;
+  min-height: max(100svh, 680px);
+  padding: calc(var(--head-h) + clamp(28px, 5vh, 64px)) var(--pad-x) clamp(90px, 12vh, 130px);
+  background: #0d0a07; color: var(--parch);
 }
-.hero-next i { display: block; width: 1px; height: 30px; background: linear-gradient(var(--taxi), transparent); }
-.hero-next:hover, .hero-next:focus-visible { color: var(--taxi); }
-@media (max-height: 760px) and (min-width: 721px) { .hero-next { display: none; } }
+.hero-bg { position: absolute; inset: 0; z-index: -4; background: #0d0a07 url('../assets/hero/hero-bg.webp') 64% center / cover no-repeat;
+  filter: saturate(.88) brightness(.94) contrast(1.02); transform: scale(1.02); }
+/* keeps the left third dark and calm for the headline; the vignette keeps the edges hushed */
+.hero-scrim { position: absolute; inset: 0; z-index: -3;
+  background:
+    linear-gradient(90deg, rgba(9,6,3,.94) 0%, rgba(9,6,3,.82) 26%, rgba(9,6,3,.42) 50%, rgba(9,6,3,.06) 72%, transparent 100%),
+    linear-gradient(180deg, rgba(9,6,3,.55) 0%, transparent 22%, transparent 70%, rgba(9,6,3,.7) 100%),
+    radial-gradient(120% 100% at 60% 50%, transparent 55%, rgba(0,0,0,.55) 100%); }
+.hero-grain { position: absolute; inset: 0; z-index: -2; opacity: .22; mix-blend-mode: overlay; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.85%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%20.6%20%200%200%200%200%20.5%20%200%200%200%200%20.35%20%200%200%200%20.9%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E"); }
 
-@media (max-width: 720px) {
-  /* phones: the same composition at about 85% of the old size, so the cluster sits in the scene, not over it */
-  .hero { --tw: 72vw; }
-  .hero .t-near { width: calc(var(--tw) * 0.56); top: calc(var(--hy, 55%) - 1.4vh + var(--tw) * 0.006); }
-  .hero-quote { top: calc(var(--hy, 55%) - 1.4vh + var(--tw) * 0.224 + 18px); gap: 10px; }
-  .hero-quote p { gap: 6px; }
-  .hero-quote .ln { gap: 8px; }
-  /* the quote is an accessory to the title: the punchline's caps stand 0.3x as tall as TRAMLINE's
-     (TRAMLINE's caps are 0.173 x --tw tall, Oswald's caps 0.81em, so 0.3 x 0.173 / 0.81 = 0.064) */
-  .hero-quote .setup { font-size: max(10.5px, calc(var(--tw) * 0.036)); letter-spacing: 0.14em; }
-  .hero-quote .setup::before, .hero-quote .setup::after { width: 12px; }
-  .hero-quote .punch { font-size: calc(var(--tw) * 0.064); }
+.hero-copy { --h1: clamp(3.4rem, min(12.4vw, 19.5vh), 10.2rem); position: relative; z-index: 2; width: min(100%, clamp(300px, 50vw, 760px)); }
+
+/* the tag: a scrap of aged paper held to the board by two weathered push pins, set diagonally */
+.hero .tag { display: inline-block; position: relative; isolation: isolate; margin: 6px 0 clamp(16px, 2.6vh, 28px) 4px;
+  padding: clamp(14px, 1.9vh, 18px) clamp(34px, 3.2vw, 46px);
+  font-size: clamp(.72rem, 1.05vw, .95rem); letter-spacing: .18em; color: var(--paper-ink);
+  transform: rotate(-1.6deg); filter: drop-shadow(0 7px 7px rgba(0,0,0,.6)); }
+.hero .tag .paper { position: absolute; inset: 0; z-index: -1; background: url('../assets/hero/tag-paper.webp') center / cover no-repeat;
+  clip-path: polygon(0 8%,3% 0,9% 6%,16% 0,25% 5%,34% 0,45% 6%,56% 0,67% 5%,78% 0,89% 6%,97% 0,100% 8%,99% 55%,100% 92%,95% 100%,86% 94%,74% 100%,62% 95%,50% 100%,38% 94%,26% 100%,14% 95%,5% 100%,0 90%,1% 50%); }
+.hero .tag .txt { position: relative; font-family: 'Special Elite', 'Courier Prime', monospace; color: #2a1a0b; opacity: .9; white-space: nowrap; text-transform: uppercase;
+  text-shadow: 0 0 1.2px rgba(42,26,11,.55), .4px .4px 0 rgba(42,26,11,.25); }
+.hero .pin { position: absolute; z-index: 2; width: clamp(11px, .95vw, 14px); aspect-ratio: 1; border-radius: 49% 51% 50% 50% / 52% 48% 52% 48%;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(214,202,182,.34) 0 5%, transparent 19%),
+    radial-gradient(circle at 76% 82%, rgba(112,54,22,.55) 0 9%, transparent 28%),
+    radial-gradient(circle at 20% 68%, rgba(92,46,20,.4) 0 6%, transparent 20%),
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2760%27%20height%3D%2760%27%3E%3Cfilter%20id%3D%27s%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.95%27%20numOctaves%3D%272%27%20seed%3D%279%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%20.5%20%200%200%200%200%20.25%20%200%200%200%200%20.09%20%200%200%200%209%20-6.6%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23s%29%27%2F%3E%3C%2Fsvg%3E") center / 60px,
+    radial-gradient(circle at 42% 36%, #4a4540 0, #2a2622 40%, #12100e 84%);
+  box-shadow: inset 0 -1.5px 2px rgba(0,0,0,.85), inset 0 1px 1px rgba(200,188,166,.1), 0 0 0 1px #1b1510, 0 0 0 2px rgba(96,50,22,.3); }
+.hero .pin::before { content: ''; position: absolute; inset: -70%; z-index: -2; border-radius: 50%; /* rust bleed on the paper */
+  background: radial-gradient(circle, rgba(116,56,20,.3) 0, rgba(116,56,20,.14) 38%, transparent 66%); filter: blur(1.5px); }
+.hero .pin::after { content: ''; position: absolute; left: 48%; top: 62%; width: 105%; height: 55%; z-index: -1; border-radius: 50%; /* its cast shadow */
+  background: rgba(0,0,0,.42); filter: blur(2px); transform: rotate(30deg); }
+.hero .pin-a { left: clamp(10px, 1vw, 14px); top: clamp(9px, .9vw, 12px); transform: rotate(-14deg); }
+.hero .pin-b { right: clamp(10px, 1vw, 14px); bottom: clamp(9px, .9vw, 12px); transform: rotate(38deg) scale(.97); }
+
+/* the title scales with both the width and the height of the screen, so it never outgrows its column */
+.hero .title { margin: 0; font-family: var(--display); font-weight: 400; color: var(--parch); line-height: 1.04; letter-spacing: .012em; text-transform: uppercase;
+  text-shadow: 0 2px 0 rgba(0,0,0,.35), 0 10px 40px rgba(0,0,0,.5); }
+.hero .title span { display: block; font-size: var(--h1); }
+.hero .rule { display: block; width: clamp(90px, 10vw, 150px); height: 3px; background: var(--red); margin: clamp(14px, 2.4vh, 24px) 0; }
+
+/* the quote: an accessory to the title, sized off it (about 14% of its height) and flush with its left edge */
+.hero .pull { position: relative; margin: 0 0 clamp(20px, 3.4vh, 34px); padding-left: 1.15em; font-size: clamp(.86rem, calc(var(--h1) * .14), 1.9rem); }
+.hero .pull::before { content: ''; position: absolute; left: 0; top: .12em; bottom: .12em; width: 3px; border-radius: 2px;
+  background: linear-gradient(180deg, var(--amber) 0%, rgba(217,164,65,.55) 60%, rgba(217,164,65,.12) 100%); }
+.hero .pull p { margin: 0; font-family: var(--f-mono); letter-spacing: .09em; line-height: 1.5; text-transform: uppercase; color: var(--parch); }
+.hero .pull b { display: block; margin-top: .15em; color: var(--amber); letter-spacing: .07em; }
+
+.hero .cta { display: inline-flex; align-items: center; gap: 16px; padding: clamp(12px, 1.7vh, 16px) clamp(22px, 2.4vw, 34px);
+  font-family: var(--f-mono); font-size: clamp(.78rem, 1.1vw, .95rem); letter-spacing: .16em; text-transform: uppercase; color: var(--amber);
+  border: 1px solid rgba(217,164,65,.85); background: rgba(8,5,2,.35); transition: background .2s, color .2s, gap .2s; }
+.hero .cta:hover, .hero .cta:focus-visible { background: var(--amber); color: #0d0a07; gap: 22px; }
+
+/* the props: cut-outs of the locked concept, kept muted so they sit in the scene */
+.hero .props { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.hero .props img { position: absolute; height: auto; display: block; max-width: none; filter: brightness(.94) saturate(.9) drop-shadow(0 14px 18px rgba(0,0,0,.65)); }
+.hero .p-clip { top: calc(var(--head-h) + 6px); right: -1.5vw; width: clamp(230px, 23.8vw, 430px); }
+.hero .p-pile { right: 0; bottom: 0; width: clamp(290px, 35.5vw, 640px); }
+.hero .props .m-only { display: none; }
+
+/* a torn parchment edge along the bottom */
+.hero .torn { position: absolute; left: 0; right: 0; bottom: -1px; height: clamp(40px, 7vh, 74px); z-index: 3; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.9%27%20numOctaves%3D%272%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%20.35%20%200%200%200%200%20.26%20%200%200%200%200%20.14%20%200%200%200%20.55%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E"), linear-gradient(180deg, #6f5d3c, #8f7b54 45%, #a69367);
+  clip-path: polygon(0 62%,2% 48%,5% 58%,8% 40%,12% 52%,15% 38%,19% 50%,23% 34%,27% 46%,31% 36%,36% 52%,40% 40%,44% 54%,49% 38%,53% 50%,58% 36%,62% 52%,66% 42%,71% 56%,75% 40%,80% 52%,84% 36%,88% 50%,92% 38%,96% 52%,100% 42%,100% 100%,0 100%);
+  filter: drop-shadow(0 -4px 8px rgba(0,0,0,.5)); }
+
+@media (max-width: 1100px) { .hero-copy { width: min(100%, 56vw); } }
+
+/* phones: the tram stays the star at the top, the copy sits under it, and the props follow in two deliberate rows
+   (clipping and photograph, then the ticket with the stamp tucked at the right) */
+@media (max-width: 760px) {
+  .hero { flex-direction: column; align-items: stretch; justify-content: flex-start; min-height: max(100svh, 760px); padding-top: calc(var(--head-h) + 22px); padding-bottom: 0; }
+  .hero-bg { inset: 0 0 auto 0; height: 64svh; background-position: 80% 40%;
+    -webkit-mask-image: linear-gradient(#000 55%, transparent 100%); mask-image: linear-gradient(#000 55%, transparent 100%); }
+  .hero-scrim { background: radial-gradient(120% 40% at 70% 28%, transparent 50%, rgba(0,0,0,.5) 100%); }
+  .hero-copy { --h1: clamp(3.2rem, 17.5vw, 6.2rem); width: 100%; margin-top: 36svh; }
+  .hero .props { position: relative; inset: auto; order: 3; height: 122vw; margin: 26px calc(var(--pad-x) * -1) 0; }
+  .hero .props .p-pile { display: none; }
+  .hero .props .m-only { display: block; }
+  .hero .p-clip { top: 0; left: -3vw; right: auto; width: 58vw; z-index: 1; }
+  .hero .p-photo { top: 3vw; right: 3vw; width: 41vw; transform: rotate(3.2deg); z-index: 2; }
+  .hero .p-ticket { bottom: 0; right: -2vw; left: auto; width: 88vw; z-index: 3; }
+  .hero .torn { height: 44px; }
 }
-
-/* one arrival: the lamps strike on first, then TRAMLINE surfaces from the haze, Tales slides in, the quote lands */
-html.js.motion .hero .t-far, html.js.motion .hero .t-near, html.js.motion .hero-quote, html.js.motion .hero-next { opacity: 0; }
-.hero.go .t-far { animation: hero-surface-title 1.6s var(--ease-out) 1.4s both; }
-.hero.go .t-near { animation: hero-slide-in 1.3s var(--ease-out) 2s both; }
-.hero.go .hero-quote { animation: hero-surface 1.2s var(--ease-out) 2.6s both; }
-.hero.go .hero-next { animation: hero-cue 1s var(--ease-out) 3.3s both; }
-@keyframes hero-surface { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-@keyframes hero-surface-title { from { opacity: 0; transform: translateY(16px) scale(0.985); } to { opacity: 1; transform: none; } }
-@keyframes hero-slide-in { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
-@keyframes hero-cue { from { opacity: 0; } to { opacity: 0.85; } }
+@media (max-width: 420px) { .hero .tag { font-size: .62rem; letter-spacing: .11em; padding-left: 30px; padding-right: 30px; } }

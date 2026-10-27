@@ -49,6 +49,17 @@ function scrollToY(target: number | HTMLElement) {
   }, { passive: true });
 }
 
+/* ---------- phone menu: the links fold into a drop-down under the bar ---------- */
+{
+  const btn = $('[data-menu]'), nav = $('#site-nav');
+  if (btn && nav) {
+    const set = (open: boolean) => { nav.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); };
+    btn.addEventListener('click', () => set(!nav.classList.contains('open')));
+    nav.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) set(false); });
+    addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+  }
+}
+
 /* ---------- the time in Howrah ---------- */
 {
   const el = $('[data-clock]');

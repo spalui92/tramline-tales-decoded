@@ -10,6 +10,10 @@ import { Image } from 'astro:assets';
 import { cfg, tales, newestFirst, depotFiles, notices, href, absolute, shortDate, pad } from '../lib/site';
 import { windows } from '../lib/kolkata';
 import '../styles/hero.css';
+import clipImg from '../assets/hero/prop-clip.webp';
+import pileImg from '../assets/hero/prop-pile.webp';
+import photoImg from '../assets/hero/prop-photo.webp';
+import ticketImg from '../assets/hero/prop-ticket.webp';
 
 const latest = newestFirst[0];
 const recent = newestFirst.slice(0, 3);
@@ -23,46 +27,30 @@ const jsonld = {
 };
 ---
 <Base page="home" wire jsonld={jsonld}>
-  <!-- HERO: crossing Howrah Bridge at night. The scene is drawn by src/scripts/gateway.ts on two canvases:
-       TRAMLINE stands between them, so the nearest girders pass in front of it; Tales and the quote sit on top. -->
+  <!-- HERO: a night tram on an old iron bridge. The photograph sits behind a scrim that keeps the left calm for the
+       title; the props (clipping, ticket, bridge photograph, stamp) are cut-outs laid on top. Wide screens put them at
+       the right, phones stack them in two rows below the copy (see src/styles/hero.css). -->
   <section class="hero" aria-labelledby="hero-title">
-    <canvas class="scene-back" data-scene="back" aria-hidden="true"></canvas>
-    <canvas class="scene-front" data-scene="front" aria-hidden="true"></canvas>
-    <h1 class="hero-title" id="hero-title">
-      <span class="sr">Tramline Tales</span>
-      <!-- TRAMLINE in condensed caps, a tram standing in for the I -->
-      <svg class="t-far" viewBox="0 11 161 30.5" aria-hidden="true" focusable="false">
-        <text class="caps" x="0" y="40" textLength="98" lengthAdjust="spacing">TRAML</text>
-        <!-- the tram spans exactly the caps' height: Oswald's caps are 0.81em, so y 12.14 to the baseline at 40 -->
-        <g transform="translate(102 11.44) scale(0.6538 0.6966)">
-          <rect x="0" y="1" width="26" height="2" class="gold" />
-          <path d="M13 3 L7 11 M13 3 L19 11" class="wire" />
-          <rect x="3" y="10" width="20" height="28" rx="2" class="body" />
-          <rect x="6" y="12" width="14" height="4" rx="1" class="glass" />
-          <rect x="6" y="18" width="6" height="10" rx="1" class="glass" />
-          <rect x="14" y="18" width="6" height="10" rx="1" class="glass" />
-          <rect x="3" y="30" width="20" height="2" class="gold" />
-          <circle cx="13" cy="35" r="1.6" class="lamp-red" />
-          <rect x="0" y="39" width="26" height="2" class="gold" />
-        </g>
-        <text class="caps" x="123" y="40" textLength="38" lengthAdjust="spacing">NE</text>
-      </svg>
-      <!-- Tales in a light italic, its T a tram pole whose crossbar runs on as the overhead wire -->
-      <svg class="t-near" viewBox="96 46 172 67" aria-hidden="true" focusable="false">
-        <g class="pole" transform="translate(98 108) skewX(-11)">
-          <line x1="0" y1="-56" x2="155" y2="-56" />
-          <line x1="0" y1="-56" x2="0" y2="-45" />
-          <rect x="20" y="-56" width="6" height="56" />
-          <line x1="12" y1="-1.5" x2="34" y2="-1.5" />
-          <circle class="signal" cx="155" cy="-56" r="3.4" />
-        </g>
-        <text class="script" x="138" y="108" textLength="118" lengthAdjust="spacing">ales</text>
-      </svg>
-    </h1>
-    <figure class="hero-quote">
-      <blockquote><p><span class="ln setup">“The consumer isn’t a moron.</span> <span class="ln punch">She is your wife.”</span></p></blockquote>
-    </figure>
-    <a class="hero-next" href="#front-page" data-cursor="link"><span>Next stop</span><i aria-hidden="true"></i></a>
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-grain" aria-hidden="true"></div>
+
+    <div class="hero-copy">
+      <span class="tag"><i class="paper"></i><span class="txt">Fare paid. Thoughts free.</span><i class="pin pin-a"></i><i class="pin pin-b"></i></span>
+      <h1 class="title" id="hero-title"><span>Tramline</span> <span>Tales</span></h1>
+      <i class="rule" aria-hidden="true"></i>
+      <blockquote class="pull"><p>The consumer isn’t a moron.<b>She is your wife.</b></p></blockquote>
+      <a class="cta" href="#front-page" data-cursor="link">Start the journey <span aria-hidden="true">&rarr;</span></a>
+    </div>
+
+    <div class="props" aria-hidden="true">
+      <Image class="p-clip" src={clipImg} alt="" loading="eager" />
+      <Image class="p-pile" src={pileImg} alt="" loading="eager" />
+      <Image class="p-photo m-only" src={photoImg} alt="" loading="eager" />
+      <Image class="p-ticket m-only" src={ticketImg} alt="" loading="eager" />
+    </div>
+
+    <div class="torn" aria-hidden="true"></div>
   </section>
 
   <!-- THE SCOREBOARD: the newest tale, straight after the masthead -->
