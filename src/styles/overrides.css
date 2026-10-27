@@ -6,9 +6,6 @@
   .site-header { gap: 10px; }
   .nav { --ng: 13px; gap: var(--ng); font-size: 11px; letter-spacing: 0.015em; flex: 0 0 auto; }
   .brand { min-width: 0; gap: 7px; }
-  .brand-tram { width: 26px; }
-  .brand .w1 { font-size: 12px; }
-  .brand .w2 { font-size: 20px; }
 }
 @media (max-width: 360px) {
   .nav { --ng: 10px; font-size: 10.5px; }

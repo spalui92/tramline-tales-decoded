@@ -9,6 +9,7 @@
 @import '@fontsource/imperial-script/latin-400.css';
 @import '@fontsource/noto-serif-bengali/bengali-400.css';
 @import '@fontsource/bebas-neue/latin-400.css';
+@import '@fontsource-variable/oswald/index.css';
 @import '@fontsource/shadows-into-light/latin-400.css';
 @import '@fontsource/cormorant-garamond/latin-500-italic.css';
 @import '@fontsource/tiro-devanagari-hindi/devanagari-400.css';
@@ -94,14 +95,12 @@ html.js [data-draw] path, html.js [data-draw] line { stroke-dasharray: 1; stroke
 .site-header::before { content: ''; position: absolute; inset: 0; z-index: -1; background: rgba(12, 11, 9, 0.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); opacity: 0; transition: opacity 0.4s; }
 .site-header.is-solid { mix-blend-mode: normal; color: var(--paper); }
 .site-header.is-solid::before { opacity: 1; }
-.brand { display: flex; align-items: center; gap: 12px; line-height: 1; }
-/* the navbar logo: the tram from the reading wire, then a faded, worn wordmark */
-.brand-tram { width: 38px; color: var(--accent); flex: none; }
-.brand .stack { display: flex; flex-direction: column; }
-.brand .w1 { font-family: 'Special Elite', var(--f-mono); font-size: 16px; letter-spacing: 0.06em; opacity: 0.9;
-  -webkit-mask: var(--worn-a); mask: var(--worn-a); }
-.brand .w2 { font-family: 'Imperial Script', var(--f-display); font-size: 29px; margin: -0.38em 0 -0.12em 1.5em; color: var(--accent); opacity: 0.9;
-  -webkit-mask: var(--worn-b); mask: var(--worn-b); }
+.brand { display: flex; align-items: center; gap: 10px; line-height: 1; }
+/* the navbar logo: the masthead's tram, head on, beside TRAMLINE in spaced caps and Tales in italic */
+.brand-tram { width: 26px; height: auto; flex: none; }
+.brand .stack { display: flex; flex-direction: column; line-height: 0.9; }
+.brand .w1 { font-family: 'Bebas Neue', var(--f-mono); font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--paper); }
+.brand .w2 { font-family: 'Cormorant Garamond', var(--f-display); font-style: italic; font-weight: 500; font-size: 22px; color: var(--taxi); }
 :root {
   /* ink that has worn off old print, used as a mask over the wordmark */
   --worn-a: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
@@ -532,9 +531,9 @@ html.reduced .board .track { transform: none !important; }
 }
 @media (max-width: 420px) {
   .brand { gap: 8px; }
-  .brand-tram { width: 28px; }
-  .brand .w1 { font-size: 12.5px; }
-  .brand .w2 { font-size: 22px; margin-left: 1.2em; }
+  .brand-tram { width: 22px; }
+  .brand .w1 { font-size: 13px; }
+  .brand .w2 { font-size: 19px; }
 }
 @media (max-width: 330px) { .brand .stack { display: none; } }
 

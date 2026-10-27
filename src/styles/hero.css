@@ -15,7 +15,8 @@
   filter: drop-shadow(0 0 28px rgba(255, 168, 86, 0.28)) drop-shadow(0 0 2px rgba(255, 220, 170, 0.35)); }
 .hero .t-near { z-index: 3; width: calc(var(--tw) * 0.38); right: calc((100% - var(--tw)) / 2); top: calc(var(--hy, 50%) - 1.4vh + var(--tw) * 0.004);
   filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.8)); }
-.t-far .caps { font-family: 'Bebas Neue', var(--f-display); font-size: 40px; fill: var(--paper); }
+/* a light condensed cut, so TRAMLINE stays big without shouting */
+.t-far .caps { font-family: 'Oswald Variable', 'Bebas Neue', var(--f-display); font-weight: 300; font-size: 34.4px; fill: var(--paper); } /* caps as tall as the tram */
 .t-far .gold { fill: var(--taxi); }
 .t-far .wire { stroke: var(--paper); stroke-width: 1.6; fill: none; }
 .t-far .body { fill: var(--paper); }
@@ -30,13 +31,13 @@
 .hero-quote { position: absolute; z-index: 3; margin: 0; left: var(--gutter); right: var(--gutter); top: calc(var(--hy, 50%) - 1.4vh + var(--tw) * 0.152 + 22px);
   display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
 .hero-quote blockquote { margin: 0; }
-/* two lines on every device, broken at the full stop: the setup, then the punchline */
-.hero-quote p { margin: 0; font-family: 'Cormorant Garamond', var(--f-display); font-style: italic; font-weight: 500; font-size: clamp(24px, 2.4vw, 36px); line-height: 1.14; color: var(--paper); text-shadow: 0 2px 18px rgba(0, 0, 0, 0.9); }
-.hero-quote .ln { display: block; white-space: nowrap; }
-.hero-quote .ln:first-child { text-indent: -0.36em; } /* the opening mark hangs, so the words themselves sit centred */
-.hero-quote .punch { color: var(--taxi); }
-.hero-quote figcaption { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 0; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper-dim); text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9); }
-.hero-quote cite { font-style: normal; color: var(--taxi); }
+/* set in caps, on two lines on every device, broken at the full stop: the setup small and tracked out
+   between two rules, the punchline big and bold underneath */
+.hero-quote p { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; font-family: 'Oswald Variable', 'Bebas Neue', sans-serif; text-transform: uppercase; color: var(--paper); text-shadow: 0 2px 18px rgba(0, 0, 0, 0.9); }
+.hero-quote .ln { display: flex; align-items: center; gap: 14px; white-space: nowrap; }
+.hero-quote .setup { font-weight: 400; font-size: clamp(14px, 1.35vw, 20px); letter-spacing: 0.2em; line-height: 1; }
+.hero-quote .setup::before, .hero-quote .setup::after { content: ''; width: clamp(20px, 3vw, 44px); height: 1px; background: var(--taxi); opacity: 0.7; }
+.hero-quote .punch { font-weight: 650; font-size: clamp(30px, 3.5vw, 52px); letter-spacing: 0.05em; line-height: 0.95; color: var(--taxi); }
 
 .hero-next {
   position: absolute; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); z-index: 3; transform: translateX(-50%);
@@ -51,9 +52,11 @@
   .hero { --tw: 84vw; }
   .hero .t-near { width: calc(var(--tw) * 0.62); top: calc(var(--hy, 55%) - 1.4vh + var(--tw) * 0.006); }
   .hero-quote { top: calc(var(--hy, 55%) - 1.4vh + var(--tw) * 0.246 + 18px); gap: 10px; }
-  .hero-quote p { font-size: clamp(20px, 6.9vw, 28px); }
-  .hero-quote figcaption { flex-direction: column; gap: 3px; font-size: 9.5px; letter-spacing: 0.14em; line-height: 1.5; }
-  .hero-quote .dot { display: none; }
+  .hero-quote p { gap: 8px; }
+  .hero-quote .ln { gap: 10px; }
+  .hero-quote .setup { font-size: clamp(12px, 3.8vw, 16px); letter-spacing: 0.14em; }
+  .hero-quote .setup::before, .hero-quote .setup::after { width: 16px; }
+  .hero-quote .punch { font-size: clamp(26px, 8vw, 34px); }
 }
 
 /* one arrival: the lamps strike on first, then TRAMLINE surfaces from the haze, Tales slides in, the quote lands */
