@@ -197,75 +197,9 @@ html.js.motion.first-visit .loader { display: grid; }
 .wipe .tram { width: 90px; margin: 0 auto 16px; }
 html.js.arriving .wipe { visibility: visible; }
 
-/* ---------- hero: Howrah Bridge across the night, a highway rolling out beneath it ---------- */
-/* --horizon is how far up from the bottom the bridge stands; the road fills everything below it */
-.hero { --horizon: 46%; position: relative; height: clamp(470px, 68svh, 780px); overflow: hidden; isolation: isolate; }
-.hero canvas.river { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
-.hero .river-fallback { position: absolute; inset: 0; z-index: -3; background: linear-gradient(to bottom, #0c0b09 0%, #1a130d 48%, #2a1a0e 54%, #0b0c10 54.2%, #07080a 100%); }
-.hero .bridge { position: absolute; max-width: none; color: var(--paper); opacity: 0.6; z-index: -1; }
-.hero .lamp { fill: #ffb45e; stroke: none; }
-/* desktop: the whole bridge, approach viaducts and all, edge to edge */
-.hero .bridge.wide { left: 0; width: 100%; bottom: var(--horizon); }
-.hero .bridge.wide.mirror { bottom: auto; top: calc(100% - var(--horizon)); transform: scaleY(-0.55); transform-origin: top; opacity: 0.1; filter: blur(1.2px); -webkit-mask: linear-gradient(to bottom, #000, transparent 70%); mask: linear-gradient(to bottom, #000, transparent 70%); }
-.hero .bridge.narrow { display: none; }
-/* a little extra night over the road, so the masthead reads cleanly */
-.hero::after { content: ''; position: absolute; inset: auto 0 0; height: calc(var(--horizon) + 6%); z-index: -1; pointer-events: none; background: linear-gradient(to bottom, transparent, rgba(12, 11, 9, 0.6)); }
+/* ---------- hero: lives in hero.css ---------- */
 
-/* the highway: from the bridge's horizon down to the reader, faded well into the background */
-.highway { position: absolute; left: 0; right: 0; top: calc(100% - var(--horizon)); width: 100%; height: var(--horizon); max-width: none; z-index: 0; pointer-events: none; opacity: 0.32;
-  -webkit-mask: linear-gradient(to bottom, transparent 0%, #000 22%, #000 74%, transparent 100%); mask: linear-gradient(to bottom, transparent 0%, #000 22%, #000 74%, transparent 100%); }
-.highway .edge { stroke: var(--paper); stroke-width: 1.2; fill: none; vector-effect: non-scaling-stroke; }
-.highway .lane { fill: var(--paper); opacity: 0.55; }
-.highway .mid { fill: var(--taxi); }
-.highway-phone { display: none; }
-
-/* the masthead and kicker: one centred lockup standing on the road */
-.hero-inner { position: absolute; inset: 0; z-index: 1; display: flex; align-items: flex-end; justify-content: center; padding: calc(var(--header-h) + 2vh) var(--gutter) clamp(18px, 2.8vh, 28px); }
-.masthead { width: 100%; text-align: center; }
-.hero-title { margin: 0; font-family: var(--f-display); font-weight: 400; line-height: 0.86; letter-spacing: -0.03em; font-size: clamp(48px, 5.6vw + 8px, 88px); }
-.hero-title .l1, .hero-title .l2 { display: block; }
-.hero-title .l2 { font-style: italic; color: var(--accent); }
-.kicker { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 4px 14px; margin: clamp(12px, 1.6vh, 18px) 0 0; line-height: 1.25; }
-/* Upright, regular-weight Bengali (no italics, no bold) */
-.kicker .bn { font-family: var(--f-bn); font-size: clamp(18px, 1.45vw, 22px); line-height: 1.2; color: var(--paper); font-style: normal; font-weight: 400; }
-/* ink dropped in water: white bleeds into red, red into yellow, left to right, and the fronts keep drifting */
-.kicker .bn {
-  background-image:
-    radial-gradient(ellipse 26% 90% at 36% 50%, rgba(239,75,54,0.95), transparent 100%),
-    radial-gradient(ellipse 26% 90% at 68% 50%, rgba(246,197,49,0.95), transparent 100%),
-    linear-gradient(90deg, #f1e9d6 0%, #f1e9d6 18%, #ef4b36 50%, #f6c531 82%, #f6c531 100%);
-  background-size: 100% 100%, 100% 100%, 100% 100%;
-  background-repeat: no-repeat;
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
-  animation: inkBleed 9s ease-in-out infinite alternate;
-}
-@keyframes inkBleed {
-  0%   { background-position: -6% 0, 6% 0, 0 0; background-size: 100% 100%, 100% 100%, 112% 100%; }
-  100% { background-position: 8% 0, -8% 0, -12% 0; background-size: 120% 100%, 120% 100%, 112% 100%; }
-}
-@media (prefers-reduced-motion: reduce) { .kicker .bn { animation: none; } }
-.kicker .sep { color: var(--accent); }
-.kicker .en { font-family: var(--f-mono); font-size: clamp(11px, 0.9vw, 13px); letter-spacing: 0.22em; text-transform: uppercase; color: var(--paper-dim); }
-
-/* phones: the centre span rides high and the road is taller; the kicker stacks, its divider is the road's centre line */
-@media (max-width: 720px) {
-  .hero { --horizon: 50%; height: clamp(480px, 64svh, 600px); }
-  .hero .bridge.wide { display: none; }
-  .hero .bridge.narrow { display: block; left: 50%; bottom: var(--horizon); width: 186vw; transform: translateX(-50%); }
-  .hero .bridge.narrow.mirror { bottom: auto; top: calc(100% - var(--horizon)); transform: translateX(-50%) scaleY(-0.55); transform-origin: top; opacity: 0.12; filter: blur(1.2px); -webkit-mask: linear-gradient(to bottom, #000, transparent 75%); mask: linear-gradient(to bottom, #000, transparent 75%); }
-  .hero::after { height: 62%; }
-  .highway-wide { display: none; }
-  .highway-phone { display: block; }
-  .hero-inner { padding-bottom: 24px; }
-  .hero-title { font-size: clamp(48px, 14.4vw, 56px); }
-  .kicker { flex-direction: column; align-items: center; gap: 9px; margin: 18px 0 0; }
-  .kicker .bn { font-size: 23px; }
-  .kicker .sep { display: none; }
-  .kicker .en { font-size: 10.5px; letter-spacing: 0.28em; }
-}
-
-/* the desi ट: as tall as a capital, on the baseline, in sindoor (hero masthead and footer signature) */
+/* the desi ट: as tall as a capital, on the baseline, in sindoor (footer signature) */
 .dv { display: inline-block; font-family: 'Tiro Devanagari Hindi', var(--f-display); font-size: 1.2em; line-height: 0.6; letter-spacing: 0; margin-right: 0.015em; color: var(--sindoor); position: relative; top: 0.046em; font-style: inherit; }
 
 /* ---------- the scoreboard: the newest tale, right under the masthead ---------- */

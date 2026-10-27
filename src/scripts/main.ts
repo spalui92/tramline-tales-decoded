@@ -6,8 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import Lenis from 'lenis';
-import { initRiver } from './river';
-import { initHighways } from './highway';
+import { initGateway } from './gateway';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 (window as any).__tt = true;
@@ -166,35 +165,7 @@ function reveals() {
 /* ---------- home ---------- */
 function hero() {
   const hero = $('.hero');
-  if (!hero) return;
-  const canvas = $<HTMLCanvasElement>('[data-river]', hero);
-  if (canvas) initRiver(canvas, hero, motion);
-  initHighways(hero, motion);
-  if (!motion) return;
-
-  const tl = gsap.timeline();
-  // Crisp, lightweight editorial title-card reveal, without blurred smoke.
-  const lines = $$('[data-hero-line]', hero);
-  lines.forEach((line) => gsap.set(line, { visibility: 'visible', clipPath: 'inset(0 100% 0 0)' }));
-  tl.to(lines, {
-    clipPath: 'inset(0 0 0 0)', duration: 0.85, stagger: 0.14, ease: 'power2.out',
-    onComplete: () => gsap.set(lines, { clearProps: 'clipPath' }),
-  }, 0.1);
-  const bn = $('.kicker .bn', hero);
-  if (bn) tl.fromTo(bn, { clipPath: 'inset(0 100% 0 0)' },
-    { clipPath: 'inset(0 0 0 0)', duration: 0.6, ease: 'power2.out',
-      onComplete: () => gsap.set(bn, { clearProps: 'clipPath' }) }, 0.75);
-  tl.fromTo($$('.hero-intro, .hero-explore', hero), { opacity: 0, y: 9 },
-    { opacity: 1, y: 0, duration: 0.45, stagger: 0.12, ease: 'power2.out' }, 1.5);
-  const draw = $$('[data-draw] path', hero);
-  tl.to(draw, { strokeDashoffset: 0, duration: 2.6, ease: 'power2.inOut', stagger: 0.12 }, 0.1);
-  tl.from($$('.bridge .lamp', hero), { opacity: 0, duration: 0.4, stagger: { each: 0.03, from: 'center' } }, 1.4);
-  tl.fromTo($('[data-reveal]', hero), { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.65);
-
-  // on the way out, the title lifts away and the bridge settles into the river haze
-  gsap.timeline({ scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } })
-    .to('.masthead', { yPercent: -18, opacity: 0.35, ease: 'none' }, 0)
-    .to('.hero .bridge:not(.mirror)', { yPercent: 10, scale: 1.06, ease: 'none' }, 0);
+  if (hero) initGateway(hero, motion);
 }
 
 function taleList() {

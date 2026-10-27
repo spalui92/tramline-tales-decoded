@@ -15,14 +15,8 @@
   .site-header { gap: 6px; }
 }
 
-/* The bridge and title read as one composition, with the title slightly higher. */
 @media (max-width: 720px) {
-  .hero-inner { padding-bottom: 44px; }
-  .hero-title { font-size: clamp(46px, 13.8vw, 54px); }
   .sb-title { font-size: clamp(30px, 8.1vw, 38px); line-height: 1.025; }
-}
-@media (min-width: 721px) {
-  .hero-inner { padding-bottom: clamp(28px, 4vh, 44px); }
 }
 
 /* A restrained newspaper folio between the cinematic hero and lead story. */
@@ -37,30 +31,6 @@
   .editorial-rule { font-size: 8px; letter-spacing: 0.08em; gap: 6px; }
   .editorial-rule span:last-child { display: none; }
   .editorial-rule-center { margin-left: auto; }
-}
-
-/* Noto Serif Bengali is already locally loaded. One red sweep, then cream with a red initial. */
-.kicker .bn {
-  position: relative; display: inline-block; isolation: isolate;
-  font-family: 'Noto Serif Bengali', serif; font-weight: 400;
-  color: #E9DFCD; -webkit-text-fill-color: #E9DFCD;
-  background: none; animation: none; line-height: 1.55;
-}
-.kicker .bn-initial { color: #E34C3C; -webkit-text-fill-color: #E34C3C; }
-.kicker .bn::after {
-  content: attr(data-text); position: absolute; inset: 0; white-space: nowrap;
-  color: #E34C3C; -webkit-text-fill-color: #E34C3C;
-  clip-path: inset(0 100% 0 0); opacity: 0;
-  pointer-events: none; animation: bengali-red-sweep 2s ease-out 0.4s both;
-}
-@keyframes bengali-red-sweep {
-  0% { clip-path: inset(0 100% 0 0); opacity: 0; }
-  12% { opacity: 1; }
-  60% { clip-path: inset(0 0 0 0); opacity: 0.95; }
-  100% { clip-path: inset(0 0 0 0); opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .kicker .bn::after { animation: none; display: none; }
 }
 
 /* The junction, printed as two old Kolkata tram tickets. */
@@ -117,47 +87,10 @@
  .ticket-overline { font-size:8px; }
 }
 
-/* Give the English masthead room to breathe; keep the red Devanagari initials untouched. */
-.hero-title .l1 .en { letter-spacing: 0.025em; }
-.hero-title .l2 .en { letter-spacing: 0.015em; }
-
 /* Center the copyright and closing tagline as a single footer sign-off. */
 .foot-base { justify-content:center; text-align:center; }
 .foot-base > span { flex-basis:100%; }
 .foot-base > span:first-child { font-size: 0.85em; }
-
-/* Full-width typewriter reveal: no ch-based clipping on letter-spaced mobile text. */
-.kicker .tagline-typewriter {
-  position:relative; display:inline-block; white-space:nowrap;
-  width:max-content; max-width:none; overflow:visible;
-}
-html.js .kicker .tagline-typewriter {
-  animation:hero-tagline-reveal 1.8s steps(25,end) 2.1s both;
-}
-.kicker .tagline-typewriter::after { content:none; }
-@keyframes hero-tagline-reveal {
-  from { clip-path:inset(0 100% 0 0); }
-  to { clip-path:inset(0 0 0 0); }
-}
-@media (prefers-reduced-motion:reduce) {
-  html.js .kicker .tagline-typewriter { animation:none; clip-path:none; }
-}
-
-/* Editorial title card: no simulated smoke or blur. */
-.kicker .bn::after { content:none; display:none; animation:none; }
-.kicker { margin-top:clamp(20px,3vw,30px); }
-.kicker .en { letter-spacing:.13em; }
-html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-delay:1.15s; }
-.hero-intro { max-width:410px; margin:22px auto 0; color:var(--paper-dim); font-family:var(--f-body); font-size:clamp(13px,1.25vw,16px); line-height:1.5; text-align:center; text-wrap:balance; }
-.hero-explore { display:inline-flex; align-items:center; gap:12px; margin-top:18px; padding:8px 0; border-bottom:1px solid currentColor; color:var(--paper); font-family:var(--f-mono); font-size:10px; letter-spacing:.14em; text-decoration:none; transition:color .2s; }
-.hero-explore:hover { color:var(--accent); }
-.hero-explore span { font-size:17px; }
-@media(max-width:720px) {
-  .kicker .en { letter-spacing:.12em; font-size:10px; }
-  .hero-intro { max-width:290px; margin-top:16px; font-size:12px; }
-  .hero-explore { margin-top:12px; font-size:9px; }
-}
-@media(prefers-reduced-motion:reduce) { .hero-explore { transition:none; } }
 
 /* Top of the page, one piece: the tram wire and the navbar share a single ink-black panel,
    the old double film-strip edges are replaced by one quiet sprocket rule along the bottom,
@@ -183,19 +116,6 @@ html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-d
 .nav a { color: var(--paper-dim); transition: color 0.3s; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--paper); }
 .nav a[aria-current="page"]::after { transform: scaleX(1); background: var(--accent); }
-
-/* Hero: no intro line any more; the masthead sits lower, clear of the bridge. */
-@media (max-width: 720px) {
-  .hero-inner { padding-bottom: 18px; }
-}
-@media (min-width: 721px) {
-  .hero-inner { padding-bottom: clamp(14px, 2vh, 24px); }
-}
-
-
-/* Bridge breathing room: a taller hero, so the span no longer touches the navbar. */
-.hero { height: calc(clamp(470px, 68svh, 780px) + 40px); }
-@media (max-width: 720px) { .hero { height: calc(clamp(480px, 64svh, 600px) + 36px); } }
 
 /* ---------- Latest: base (phones keep exactly the old stacked look) ---------- */
 @font-face { font-family: 'DSEG7'; src: url('../assets/fonts/DSEG7Classic-Bold.woff2') format('woff2'); font-display: swap; }
@@ -252,80 +172,4 @@ html.js.motion .kicker .tagline-typewriter { animation-duration:.8s; animation-d
   .alarm.ting .al-bell.l { animation: alBellL 0.5s ease-in-out 4; }
   .alarm.ting .al-bell.r { animation: alBellR 0.5s ease-in-out 4; }
   .alarm.ting .al-time { animation: alFlare 0.5s ease-in-out 4; }
-}
-
-
-/* Masthead lockup (17 Oct 2026): TRAMLINE in condensed caps with a tram as the I, and a larger
-   italic Tales whose T is a tram pole carrying the overhead wire. Capped so it never swamps the bridge. */
-.masthead { width: auto; display: flex; flex-direction: column; align-items: center; }
-.hero-title { font-size: inherit; line-height: 1; }
-.hero-title .lockup { display: block; width: clamp(300px, 38vw, 540px); height: auto; overflow: visible; }
-.lockup .lk-caps { font-family: 'Bebas Neue', var(--f-display); font-size: 40px; fill: var(--paper); }
-.lockup .lk-script { font-family: 'Cormorant Garamond', var(--f-display); font-style: italic; font-weight: 500; font-size: 80px; fill: var(--taxi); }
-.lockup .lk-pole { fill: var(--taxi); stroke: var(--taxi); }
-.lockup .lk-pole line { stroke-width: 2; }
-.lockup .lk-pole rect { stroke: none; }
-.lockup .lk-pole .lk-signal { fill: var(--sindoor); stroke: none; }
-.lockup .gold { fill: var(--taxi); }
-.lockup .wire { stroke: var(--paper); stroke-width: 1.6; fill: none; }
-.lockup .body { fill: var(--paper); }
-.lockup .glass { fill: #0c0b09; }
-.lockup .lamp-red { fill: var(--sindoor); }
-/* the Bengali line and tagline sit under Tales, flush with its right edge */
-.masthead .kicker { align-self: stretch; justify-content: flex-end; text-align: right; margin-top: clamp(8px, 1.4vh, 14px); }
-@media (max-width: 720px) {
-  .hero-title .lockup { width: min(86vw, 340px); }
-  .masthead .kicker { align-items: flex-end; gap: 7px; margin-top: 10px; }
-}
-
-/* The annotator (17 Oct 2026): the tagline handwritten on a strip of highlighter tape, stamped under the lockup.
-   TRAMLINE rolls in from the left, Tales from the right, then the tape lands. */
-.lockup .lk-left, .lockup .lk-right { transform-box: view-box; }
-.masthead .kicker { align-self: stretch; flex-direction: column; align-items: center; gap: 12px; margin-top: 10px; text-align: center; }
-.masthead .kicker .tape {
-  position: relative; display: inline-block; padding: 2px 26px 6px; transform: rotate(-2.5deg);
-  background: var(--taxi); color: #14110d;
-  clip-path: polygon(1% 8%, 6% 0, 18% 6%, 34% 1%, 52% 5%, 70% 0, 86% 4%, 99% 0, 100% 46%, 98% 93%, 84% 100%, 66% 95%, 48% 100%, 30% 94%, 14% 100%, 2% 95%, 0 52%);
-}
-.masthead .kicker .tape .en {
-  font-family: 'Shadows Into Light', cursive; text-transform: none; letter-spacing: 0; color: #14110d;
-  font-size: clamp(25px, 2.1vw, 31px); line-height: 1.5; padding-bottom: 0.08em; white-space: nowrap;
-}
-html.js.motion .lockup .lk-left { animation: lk-from-left 0.9s cubic-bezier(.2,.8,.2,1) 0.15s both; }
-html.js.motion .lockup .lk-right { animation: lk-from-right 0.9s cubic-bezier(.2,.8,.2,1) 0.35s both; }
-html.js.motion .masthead .kicker .tape { animation: tape-stamp 0.45s cubic-bezier(.3,1.6,.5,1) 1.05s both; }
-@keyframes lk-from-left { from { transform: translateX(-60px); opacity: 0; } to { transform: none; opacity: 1; } }
-@keyframes lk-from-right { from { transform: translateX(60px); opacity: 0; } to { transform: none; opacity: 1; } }
-@keyframes tape-stamp { from { transform: rotate(-2.5deg) scale(1.35); opacity: 0; } to { transform: rotate(-2.5deg) scale(1); opacity: 1; } }
-@media (prefers-reduced-motion: reduce) {
-  .lockup .lk-left, .lockup .lk-right, .masthead .kicker .tape { animation: none !important; }
-}
-/* Phones: drop the Bengali line, leave just the tape. */
-@media (max-width: 720px) {
-  .masthead .kicker .bn { display: none; }
-  .masthead .kicker { margin-top: 12px; }
-  .masthead .kicker .tape .en { font-size: 25px; }
-}
-/* Desktop: Bengali line and tape share one row, keeping the lockup down on the road, clear of the bridge. */
-@media (min-width: 721px) {
-  .masthead .kicker { flex-direction: row; justify-content: center; align-items: center; gap: 22px; margin-top: 4px; }
-}
-/* Kalam replaces Sacramento on the tape; the Bengali line moves above TRAMLINE on desktop, centred over it
-   (like a small script word over a big one), and the lockup grows a size on wide screens. */
-.masthead .bn-over { display: none; }
-@media (min-width: 721px) {
-  .hero-title .lockup { width: clamp(360px, 40vw, 580px); }
-  .hero-inner { padding-bottom: 14px; }
-  .masthead .bn-over { display: block; align-self: flex-start; width: 59.6%; text-align: center; margin: 0 0 4px; }
-  .masthead .bn-over .bn { font-size: clamp(17px, 1.35vw, 22px); }
-  html.js.motion .masthead .bn-over { animation: lk-from-left 0.9s cubic-bezier(.2,.8,.2,1) 0.6s both; }
-  .masthead .kicker:not(.bn-over) { margin-top: 10px; }
-}
-/* Tape sized to the lockup, not the viewport extremes: smaller on phones, a touch smaller on desktop. */
-.masthead .kicker .tape { padding: 1px 20px 5px; }
-.masthead .kicker .tape .en { font-size: clamp(20px, 1.6vw, 26px); }
-@media (max-width: 720px) {
-  .masthead .kicker { margin-top: 10px; }
-  .masthead .kicker .tape { padding: 0 14px 3px; }
-  .masthead .kicker .tape .en { font-size: clamp(17px, 5vw, 20px); }
 }

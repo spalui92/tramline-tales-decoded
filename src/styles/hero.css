@@ -1,0 +1,68 @@
+/* ---------- hero: driving across Howrah Bridge at night ----------
+   The scene (src/scripts/gateway.ts) draws the deck, the girders, the lamps and the Hooghly below on two
+   canvases and sets --hy, its horizon, on the hero. TRAMLINE stands inside the bridge between the two
+   canvases, so the nearest girders pass in front of it; Tales sits in front of everything at its lower
+   right; the quote closes the hero, centred underneath. Every position hangs off --hy and --tw (the width
+   of TRAMLINE), so the type and the road can never drift apart. Phones get the same composition, scaled. */
+.hero { --tw: min(80vw, 1240px, 150svh); position: relative; height: clamp(600px, 94svh, 940px); overflow: hidden; isolation: isolate; background: #06070b; }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.hero .scene-back { z-index: 0; }
+.hero .scene-front { z-index: 2; }
+
+.hero-title { margin: 0; }
+.hero .t-far, .hero .t-near { position: absolute; display: block; height: auto; max-width: none; overflow: visible; pointer-events: none; }
+.hero .t-far { z-index: 1; width: var(--tw); left: calc((100% - var(--tw)) / 2); bottom: calc(100% - var(--hy, 50%) + 1.4vh);
+  filter: drop-shadow(0 0 28px rgba(255, 168, 86, 0.28)) drop-shadow(0 0 2px rgba(255, 220, 170, 0.35)); }
+.hero .t-near { z-index: 3; width: calc(var(--tw) * 0.38); right: calc((100% - var(--tw)) / 2); top: calc(var(--hy, 50%) - 1.4vh + var(--tw) * 0.004);
+  filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.8)); }
+.t-far .caps { font-family: 'Bebas Neue', var(--f-display); font-size: 40px; fill: var(--paper); }
+.t-far .gold { fill: var(--taxi); }
+.t-far .wire { stroke: var(--paper); stroke-width: 1.6; fill: none; }
+.t-far .body { fill: var(--paper); }
+.t-far .glass { fill: #0c0b09; }
+.t-far .lamp-red { fill: var(--sindoor); }
+.t-near .script { font-family: 'Cormorant Garamond', var(--f-display); font-style: italic; font-weight: 500; font-size: 80px; fill: var(--taxi); }
+.t-near .pole { fill: var(--taxi); stroke: var(--taxi); }
+.t-near .pole line { stroke-width: 2; }
+.t-near .pole rect { stroke: none; }
+.t-near .signal { fill: var(--sindoor); stroke: none; }
+
+.hero-quote { position: absolute; z-index: 3; margin: 0; left: var(--gutter); right: var(--gutter); top: calc(var(--hy, 50%) - 1.4vh + var(--tw) * 0.152 + 22px);
+  display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.hero-quote blockquote { margin: 0; }
+/* two lines on every device, broken at the full stop: the setup, then the punchline */
+.hero-quote p { margin: 0; font-family: 'Cormorant Garamond', var(--f-display); font-style: italic; font-weight: 500; font-size: clamp(24px, 2.4vw, 36px); line-height: 1.14; color: var(--paper); text-shadow: 0 2px 18px rgba(0, 0, 0, 0.9); }
+.hero-quote .ln { display: block; white-space: nowrap; }
+.hero-quote .ln:first-child { text-indent: -0.36em; } /* the opening mark hangs, so the words themselves sit centred */
+.hero-quote .punch { color: var(--taxi); }
+.hero-quote figcaption { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 0; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper-dim); text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9); }
+.hero-quote cite { font-style: normal; color: var(--taxi); }
+
+.hero-next {
+  position: absolute; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); z-index: 3; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--paper); text-decoration: none;
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
+}
+.hero-next i { display: block; width: 1px; height: 30px; background: linear-gradient(var(--taxi), transparent); }
+.hero-next:hover, .hero-next:focus-visible { color: var(--taxi); }
+@media (max-height: 760px) and (min-width: 721px) { .hero-next { display: none; } }
+
+@media (max-width: 720px) {
+  .hero { --tw: 84vw; }
+  .hero .t-near { width: calc(var(--tw) * 0.62); top: calc(var(--hy, 55%) - 1.4vh + var(--tw) * 0.006); }
+  .hero-quote { top: calc(var(--hy, 55%) - 1.4vh + var(--tw) * 0.246 + 18px); gap: 10px; }
+  .hero-quote p { font-size: clamp(20px, 6.9vw, 28px); }
+  .hero-quote figcaption { flex-direction: column; gap: 3px; font-size: 9.5px; letter-spacing: 0.14em; line-height: 1.5; }
+  .hero-quote .dot { display: none; }
+}
+
+/* one arrival: the lamps strike on first, then TRAMLINE surfaces from the haze, Tales slides in, the quote lands */
+html.js.motion .hero .t-far, html.js.motion .hero .t-near, html.js.motion .hero-quote, html.js.motion .hero-next { opacity: 0; }
+.hero.go .t-far { animation: hero-surface-title 1.6s var(--ease-out) 1.4s both; }
+.hero.go .t-near { animation: hero-slide-in 1.3s var(--ease-out) 2s both; }
+.hero.go .hero-quote { animation: hero-surface 1.2s var(--ease-out) 2.6s both; }
+.hero.go .hero-next { animation: hero-cue 1s var(--ease-out) 3.3s both; }
+@keyframes hero-surface { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes hero-surface-title { from { opacity: 0; transform: translateY(16px) scale(0.985); } to { opacity: 1; transform: none; } }
+@keyframes hero-slide-in { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
+@keyframes hero-cue { from { opacity: 0; } to { opacity: 0.85; } }
