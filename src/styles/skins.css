@@ -1,0 +1,83 @@
+/* ---------- skins: an optional look for a single piece ----------
+   Set `skin:` in an article's header. Pages without it are untouched.
+   To undo a skin on a piece, delete its `skin:` line. */
+
+/* ===== royal: slate emery paper, antique brass, old-camera postcards =====
+   The grey-black sandpaper every middle-class home takes to the window grill before Diwali,
+   with a little rust caught in the grit. Brass instead of neon; everything subdued. */
+html[data-skin='royal'] {
+  --accent: #c4a15f !important;          /* antique brass */
+  --slate: #282d32;
+  --slate-deep: #1d2125;
+  --brass: #c4a15f;
+  --brass-dim: rgba(196, 161, 95, 0.42);
+  background: var(--slate-deep);
+}
+html[data-skin='royal'] body { background: transparent; }
+
+/* the paper itself: fixed behind everything, so the grit doesn't scroll like wallpaper */
+html[data-skin='royal'] body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    url('../assets/textures/emery-rust.svg') 0 0 / 512px 512px,
+    url('../assets/textures/emery-grit.svg') 0 0 / 256px 256px,
+    url('../assets/textures/emery-wear.svg') center / cover no-repeat,
+    radial-gradient(120% 90% at 50% 35%, transparent 45%, rgba(8, 9, 11, 0.55) 100%),
+    linear-gradient(170deg, #2e3439 0%, var(--slate) 45%, #23272b 100%);
+  opacity: 1;
+}
+/* the site's film grain sits a touch lighter on grey */
+html[data-skin='royal'] body::after { opacity: 0.045; }
+
+/* hero: brass glow and numeral, a double rule like an old letterhead */
+html[data-skin='royal'] .tale-hero .glow {
+  background: radial-gradient(closest-side, rgba(196, 161, 95, 0.22), transparent);
+  opacity: 0.6;
+}
+html[data-skin='royal'] .tale-hero .bignum { -webkit-text-stroke: 1px rgba(196, 161, 95, 0.5); opacity: 0.45; }
+html[data-skin='royal'] .tale-hero::after {
+  content: ''; position: absolute; left: var(--gutter); right: var(--gutter); bottom: 18px; height: 5px;
+  border-top: 1px solid var(--brass-dim); border-bottom: 1px solid var(--brass-dim);
+}
+html[data-skin='royal'] .tale-meta .no { letter-spacing: 0.14em; }
+html[data-skin='royal'] .tale-sub .summary { color: #c9c6bd; }
+
+/* reading text: warm ivory on slate */
+html[data-skin='royal'] .prose { color: #ebe5d6; }
+html[data-skin='royal'] .prose h2 .sec { letter-spacing: 0.22em; }
+html[data-skin='royal'] .prose h2 .sec::after {
+  content: ''; display: inline-block; vertical-align: middle; width: 64px; height: 3px; margin-left: 14px;
+  border-top: 1px solid var(--brass-dim); border-bottom: 1px solid var(--brass-dim);
+}
+html[data-skin='royal'] .prose blockquote.said .line { color: #efe6cf; }
+html[data-skin='royal'] .prose ol.az,
+html[data-skin='royal'] .prose ol.az li { border-color: rgba(196, 161, 95, 0.22); }
+html[data-skin='royal'] .signoff { border-color: rgba(196, 161, 95, 0.25); }
+
+/* postcards: prints from a camera that has seen better decades.
+   Faded blacks, a warm cast, soft corners and a little grain; the subject still looks royal. */
+html[data-skin='royal'] .postcard .card {
+  background: #e9dfc6;
+  box-shadow:
+    inset 0 0 38px rgba(110, 80, 35, 0.22),
+    0 40px 80px -30px rgba(0, 0, 0, 0.9);
+}
+html[data-skin='royal'] .postcard .pclip { color: #b8954f !important; }
+html[data-skin='royal'] .postcard .img { position: relative; }
+html[data-skin='royal'] .postcard .img img {
+  filter: sepia(0.24) saturate(0.78) contrast(0.94) brightness(1.02);
+}
+html[data-skin='royal'] .postcard .img::after {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    url('../assets/textures/emery-grit.svg') 0 0 / 160px 160px,
+    radial-gradient(115% 100% at 50% 45%, transparent 55%, rgba(40, 26, 10, 0.42) 100%),
+    linear-gradient(180deg, rgba(255, 236, 200, 0.08), rgba(60, 40, 20, 0.08));
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+html[data-skin='royal'] .postcard figcaption { color: #2f2a24; }
+
+@media (prefers-reduced-transparency: reduce) {
+  html[data-skin='royal'] .postcard .img::after { opacity: 0.4; }
+}

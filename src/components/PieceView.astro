@@ -42,7 +42,7 @@ const jsonld = {
   author: { '@type': 'Person', name: cfg.author }, publisher: { '@type': 'Person', name: cfg.author },
 };
 ---
-<Base page="tale" title={tale.title} description={tale.summary} image={og} accent={tale.colour} article={{ date: tale.date, tag: tale.tag }} wire jsonld={jsonld}>
+<Base page="tale" title={tale.title} description={tale.summary} image={og} accent={tale.colour} article={{ date: tale.date, tag: tale.tag }} wire jsonld={jsonld} skin={tale.skin}>
   <article class="tale">
     <header class="tale-hero">
       <div class="glow" aria-hidden="true"></div>

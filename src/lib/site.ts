@@ -62,6 +62,8 @@ export type Tale = {
   kind: Kind; path: string;
   slug: string; no: number; title: string; date: string; tag: string; note: string;
   summary: string; colour: string; colourName: string; words: number; minutes: number;
+  /** optional page look, set with `skin:` in the header (e.g. `royal`) */
+  skin: string;
   cover?: { caption: string; image: ImageMetadata; src: string };
   body: Block[];
 };
@@ -140,7 +142,7 @@ function parse(file: string, text: string) {
   if (!KINDS.includes(kind)) throw new Error(`${name}: kind must be one of ${KINDS.join(', ')} (got '${meta.kind}')`);
   return {
     kind, slug: name.replace(/\.md$/, ''), title: meta.title, date: meta.date, tag: meta.tag || '',
-    note: meta.note || '', summary, colourKey: (meta.colour || meta.color || '').toLowerCase(), words,
+    note: meta.note || '', skin: (meta.skin || '').toLowerCase(), summary, colourKey: (meta.colour || meta.color || '').toLowerCase(), words,
     cover: coverBlock && { caption: coverBlock.caption, image: coverBlock.image, src: coverBlock.src },
     body: blocks,
   };
