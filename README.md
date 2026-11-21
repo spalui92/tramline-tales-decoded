@@ -34,7 +34,7 @@ Only `title` is required.
 - `tag`: the small label above the title.
 - `note`: the handwritten scribble in the margin.
 - `summary`: shown on the home page, in Google and in shared links. If left out, the first lines of the article are used.
-- `kind` (optional): which line of the diary the piece belongs to. `tale` (the default, so existing articles need nothing), `depot` for a campaign teardown (shown as a **Depot File**), or `notice` for a newsletter-style piece (shown on the **Notice Board**). Each line has its own numbering, page (`/tales/`, `/depot/`, `/notice/`), navbar link and stop on the home page's route map.
+- `kind` (optional): which line of the diary the piece belongs to. `tale` (the default, so existing articles need nothing), `depot` for a campaign teardown (shown as a **Depot File**), or `positioning` for an original brand-positioning study (shown in the **Brand Positioning Lab**). Each line has its own numbering, page (`/tales/`, `/depot/`, `/positioning/`), navbar link and stop on the home page's route map.
 - `colour` (optional): the colour this tale wears on its page, its cursor, its page wipe and its card. Choose one of `sindoor`, `tram`, `taxi`, `chai`, `ganga` or `alta`. Leave it out and tales take turns through that list.
 
 Special lines inside an article:
