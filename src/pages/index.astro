@@ -7,7 +7,7 @@ import RouteMap from '../components/RouteMap.astro';
 import Icon from '../components/Icon.astro';
 import Clip from '../components/Clip.astro';
 import { Image } from 'astro:assets';
-import { cfg, tales, newestFirst, depotFiles, href, absolute, shortDate, pad } from '../lib/site';
+import { cfg, tales, newestFirst, piecesNewestFirst, SECTIONS, depotFiles, href, absolute, shortDate, pad } from '../lib/site';
 import { windows } from '../lib/kolkata';
 import '../styles/hero.css';
 import clipImg from '../assets/hero/prop-clip.webp';
@@ -15,7 +15,11 @@ import pileImg from '../assets/hero/prop-pile.webp';
 import photoImg from '../assets/hero/prop-photo.webp';
 import ticketImg from '../assets/hero/prop-ticket.webp';
 
-const latest = newestFirst[0];
+// The front page leads with the newest piece on any line (tale, depot file or Brand Lab study);
+// the tale lists further down still show tales only.
+const latest = piecesNewestFirst[0];
+const latestSec = SECTIONS[latest.kind];
+const latestWord = latest.kind === 'tale' ? 'tale' : latest.kind === 'depot' ? 'file' : 'study';
 const recent = newestFirst.slice(0, 3);
 const latestDepot = depotFiles[depotFiles.length - 1];
 
@@ -53,15 +57,15 @@ const jsonld = {
   </section>
 
   <!-- THE SCOREBOARD: the newest tale, straight after the masthead -->
-  <section class="scoreboard" id="front-page" style={`--c:${latest.colour}`} aria-label="Latest tale">
+  <section class="scoreboard" id="front-page" style={`--c:${latest.colour}`} aria-label={`Latest ${latestWord}`}>
     <div class="wrap editorial-rule mono" aria-hidden="true"><span>TRAMLINE TALES</span><span class="editorial-rule-center">THE FRONT PAGE</span><span>EST. KOLKATA</span></div>
     <div class="wrap sb">
-      <span class="sb-meta mono" data-reveal><b>Latest · Tale No. {pad(latest.no)}</b><span>{shortDate(latest.date)}</span>{latest.tag && <span>{latest.tag}</span>}</span>
+      <span class="sb-meta mono" data-reveal><b>Latest · {latestSec.singular} No. {pad(latest.no)}</b><span>{shortDate(latest.date)}</span>{latest.tag && <span>{latest.tag}</span>}</span>
       <a class="sb-main" href={href(latest.path)} data-cursor="Read" data-wipe={latest.colour} data-wipe-to={latest.title}>
         <span class="sb-title" data-reveal>{latest.title}</span>
         <span class="sb-side" data-reveal>
           <span class="sb-sum">{latest.summary}</span>
-          <span class="sb-cta mono">Open the tale <span aria-hidden="true">&rarr;</span></span>
+          <span class="sb-cta mono">Open the {latestWord} <span aria-hidden="true">&rarr;</span></span>
         </span>
       </a>
       <div class="sb-desk">
