@@ -45,7 +45,7 @@
   clip-path:polygon(0 0,100% 0,100% 44%,calc(100% - 6px) 50%,100% 56%,100% 100%,0 100%,0 56%,6px 50%,0 44%);
   transition:transform .3s ease,box-shadow .3s ease;
 }
-.ticket-notice { --ticket-accent:#386b8a; }
+.ticket-positioning { --ticket-accent:#386b8a; }
 .route-ticket::before { content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;background-image:repeating-linear-gradient(0deg,transparent 0 3px,rgba(71,53,30,.1) 4px 5px); }
 .ticket-stub { display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px 8px;border-right:1px dashed #a89a84;color:var(--ticket-accent);text-align:center; }
 .ticket-stub strong { font-family:var(--f-display);font-weight:400;font-size:clamp(48px,5vw,66px);line-height:.85; }
