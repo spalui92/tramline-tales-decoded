@@ -44,7 +44,21 @@
 /* the title scales with both the width and the height of the screen, so it never outgrows its column */
 .hero .title { margin: 0; font-family: var(--display); font-weight: 400; color: var(--parch); line-height: 1.04; letter-spacing: .012em; text-transform: uppercase;
   text-shadow: 0 2px 0 rgba(0,0,0,.35), 0 10px 40px rgba(0,0,0,.5); }
-.hero .title span { display: block; font-size: var(--h1); }
+/* the title: hollow letters about two-thirds full of fountain-pen ink, the surface never at rest,
+   rolling like water at the shore. Two waves drift in opposite directions while the tide breathes up and down.
+   The letters stay real text; the ink is a background clipped to them. */
+.hero .title > span { display: block; font-size: var(--h1); width: max-content; max-width: 100%;
+  color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: max(1px, .006em) rgba(224,207,165,.85); text-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='f' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23324b72'/%3E%3Cstop offset='0.34' stop-color='%23273d60'/%3E%3Cstop offset='0.55' stop-color='%231a2a47'/%3E%3Cstop offset='1' stop-color='%230e1628'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,37 C43.2,33.8 76.8,33.8 120.0,37 C163.2,40.2 196.8,40.2 240,37 V100 H0 Z' fill='url%28%23f%29' fill-opacity='1'/%3E%3Cpath d='M0,37 C43.2,33.8 76.8,33.8 120.0,37 C163.2,40.2 196.8,40.2 240,37' fill='none' stroke='rgba%28170,192,220,.42%29' stroke-width='1.2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%2347648f'/%3E%3Cstop offset='0.6' stop-color='%232c4569'/%3E%3Cstop offset='1' stop-color='%23203454'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,35.2 C64.8,32.6 115.2,32.6 180.0,35.2 C244.8,37.800000000000004 295.2,37.800000000000004 360,35.2 V100 H0 Z' fill='url%28%23b%29' fill-opacity='0.55'/%3E%3C/svg%3E"), linear-gradient(var(--parch), var(--parch));
+  background-size: 3em 100%, 4.6em 100%, 100% 100%; background-repeat: repeat-x, repeat-x, no-repeat;
+  background-position: 0 0, 0 0, 0 0;
+  -webkit-background-clip: text; background-clip: text;
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,.35)) drop-shadow(0 10px 22px rgba(0,0,0,.45));
+  animation: ink-drift 9s linear infinite, ink-tide 5.5s ease-in-out infinite alternate; }
+.hero .title > span + span { animation-delay: -3.1s, -1.7s; }
+@keyframes ink-drift { to { background-position-x: -3em, 4.6em, 0; } }
+@keyframes ink-tide { from { background-position-y: .035em, -.02em, 0; } to { background-position-y: -.035em, .03em, 0; } }
+@media (prefers-reduced-motion: reduce) { .hero .title > span { animation: none; } }
 .hero .rule { display: block; width: clamp(90px, 10vw, 150px); height: 3px; background: var(--red); margin: clamp(14px, 2.4vh, 24px) 0; }
 
 /* The quote scales independently from the display headline, so tracking never pushes it beyond its column. */
