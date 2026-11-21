@@ -31,6 +31,7 @@ export type Block =
   | { t: 'h'; x: string }
   | { t: 'quote'; line: string; gloss: string }
   | { t: 'list'; items: { mark: string; x: string }[] }
+  | { t: 'post'; items: { line: string; gloss: string }[] }
   | { t: 'img'; caption: string; src: string; image: ImageMetadata };
 
 // The site has three lines. Set `kind:` in an article's header to choose one;
@@ -122,6 +123,16 @@ function parse(file: string, text: string) {
     if (q) {
       const said = q[1].match(/^(["“].*?[.!?…]["”])\s*(.*)$/);
       blocks.push(said ? { t: 'quote', line: said[1], gloss: said[2] } : { t: 'quote', line: q[1], gloss: '' });
+      continue;
+    }
+    // |> "A quote." Who said it. Quotes that follow one another hang on one signpost, left and right.
+    const sp = chunk.match(/^\|>\s*(.*)$/);
+    if (sp) {
+      const said = sp[1].match(/^(["“].*?[.!?…]["”])\s*(.*)$/);
+      const item = said ? { line: said[1], gloss: said[2] } : { line: sp[1], gloss: '' };
+      const last = blocks[blocks.length - 1];
+      if (last && last.t === 'post') last.items.push(item);
+      else blocks.push({ t: 'post', items: [item] });
       continue;
     }
     // A/. list items, kept together while they follow one another

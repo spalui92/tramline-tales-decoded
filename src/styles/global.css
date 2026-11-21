@@ -471,6 +471,44 @@ html.reduced .board .track { transform: none !important; }
 .prose blockquote.said .dd { display: block; font-family: var(--f-display); color: var(--accent); font-size: 40px; line-height: 1; margin-bottom: 14px; }
 .prose blockquote.said .line { display: block; font-family: var(--f-display); font-style: italic; font-size: clamp(32px, 3.4vw, 50px); line-height: 1.04; letter-spacing: -0.01em; text-wrap: balance; }
 .prose blockquote.said .gloss { display: block; margin-top: 16px; color: var(--paper-dim); font-size: 0.92em; text-wrap: balance; }
+/* the signpost: a green cast-iron tram pole with parchment placards hung off iron arms, left and right
+   (on phones the pole runs down the left edge and every placard hangs to its right) */
+.prose .signpost { position: relative; margin: 2.4em 0 1.4em; padding: 46px 0 64px; }
+.prose .sp-pole { position: absolute; left: 50%; top: 0; bottom: 0; width: 14px; transform: translateX(-50%); border-radius: 7px 7px 2px 2px;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 118px, rgba(0,0,0,.45) 118px 120px, rgba(196,214,180,.18) 120px 122px, transparent 122px 128px),
+    linear-gradient(90deg, #13241a 0%, #2f5640 28%, #4d7a5d 42%, #2b4c38 66%, #0f1d15 100%);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.35), 6px 0 14px rgba(0,0,0,.35); }
+.prose .sp-pole::before { content: ''; position: absolute; left: 50%; top: -22px; width: 26px; height: 26px; transform: translateX(-50%); border-radius: 50% 50% 40% 40%;
+  background: radial-gradient(circle at 38% 32%, #6e9a7c 0, #2f5640 45%, #13241a 100%); box-shadow: 0 2px 4px rgba(0,0,0,.5); }
+.prose .sp-pole::after { content: ''; position: absolute; left: 50%; bottom: -8px; width: 40px; height: 22px; transform: translateX(-50%); border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(90deg, #13241a, #3b6a4d 45%, #1a3123); box-shadow: 0 4px 8px rgba(0,0,0,.45); }
+.prose .sp-boards { list-style: none; margin: 0; padding: 0; }
+.prose .sp-item { position: relative; width: calc(50% - 30px); margin: 0 0 30px; }
+.prose .sp-item:nth-child(odd) { margin-right: auto; }
+.prose .sp-item:nth-child(even) { margin-left: auto; }
+.prose .sp-item:last-child { margin-bottom: 0; }
+.prose .sp-arm { position: absolute; top: 30px; width: 34px; height: 5px; border-radius: 3px; background: linear-gradient(180deg, #4d4640, #1c1814); box-shadow: 0 2px 3px rgba(0,0,0,.45); }
+.prose .sp-item:nth-child(odd) .sp-arm { right: -34px; }
+.prose .sp-item:nth-child(even) .sp-arm { left: -34px; }
+.prose .sp-board { position: relative; margin: 0; padding: 30px 26px 24px; transform: rotate(var(--tilt, 0deg)); transform-origin: 50% 12px;
+  background: url('../assets/textures/placard.webp') center / 100% 100% no-repeat; color: #2a1d12; text-align: left;
+  filter: drop-shadow(0 8px 10px rgba(0,0,0,.45)); animation: sp-sway 7s ease-in-out infinite alternate; }
+.prose .sp-item:nth-child(even) .sp-board { animation-duration: 8.5s; animation-delay: -2s; }
+@keyframes sp-sway { from { rotate: -.5deg; } to { rotate: .5deg; } }
+.prose .sp-line { margin: 0; font-family: var(--f-display); font-style: italic; font-size: clamp(20px, 1.6vw, 24px); line-height: 1.22; text-wrap: balance; color: #2a1d12; }
+.prose .sp-board cite { display: block; margin-top: 12px; font-family: var(--f-mono); font-style: normal; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.5; color: rgba(42,29,18,.68); }
+.prose .sp-nail { position: absolute; top: 10px; width: 13px; height: 13px; background: url('../assets/textures/nail.webp') center / contain no-repeat; filter: drop-shadow(1px 1px 1px rgba(0,0,0,.5)); }
+.prose .sp-nail-a { left: 12px; }
+.prose .sp-nail-b { right: 12px; transform: rotate(40deg); }
+@media (min-width: 641px) { .prose .sp-item + .sp-item { margin-top: -64px; } }
+@media (max-width: 640px) {
+  .prose .signpost { padding-left: 0; }
+  .prose .sp-pole { left: 9px; transform: none; }
+  .prose .sp-item, .prose .sp-item:nth-child(odd), .prose .sp-item:nth-child(even) { width: calc(100% - 50px); margin-left: auto; margin-right: 0; }
+  .prose .sp-item:nth-child(odd) .sp-arm, .prose .sp-item:nth-child(even) .sp-arm { left: -34px; right: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .prose .sp-board { animation: none; } }
 
 /* a photograph, kept as a postcard */
 .postcard { margin: 2.6em -6% 2.8em; }

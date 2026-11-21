@@ -41,6 +41,7 @@ Special lines inside an article:
 
 - **A photo**: put the picture in the `images/` folder and add a line of its own: `![a short handwritten caption](images/photo.jpg)`. It appears as a postcard with your caption written underneath.
 - **A dialogue line**: start the paragraph with `॥`, then the line in quotes, then its meaning. Example: `॥ "Rasode mein kaun tha?" Who was in the kitchen?` It is set large, with the meaning underneath.
+- **A quote signpost**: start the paragraph with `|>`, then the line in quotes, then who said it. Example: `|> "Method, order, and the little gray cells." Hercule Poirot, The Murder of Roger Ackroyd (1926)`. Quotes that follow one another hang on one tram pole as parchment placards, left and right.
 - **A list**: start each paragraph with `A/.`, `B/.`, `C/.` and so on. Paragraphs that follow one another become one list.
 
 3. Commit the file. GitHub rebuilds and republishes the site in about two minutes.

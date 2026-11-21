@@ -71,6 +71,21 @@ const jsonld = {
             {b.gloss && <span class="gloss">{b.gloss}</span>}
           </blockquote>
         );
+        if (b.t === 'post') return (
+          <div class="signpost" data-reveal>
+            <span class="sp-pole" aria-hidden="true"></span>
+            <ul class="sp-boards">{b.items.map((it, i) => (
+              <li class="sp-item" style={`--tilt:${[-1.4, 1.1, -0.7, 1.6][i % 4]}deg`}>
+                <span class="sp-arm" aria-hidden="true"></span>
+                <blockquote class="sp-board">
+                  <p class="sp-line">{it.line}</p>
+                  {it.gloss && <cite>{it.gloss}</cite>}
+                  <i class="sp-nail sp-nail-a" aria-hidden="true"></i><i class="sp-nail sp-nail-b" aria-hidden="true"></i>
+                </blockquote>
+              </li>
+            ))}</ul>
+          </div>
+        );
         if (b.t === 'list') return (
           <ol class="az">{b.items.map((li) => <li><span class="mk" aria-hidden="true">{li.mark}</span><span>{li.x}</span></li>)}</ol>
         );
