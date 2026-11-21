@@ -511,8 +511,29 @@ html.reduced .board .track { transform: none !important; }
 .prose .sp-nail-b { bottom: 7px; transform: rotate(40deg); }
 .prose .sp-item:nth-child(odd) .sp-nail { right: 8px; }
 .prose .sp-item:nth-child(even) .sp-nail { left: 8px; }
-@media (min-width: 641px) { .prose .sp-item + .sp-item { margin-top: -40px; } }
+/* desktop: the signpost steps out of the 680px reading column and spreads wider, so the signs have room to breathe */
+@media (min-width: 900px) {
+  .prose .signpost { width: min(1040px, calc(100vw - 2 * var(--gutter))); margin-left: 50%; transform: translateX(-50%); padding: 48px 0 70px; }
+  .prose .sp-item { width: calc(50% - 8px); margin-bottom: 30px; }
+  .prose .sp-item + .sp-item { margin-top: -54px; }
+  .prose .sp-board { padding: 30px 36px 26px; }
+  .prose .sp-line { font-size: clamp(24px, 1.75vw, 28px); }
+  .prose .sp-board cite { font-size: 11.5px; }
+}
+@media (min-width: 641px) and (max-width: 899px) { .prose .sp-item + .sp-item { margin-top: -40px; } }
+/* phones: a shorter, tighter post. Smaller signs, tighter gaps, so all six fit in about a screen and a half */
 @media (max-width: 640px) {
+  .prose .signpost { padding: 26px 0 40px; margin: 1.8em 0 1em; }
+  .prose .sp-item { margin-bottom: 14px; }
+  .prose .sp-arm { top: 12px; bottom: 12px; }
+  .prose .sp-board { padding: 15px 16px 13px 22px; border-width: 5px; box-shadow: inset 0 0 0 2px #f1e8d2, inset 0 0 0 3.5px rgba(31,58,92,.55), inset 0 0 18px rgba(80,58,24,.28), 0 6px 12px rgba(0,0,0,.5); }
+  .prose .sp-line { font-size: 17px; line-height: 1.2; }
+  .prose .sp-board cite { margin-top: 7px; padding-top: 6px; font-size: 9.5px; letter-spacing: .1em; line-height: 1.4; }
+  .prose .sp-nail { width: 9px; height: 9px; }
+  .prose .sp-nail-a { top: 5px; } .prose .sp-nail-b { bottom: 5px; }
+  .prose .sp-item:nth-child(odd) .sp-nail, .prose .sp-item:nth-child(even) .sp-nail { left: 6px; }
+  .prose .sp-pole { width: 12px; }
+  .prose .sp-pole::before { width: 22px; height: 22px; top: -18px; }
   .prose .sp-pole { left: 10px; transform: none; }
   .prose .sp-item, .prose .sp-item:nth-child(odd), .prose .sp-item:nth-child(even) { width: calc(100% - 20px); margin-left: auto; margin-right: 0; }
   .prose .sp-item:nth-child(odd) .sp-arm, .prose .sp-item:nth-child(even) .sp-arm { left: -11px; right: auto; }
