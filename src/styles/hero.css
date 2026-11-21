@@ -73,9 +73,9 @@
 .hero .pull b { display: block; margin-top: .15em; color: var(--amber); letter-spacing: clamp(.03em, .38vw, .065em); }
 
 /* the quote: an editorial pull quote, serif italic, a hanging maroon quote mark, the punchline in rose, a typed credit.
-   Its size is locked to the title: 0.24 x --h1, so the first line ("The consumer isn't a moron.", about 10.3em of
-   this serif) spans roughly two-thirds of the width of "Tramline" on every screen. */
-.hero .pull.pull--ed { font-size: calc(var(--h1) * .24); width: auto; max-width: 100%; padding-left: 1.9em; margin-top: .2em; margin-bottom: 1.15em; }
+   Its size is locked to the title: 0.29 x --h1, so the first line ("The consumer isn't a moron.", about 10.3em of
+   this serif) spans about four-fifths of the width of "Tramline" on every screen. */
+.hero .pull.pull--ed { font-size: calc(var(--h1) * .29); width: auto; max-width: 100%; padding-left: 1.9em; margin-top: .2em; margin-bottom: 1.15em; }
 .hero .pull--ed::before { content: '\201C'; top: -.07em; bottom: auto; width: auto; height: auto; background: none; border-radius: 0;
   font-family: 'Instrument Serif', Georgia, serif; font-size: 3.6em; line-height: 1; color: #b4574a; }
 .hero .pull.pull--ed p { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; text-transform: none; letter-spacing: .005em;
