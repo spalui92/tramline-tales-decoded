@@ -23,6 +23,7 @@ const latestWord = latest.kind === 'tale' ? 'tale' : latest.kind === 'depot' ? '
 const recent = newestFirst.slice(0, 3);
 const latestDepot = depotFiles[depotFiles.length - 1];
 const latestStudy = positioningStudies[positioningStudies.length - 1];
+const latestTale = newestFirst[0];
 
 const jsonld = {
   '@context': 'https://schema.org', '@type': 'Blog', name: cfg.name, description: cfg.description,
@@ -105,6 +106,11 @@ const jsonld = {
         </g>
       </svg></div>
       <div class="ticket-stack">
+        {latestTale && <a class="route-ticket ticket-tale" href={href(latestTale.path)} data-cursor="Read" data-wipe={latestTale.colour} data-wipe-to={latestTale.title}>
+              <span class="ticket-stub"><strong>{pad(latestTale.no)}</strong><span class="mono">TRAMLINE<br />TALES</span></span>
+              <span class="ticket-body"><span class="mono ticket-category">THE MAIN LINE</span><span class="ticket-title">{latestTale.title}</span><span class="ticket-description">Essays on brands, media and the stories that outlive them.</span></span>
+              <span class="ticket-arrow" aria-hidden="true">↗</span>
+            </a>}
         {latestDepot
           ? <a class="route-ticket ticket-depot" href={href(latestDepot.path)} data-cursor="Read" data-wipe={latestDepot.colour} data-wipe-to={latestDepot.title}>
               <span class="ticket-stub"><strong>{pad(latestDepot.no)}</strong><span class="mono">DEPOT<br />FILES</span></span>

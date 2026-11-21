@@ -149,7 +149,11 @@ function parse(file: string, text: string) {
   const firstP = blocks.find((b) => b.t === 'p') as { x: string };
   let summary = meta.summary || firstP.x;
   if (summary.length > 160 && !meta.summary) summary = summary.slice(0, 157).replace(/\s+\S*$/, '') + '...';
-  const coverBlock = blocks.find((b) => b.t === 'img') as Extract<Block, { t: 'img' }> | undefined;
+  // `cover: images/photo.jpg` picks the photo that stands for the piece; otherwise the first photo does.
+  const imgs = blocks.filter((b) => b.t === 'img') as Extract<Block, { t: 'img' }>[];
+  const wanted = (meta.cover || '').replace(/^\.?\//, '');
+  if (wanted && !imgs.some((b) => b.src === wanted)) throw new Error(`${name}: cover picture not found among the article's photos: ${wanted}`);
+  const coverBlock = (wanted && imgs.find((b) => b.src === wanted)) || imgs[0];
   const kind = (meta.kind || 'tale').toLowerCase() as Kind;
   if (!KINDS.includes(kind)) throw new Error(`${name}: kind must be one of ${KINDS.join(', ')} (got '${meta.kind}')`);
   return {
