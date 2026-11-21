@@ -7,7 +7,7 @@ import RouteMap from '../components/RouteMap.astro';
 import Icon from '../components/Icon.astro';
 import Clip from '../components/Clip.astro';
 import { Image } from 'astro:assets';
-import { cfg, tales, newestFirst, depotFiles, notices, href, absolute, shortDate, pad } from '../lib/site';
+import { cfg, tales, newestFirst, depotFiles, href, absolute, shortDate, pad } from '../lib/site';
 import { windows } from '../lib/kolkata';
 import '../styles/hero.css';
 import clipImg from '../assets/hero/prop-clip.webp';
@@ -18,7 +18,6 @@ import ticketImg from '../assets/hero/prop-ticket.webp';
 const latest = newestFirst[0];
 const recent = newestFirst.slice(0, 3);
 const latestDepot = depotFiles[depotFiles.length - 1];
-const latestNotice = notices[notices.length - 1];
 
 const jsonld = {
   '@context': 'https://schema.org', '@type': 'Blog', name: cfg.name, description: cfg.description,
@@ -62,7 +61,7 @@ const jsonld = {
         <span class="sb-title" data-reveal>{latest.title}</span>
         <span class="sb-side" data-reveal>
           <span class="sb-sum">{latest.summary}</span>
-          <span class="sb-cta mono">Board here <span aria-hidden="true">&rarr;</span></span>
+          <span class="sb-cta mono">Open the tale <span aria-hidden="true">&rarr;</span></span>
         </span>
       </a>
       <div class="sb-desk">
@@ -108,17 +107,11 @@ const jsonld = {
               <span class="ticket-arrow" aria-hidden="true">↗</span>
             </a>
           : <a class="route-ticket ticket-depot" href={href('depot/')} data-cursor="link"><span class="ticket-stub"><strong>02</strong><span class="mono">DEPOT<br />FILES</span></span><span class="ticket-body"><span class="mono ticket-category">THE BRAND AUTOPSY</span><span class="ticket-title">First teardown coming soon</span></span><span class="ticket-arrow" aria-hidden="true">↗</span></a>}
-        {latestNotice
-          ? <a class="route-ticket ticket-notice" href={href(latestNotice.path)} data-cursor="Read" data-wipe={latestNotice.colour} data-wipe-to={latestNotice.title}>
-              <span class="ticket-stub"><strong>{pad(latestNotice.no)}</strong><span class="mono">NOTICE<br />BOARD</span></span>
-              <span class="ticket-body"><span class="mono ticket-category">PLATFORM DISPATCH</span><span class="ticket-title">{latestNotice.title}</span><span class="ticket-description">A dispatch from the platform.</span></span>
+        <a class="route-ticket ticket-positioning" href={href('positioning/')} data-cursor="link">
+              <span class="ticket-stub"><strong>03</strong><span class="mono">BRAND<br />POSITIONING</span></span>
+              <span class="ticket-body"><span class="mono ticket-category">THE STRATEGY WORKSHOP</span><span class="ticket-title">Brand Positioning Lab</span><span class="ticket-description">Market context, competitors, consumer insight and a fresh point of view.</span></span>
               <span class="ticket-arrow" aria-hidden="true">↗</span>
             </a>
-          : <div class="route-ticket ticket-notice is-upcoming" aria-label="Notice Board: first dispatch coming soon">
-              <span class="ticket-stub"><strong>03</strong><span class="mono">NOTICE<br />BOARD</span></span>
-              <span class="ticket-body"><span class="mono ticket-category">PLATFORM DISPATCH</span><span class="ticket-title">Dispatches from the platform</span><span class="ticket-description">First dispatch coming soon.</span></span>
-              <span class="ticket-soon mono">SOON</span>
-            </div>}
       </div>
     </div>
   </section>
