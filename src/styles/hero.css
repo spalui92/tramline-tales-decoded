@@ -46,9 +46,8 @@
   text-shadow: 0 2px 0 rgba(0,0,0,.35), 0 10px 40px rgba(0,0,0,.5); }
 /* the title: hollow letters about 85% full of maroon ink, the surface never at rest.
    The empty top of each letter is shaded inward, as if the letters were vessels with a lip that casts a shadow.
-   One wave rolls through; a dark band under the waterline gives it depth; every eight seconds a swell rears up,
-   curls over, slams into the top of the letters and collapses back. The letters stay real text: the ink is a
-   background clipped to them, and the swell rides on an exact copy of the word laid on top (::before). */
+   One wave rolls through while the level rises and falls like a tide; a dark band under the waterline gives it depth.
+   The letters stay real text: the ink is a background clipped to them. */
 .hero .title > span { display: block; position: relative; font-size: var(--h1); width: max-content; max-width: 100%;
   color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: max(1px, .006em) rgba(224,207,165,.85); text-shadow: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='i' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='100'%3E%3Cstop offset='0' stop-color='%23b05a4b'/%3E%3Cstop offset='.15' stop-color='%23a85446'/%3E%3Cstop offset='.19' stop-color='%238a3a31'/%3E%3Cstop offset='.225' stop-color='%233e1210'/%3E%3Cstop offset='.33' stop-color='%2364221d'/%3E%3Cstop offset='.64' stop-color='%234d1816'/%3E%3Cstop offset='1' stop-color='%232a0b0a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,20 C24,19.1 44,14.8 66,14.8 C82,14.8 92,18.3 120,22.9 C160,25.7 206,22.9 240,20 V100 H0 Z' fill='url%28%23i%29'/%3E%3Cpath d='M0,20 C24,19.1 44,14.8 66,14.8 C82,14.8 92,18.3 120,22.9 C160,25.7 206,22.9 240,20' fill='none' stroke='rgba%28240,196,176,.45%29' stroke-width='1.1' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E"),
@@ -57,24 +56,10 @@
   -webkit-background-clip: text; background-clip: text;
   filter: drop-shadow(0 2px 0 rgba(0,0,0,.35)) drop-shadow(0 10px 22px rgba(0,0,0,.45));
   animation: ink-drift 9s linear infinite, ink-tide 5.5s ease-in-out infinite alternate; }
-.hero .title > span::before { content: attr(data-text) / ""; position: absolute; inset: 0; pointer-events: none;
-  -webkit-text-stroke: 0; color: transparent; -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='s' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='100'%3E%3Cstop offset='0' stop-color='%23b05a4b'/%3E%3Cstop offset='.1' stop-color='%23a85446'/%3E%3Cstop offset='.16' stop-color='%238a3a31'/%3E%3Cstop offset='.215' stop-color='%234a1613'/%3E%3Cstop offset='.27' stop-color='%2364221d' stop-opacity='.95'/%3E%3Cstop offset='.33' stop-color='%2364221d' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M118,30 C140,27 160,10.5 186,7.8 C202,6.6 216,8.4 224,12.2 C230,15 228,18.4 219,17.6 C214,17.2 214,15.6 218,15.2 C228,23 246,29 272,30 V40 H118 Z' fill='url%28%23s%29'/%3E%3Cpath d='M170,11.2 C176,9.2 180,8.3 186,7.8 C202,6.6 216,8.4 224,12.2 C230,15 228,18.4 219,17.6 C214,17.2 214,15.6 218,15.2' fill='none' stroke='rgba%28248,220,204,.78%29' stroke-width='1.1' vector-effect='non-scaling-stroke' stroke-linecap='round'/%3E%3C/svg%3E"); background-size: 2.5em 100%; background-repeat: repeat-x; background-position: 0 .12em; opacity: 0;
-  animation: ink-drift-wide 7.5s linear infinite, ink-surge 8s linear infinite; }
-.hero .title > span + span, .hero .title > span + span::before { animation-delay: -3.1s, -4.6s; }
+.hero .title > span + span { animation-delay: -3.1s, -4.6s; }
 @keyframes ink-drift { to { background-position-x: -3em, 0; } }
-@keyframes ink-drift-wide { to { background-position-x: -2.5em; } }
 @keyframes ink-tide { from { background-position-y: .03em, 0; } to { background-position-y: -.03em, 0; } }
-/* the swell: gathers quickly, slams the top, curls and collapses back into the ink */
-@keyframes ink-surge {
-  0%, 60% { opacity: 0; background-position-y: .12em; }
-  63% { opacity: 1; background-position-y: .07em; animation-timing-function: cubic-bezier(.15,.8,.3,1); }
-  69% { opacity: 1; background-position-y: -.018em; animation-timing-function: cubic-bezier(.4,0,.6,1); }
-  73% { opacity: 1; background-position-y: -.008em; animation-timing-function: cubic-bezier(.7,0,.9,.6); }
-  79% { opacity: 1; background-position-y: .085em; animation-timing-function: ease-out; }
-  84% { opacity: .6; background-position-y: .05em; }
-  90%, 100% { opacity: 0; background-position-y: .12em; } }
-@media (prefers-reduced-motion: reduce) { .hero .title > span, .hero .title > span::before { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .hero .title > span { animation: none; } }
 .hero .rule { display: block; width: clamp(90px, 10vw, 150px); height: 3px; background: var(--red); margin: clamp(14px, 2.4vh, 24px) 0; }
 
 /* The quote scales independently from the display headline, so tracking never pushes it beyond its column. */
