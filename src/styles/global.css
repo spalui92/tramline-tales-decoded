@@ -515,10 +515,10 @@ html.reduced .board .track { transform: none !important; }
 }
 
 /* =====================================================================
-   Three lines: Tales, Depot Files, Notice Board
+   Three lines: Tales, Depot Files, Brand Positioning Lab
    ===================================================================== */
 
-/* navbar: three line links and About; counts and long names fold away on phones */
+/* navbar: three line links and About; long names fold away on phones */
 .nav .short { display: none; }
 .nav .cnt { opacity: 0.6; }
 .nav a[aria-current='page']::after { transform: scaleX(1); transform-origin: left; }
