@@ -33,10 +33,10 @@ export type Block =
   | { t: 'list'; items: { mark: string; x: string }[] }
   | { t: 'img'; caption: string; src: string; image: ImageMetadata };
 
-// The diary has three lines. Set `kind:` in an article's header to choose one;
+// The site has three lines. Set `kind:` in an article's header to choose one;
 // leave it out and the article is a tale, exactly as before.
-export type Kind = 'tale' | 'depot' | 'notice';
-export const KINDS: Kind[] = ['tale', 'depot', 'notice'];
+export type Kind = 'tale' | 'depot' | 'positioning';
+export const KINDS: Kind[] = ['tale', 'depot', 'positioning'];
 export const SECTIONS: Record<Kind, {
   dir: string; label: string; short: string; singular: string; defaultColour: string;
   blurb: string; hail: string; first: string; empty: string;
@@ -51,11 +51,12 @@ export const SECTIONS: Record<Kind, {
     blurb: 'Campaign teardowns. Where a tram is taken apart to see how it runs.',
     hail: 'Open the next file', first: 'Back to the first file', empty: 'The first depot file is being opened up.',
   },
-  notice: {
-    dir: 'notice', label: 'Notice Board', short: 'Notices', singular: 'Notice', defaultColour: 'ganga',
-    blurb: 'Internal-communication notices, pinned up the way a company would.',
-    hail: 'Read the next notice', first: 'Back to the first notice', empty: 'The first notice is being pinned up.',
+  positioning: {
+    dir: 'positioning', label: 'Brand Positioning Lab', short: 'Brand Lab', singular: 'Positioning Study', defaultColour: 'ganga',
+    blurb: 'Independent brand-positioning exercises, from market context and competitor choices to consumer insight and a defensible place in the market.',
+    hail: 'Open the next study', first: 'Back to the first study', empty: 'The first brand is waiting to be selected.',
   },
+
 };
 
 export type Tale = {
@@ -152,7 +153,7 @@ const parsed = Object.entries(rawArticles).map(([file, text]) => parse(file, tex
 parsed.sort((a, b) => (a.date + a.slug).localeCompare(b.date + b.slug));
 
 /** Oldest first within each line. Tale No. 1, Depot File No. 1 and Notice No. 1 each start their own count. */
-const counters: Record<Kind, number> = { tale: 0, depot: 0, notice: 0 };
+const counters: Record<Kind, number> = { tale: 0, depot: 0, positioning: 0 };
 const everything: Tale[] = parsed.map((a) => {
   const sec = SECTIONS[a.kind];
   const i = counters[a.kind]++;
@@ -172,7 +173,7 @@ export const piecesNewestFirst: Tale[] = [...everything].reverse();
 export const byKind = (k: Kind): Tale[] => everything.filter((p) => p.kind === k);
 export const tales: Tale[] = byKind('tale');
 export const depotFiles: Tale[] = byKind('depot');
-export const notices: Tale[] = byKind('notice');
+export const positioningStudies: Tale[] = byKind('positioning');
 /** Tales only, newest first (the home page, footer and loader all mean tales). */
 export const newestFirst = [...tales].reverse();
 
