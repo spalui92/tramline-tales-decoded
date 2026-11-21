@@ -57,10 +57,10 @@
   line-height: 1.42; text-wrap: balance; overflow-wrap: anywhere; text-transform: uppercase; color: var(--parch); }
 .hero .pull b { display: block; margin-top: .15em; color: var(--amber); letter-spacing: clamp(.03em, .38vw, .065em); }
 
-.hero .cta { display: inline-flex; align-items: center; gap: 16px; padding: clamp(12px, 1.7vh, 16px) clamp(22px, 2.4vw, 34px);
-  font-family: var(--f-mono); font-size: clamp(.78rem, 1.1vw, .95rem); letter-spacing: .16em; text-transform: uppercase; color: var(--amber);
+.hero .cta { display: inline-flex; align-items: center; gap: 12px; padding: clamp(9px, 1.2vh, 12px) clamp(16px, 1.7vw, 24px);
+  font-family: var(--f-mono); font-size: clamp(.68rem, .82vw, .8rem); letter-spacing: .14em; text-transform: uppercase; color: var(--amber);
   border: 1px solid rgba(217,164,65,.85); background: rgba(8,5,2,.35); transition: background .2s, color .2s, gap .2s; }
-.hero .cta:hover, .hero .cta:focus-visible { background: var(--amber); color: #0d0a07; gap: 22px; }
+.hero .cta:hover, .hero .cta:focus-visible { background: var(--amber); color: #0d0a07; gap: 16px; }
 
 /* the props: cut-outs of the locked concept, kept muted so they sit in the scene */
 .hero .props { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
