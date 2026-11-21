@@ -10,10 +10,6 @@ import { Image } from 'astro:assets';
 import { cfg, tales, newestFirst, piecesNewestFirst, SECTIONS, depotFiles, positioningStudies, href, absolute, shortDate, pad } from '../lib/site';
 import { windows } from '../lib/kolkata';
 import '../styles/hero.css';
-import clipImg from '../assets/hero/prop-clip.webp';
-import pileImg from '../assets/hero/prop-pile.webp';
-import photoImg from '../assets/hero/prop-photo.webp';
-import ticketImg from '../assets/hero/prop-ticket.webp';
 
 // The front page leads with the newest piece on any line (tale, depot file or Brand Lab study);
 // the tale lists further down still show tales only.
@@ -33,8 +29,7 @@ const jsonld = {
 ---
 <Base page="home" wire jsonld={jsonld}>
   <!-- HERO: a night tram on an old iron bridge. The photograph sits behind a scrim that keeps the left calm for the
-       title; the props (clipping, ticket, bridge photograph, stamp) are cut-outs laid on top. Wide screens put them at
-       the right, phones stack them in two rows below the copy (see src/styles/hero.css). -->
+       title; nothing else is laid on top, so the tram stays the only picture (see src/styles/hero.css). -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-scrim" aria-hidden="true"></div>
@@ -46,13 +41,6 @@ const jsonld = {
       <i class="rule" aria-hidden="true"></i>
       <blockquote class="pull pull--ed"><p>The consumer isn’t a moron.<b>She is your wife.</b></p><cite>David Ogilvy</cite></blockquote>
       <a class="cta" href="#front-page" data-cursor="link">Start the journey <span aria-hidden="true">&rarr;</span></a>
-    </div>
-
-    <div class="props" aria-hidden="true">
-      <Image class="p-clip" src={clipImg} alt="" loading="eager" />
-      <Image class="p-pile" src={pileImg} alt="" loading="eager" />
-      <Image class="p-photo m-only" src={photoImg} alt="" loading="eager" />
-      <Image class="p-ticket m-only" src={ticketImg} alt="" loading="eager" />
     </div>
 
     <div class="torn" aria-hidden="true"></div>
