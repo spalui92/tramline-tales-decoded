@@ -7,7 +7,7 @@ import RouteMap from '../components/RouteMap.astro';
 import Icon from '../components/Icon.astro';
 import Clip from '../components/Clip.astro';
 import { Image } from 'astro:assets';
-import { cfg, tales, newestFirst, piecesNewestFirst, SECTIONS, depotFiles, href, absolute, shortDate, pad } from '../lib/site';
+import { cfg, tales, newestFirst, piecesNewestFirst, SECTIONS, depotFiles, positioningStudies, href, absolute, shortDate, pad } from '../lib/site';
 import { windows } from '../lib/kolkata';
 import '../styles/hero.css';
 import clipImg from '../assets/hero/prop-clip.webp';
@@ -22,6 +22,7 @@ const latestSec = SECTIONS[latest.kind];
 const latestWord = latest.kind === 'tale' ? 'tale' : latest.kind === 'depot' ? 'file' : 'study';
 const recent = newestFirst.slice(0, 3);
 const latestDepot = depotFiles[depotFiles.length - 1];
+const latestStudy = positioningStudies[positioningStudies.length - 1];
 
 const jsonld = {
   '@context': 'https://schema.org', '@type': 'Blog', name: cfg.name, description: cfg.description,
@@ -111,11 +112,17 @@ const jsonld = {
               <span class="ticket-arrow" aria-hidden="true">↗</span>
             </a>
           : <a class="route-ticket ticket-depot" href={href('depot/')} data-cursor="link"><span class="ticket-stub"><strong>02</strong><span class="mono">DEPOT<br />FILES</span></span><span class="ticket-body"><span class="mono ticket-category">THE BRAND AUTOPSY</span><span class="ticket-title">First teardown coming soon</span></span><span class="ticket-arrow" aria-hidden="true">↗</span></a>}
-        <a class="route-ticket ticket-positioning" href={href('positioning/')} data-cursor="link">
+        {latestStudy
+          ? <a class="route-ticket ticket-positioning" href={href(latestStudy.path)} data-cursor="Read" data-wipe={latestStudy.colour} data-wipe-to={latestStudy.title}>
+              <span class="ticket-stub"><strong>{pad(latestStudy.no)}</strong><span class="mono">BRAND<br />POSITIONING</span></span>
+              <span class="ticket-body"><span class="mono ticket-category">THE STRATEGY WORKSHOP</span><span class="ticket-title">{latestStudy.title}</span><span class="ticket-description">Market context, competitors, consumer insight and a fresh point of view.</span></span>
+              <span class="ticket-arrow" aria-hidden="true">↗</span>
+            </a>
+          : <a class="route-ticket ticket-positioning" href={href('positioning/')} data-cursor="link">
               <span class="ticket-stub"><strong>03</strong><span class="mono">BRAND<br />POSITIONING</span></span>
               <span class="ticket-body"><span class="mono ticket-category">THE STRATEGY WORKSHOP</span><span class="ticket-title">Brand Positioning Lab</span><span class="ticket-description">Market context, competitors, consumer insight and a fresh point of view.</span></span>
               <span class="ticket-arrow" aria-hidden="true">↗</span>
-            </a>
+            </a>}
       </div>
     </div>
   </section>
