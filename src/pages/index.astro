@@ -19,7 +19,8 @@ const latestWord = latest.kind === 'tale' ? 'tale' : latest.kind === 'depot' ? '
 const latestDepot = depotFiles[depotFiles.length - 1];
 const latestStudy = positioningStudies[positioningStudies.length - 1];
 const latestCinema = cinemaNotes[cinemaNotes.length - 1];
-// "Latest tales" shows the two newest tales, and its last slot (the -1 position) is held by the newest Hot Take.
+// "Latest tales" shows the two newest tales, and its last slot (the -1 position) is held by the newest Hot Take;
+// every row names the line it comes from (see `mixed` in TaleList).
 const recent = latestCinema ? [...newestFirst.slice(0, 2), latestCinema] : newestFirst.slice(0, 3);
 const latestTale = newestFirst[0];
 
@@ -140,7 +141,7 @@ const jsonld = {
       <h2 id="tales-title" data-split>Latest tales</h2>
       <span class="mono" style="color:var(--muted)">{pad(recent.length)} of {pad(tales.length)}</span>
     </div>
-    <TaleList items={recent} labelOthers />
+    <TaleList items={recent} mixed />
     <a class="archive-cta" href={href('tales/')} data-cursor="link">
       <span class="mono">Next stop: the archive</span>
       <span class="arr" aria-hidden="true">&rarr;</span>

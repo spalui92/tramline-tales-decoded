@@ -238,6 +238,9 @@ html.js.arriving .wipe { visibility: visible; }
   .tale-list.with-peek .tale-row:hover .t { transform: translateX(18px); color: var(--c); }
 }
 .tale-row .thumb { display: none; }
+/* a mixed list names each piece's line, so the number and date columns are a little wider */
+@media (min-width: 861px) { .tale-list.mixed .tale-row a { grid-template-columns: 130px minmax(0, 1fr) 250px 190px; } }
+.tale-row .d .kind { font-weight: 400; color: var(--c); }
 @media (max-width: 860px) {
   .tale-row a { grid-template-columns: 1fr auto; gap: 10px 16px; }
   .tale-row .no { order: 1; } .tale-row .d { order: 2; }

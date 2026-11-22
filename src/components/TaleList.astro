@@ -5,23 +5,24 @@ import { Image } from 'astro:assets';
 import Clip from './Clip.astro';
 import { SECTIONS, href, shortDate, pad, type Tale } from '../lib/site';
 
-interface Props { items: Tale[]; showKind?: boolean; hoverPreview?: boolean; labelOthers?: boolean }
-// labelOthers: in a mixed list of tales, name the line only on pieces that are not tales (e.g. "Take No. 02")
-const { items, showKind = false, hoverPreview = true, labelOthers = false } = Astro.props;
+interface Props { items: Tale[]; showKind?: boolean; hoverPreview?: boolean; mixed?: boolean }
+// mixed: the list holds pieces from more than one line, so every row names its line, both in the number
+// ("Tale No. 09", "Take No. 02") and beside its date ("Tales · 22.11.26", "Hot Takes · 23.11.26")
+const { items, showKind = false, hoverPreview = true, mixed = false } = Astro.props;
 const lean = [-2.2, 1.8, -1.2, 2.4];
 const fit = (w: number, list: number[]) => { const ok = list.filter((x) => x <= w); return ok.length ? ok : [w]; };
 ---
-<ol class:list={["tale-list", { "with-peek": hoverPreview }]}>
+<ol class:list={["tale-list", { "with-peek": hoverPreview, mixed }]}>
   {items.map((t, i) => (
     <li class="tale-row" style={`--c:${t.colour}`} data-row={t.slug} data-reveal>
       <a href={href(t.path)} data-cursor="Read" data-wipe={t.colour} data-wipe-to={t.title}>
         {t.cover && t.kind !== 'depot' && (
           <span class="thumb"><span class="pinned" style={`--r:${lean[i % lean.length]}deg`}><Clip /><Image src={t.cover.image} alt="" widths={fit(t.cover.image.width, [480, 900])} sizes="86vw" loading="lazy" /></span></span>
         )}
-        <span class="no mono">{showKind || (labelOthers && t.kind !== 'tale') ? `${SECTIONS[t.kind].singular} ` : ''}No. {pad(t.no)}</span>
+        <span class="no mono">{showKind || mixed ? `${SECTIONS[t.kind].singular} ` : ''}No. {pad(t.no)}</span>
         <span class="t">{t.title}</span>
         <span class="tag mono">{t.tag} · {t.minutes} min</span>
-        <span class="d mono"><time datetime={t.date}>{shortDate(t.date)}</time></span>
+        <span class="d mono">{mixed && <><b class="kind">{SECTIONS[t.kind].label}</b> · </>}<time datetime={t.date}>{shortDate(t.date)}</time></span>
         <span class="sum">{t.summary}</span>
       </a>
     </li>
