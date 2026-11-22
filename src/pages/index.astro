@@ -16,10 +16,11 @@ import '../styles/hero.css';
 const latest = piecesNewestFirst[0];
 const latestSec = SECTIONS[latest.kind];
 const latestWord = latest.kind === 'tale' ? 'tale' : latest.kind === 'depot' ? 'file' : latest.kind === 'cinema' ? 'take' : 'study';
-const recent = newestFirst.slice(0, 3);
 const latestDepot = depotFiles[depotFiles.length - 1];
 const latestStudy = positioningStudies[positioningStudies.length - 1];
 const latestCinema = cinemaNotes[cinemaNotes.length - 1];
+// "Latest tales" shows the two newest tales, and its last slot (the -1 position) is held by the newest Hot Take.
+const recent = latestCinema ? [...newestFirst.slice(0, 2), latestCinema] : newestFirst.slice(0, 3);
 const latestTale = newestFirst[0];
 
 const jsonld = {
@@ -139,7 +140,7 @@ const jsonld = {
       <h2 id="tales-title" data-split>Latest tales</h2>
       <span class="mono" style="color:var(--muted)">{pad(recent.length)} of {pad(tales.length)}</span>
     </div>
-    <TaleList items={recent} />
+    <TaleList items={recent} labelOthers />
     <a class="archive-cta" href={href('tales/')} data-cursor="link">
       <span class="mono">Next stop: the archive</span>
       <span class="arr" aria-hidden="true">&rarr;</span>
