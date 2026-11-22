@@ -2,22 +2,22 @@
 import Base from '../../layouts/Base.astro';
 import TaleList from '../../components/TaleList.astro';
 import { cinemaNotes, pad } from '../../lib/site';
-import '../../styles/cinema.css';
+import '../../styles/hot-takes.css';
 const entries = [...cinemaNotes].reverse();
 ---
-<Base page="archive" title="Director's Cut" description="Films, documentaries and series, read closely: reviews, scene essays and craft notes from an independent critic's notebook." accent="#ec6f9b">
+<Base page="archive" title="Hot Takes" description="Films, documentaries and series, read closely: reviews, scene essays and craft notes from an independent critic's notebook." accent="#ec6f9b">
   <div class="cinema-nb">
     <section class="cn-hero wrap" aria-labelledby="cn-title">
       <div class="cn-hero-copy">
-        <div class="eyebrow mono">Line 04 · The director's cut</div>
+        <div class="eyebrow mono">Line 04 · Hot takes</div>
         <h1 id="cn-title" data-split>Films. Frames.<br /><em>Perspectives.</em></h1>
         <p class="cn-intro">Not a verdict and not a star rating. An informed account of an encounter with a work: what is on screen, what it might mean, and whether it works.</p>
         <span class="cn-kicker mono">Experience first. Interpretation second. Criticism third.</span>
       </div>
-      <aside class="cn-slate" aria-label="First cut status">
+      <aside class="cn-slate" aria-label="First take status">
         <div class="cn-slate-top mono"><span>SCENE 01</span><span>TAKE 01</span></div>
         <div class="cn-slate-mark">CN</div><div class="cn-slate-rule"></div>
-        <div class="cn-slate-label mono">THE FIRST CUT</div><strong>Film to be locked</strong>
+        <div class="cn-slate-label mono">THE FIRST TAKE</div><strong>Film to be locked</strong>
         <div class="cn-slate-foot mono"><span>STATUS</span><b>IN THE EDITING ROOM</b></div>
       </aside>
     </section>
@@ -32,7 +32,7 @@ const entries = [...cinemaNotes].reverse();
     </section>
 
     <section class="cn-current wrap" aria-labelledby="cn-current-title">
-      <div class="cn-current-head"><div><span class="eyebrow mono">02 / Current reel</span><h2 id="cn-current-title">The first cut is <em>still being framed.</em></h2></div><span class="mono cn-index">{pad(entries.length)} {entries.length === 1 ? 'cut' : 'cuts'} published</span></div>
+      <div class="cn-current-head"><div><span class="eyebrow mono">02 / Current reel</span><h2 id="cn-current-title">The first take is <em>still being framed.</em></h2></div><span class="mono cn-index">{pad(entries.length)} {entries.length === 1 ? 'take' : 'takes'} published</span></div>
       {entries.length > 0 ? <TaleList items={entries} /> : <div class="cn-empty">
         <div class="cn-empty-stamp mono">RESERVED · 001</div>
         <div><h3>No film has been locked yet.</h3><p>The opening piece is a director's-craft study: how a screenplay was written, how it was envisioned, and how the actors carried out the plan as the director's instrument. Structure and draft to follow.</p></div>

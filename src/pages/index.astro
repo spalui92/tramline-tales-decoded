@@ -15,7 +15,7 @@ import '../styles/hero.css';
 // the tale lists further down still show tales only.
 const latest = piecesNewestFirst[0];
 const latestSec = SECTIONS[latest.kind];
-const latestWord = latest.kind === 'tale' ? 'tale' : latest.kind === 'depot' ? 'file' : latest.kind === 'cinema' ? 'cut' : 'study';
+const latestWord = latest.kind === 'tale' ? 'tale' : latest.kind === 'depot' ? 'file' : latest.kind === 'cinema' ? 'take' : 'study';
 const recent = newestFirst.slice(0, 3);
 const latestDepot = depotFiles[depotFiles.length - 1];
 const latestStudy = positioningStudies[positioningStudies.length - 1];
@@ -120,13 +120,13 @@ const jsonld = {
             </a>}
         {latestCinema
           ? <a class="route-ticket ticket-cinema" href={href(latestCinema.path)} data-cursor="Read" data-wipe={latestCinema.colour} data-wipe-to={latestCinema.title}>
-              <span class="ticket-stub"><strong>{pad(latestCinema.no)}</strong><span class="mono">DIRECTOR’S<br />CUT</span></span>
+              <span class="ticket-stub"><strong>{pad(latestCinema.no)}</strong><span class="mono">HOT<br />TAKES</span></span>
               <span class="ticket-body"><span class="mono ticket-category">FILMS. FRAMES. PERSPECTIVES.</span><span class="ticket-title">{latestCinema.title}</span><span class="ticket-description">Films, series and documentaries, read closely.</span></span>
               <span class="ticket-arrow" aria-hidden="true">↗</span>
             </a>
-          : <a class="route-ticket ticket-cinema" href={href('directors-cut/')} data-cursor="link">
-              <span class="ticket-stub"><strong>04</strong><span class="mono">DIRECTOR’S<br />CUT</span></span>
-              <span class="ticket-body"><span class="mono ticket-category">FILMS. FRAMES. PERSPECTIVES.</span><span class="ticket-title">The Director’s Cut</span><span class="ticket-description">Films, series and documentaries, read closely.</span></span>
+          : <a class="route-ticket ticket-cinema" href={href('hot-takes/')} data-cursor="link">
+              <span class="ticket-stub"><strong>04</strong><span class="mono">HOT<br />TAKES</span></span>
+              <span class="ticket-body"><span class="mono ticket-category">FILMS. FRAMES. PERSPECTIVES.</span><span class="ticket-title">Hot Takes</span><span class="ticket-description">Films, series and documentaries, read closely.</span></span>
               <span class="ticket-arrow" aria-hidden="true">↗</span>
             </a>}
       </div>
