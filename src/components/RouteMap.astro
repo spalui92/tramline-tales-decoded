@@ -1,6 +1,6 @@
 ---
-// The route map: three lines running out of the depot, one stop for every piece published.
-// Tales is the main line; Depot Files and the Brand Positioning Lab are branches. Each line is a window
+// The route map: four lines running out of the depot, one stop for every piece published.
+// Tales is the main line; Depot Files, the Brand Positioning Lab and the Cinema Notebook are branches. Each line is a window
 // onto its stops: three show at a time, and once a line grows past three it can be swiped or
 // stepped with the arrows. A line with nothing on it yet shows a dashed track and its next stop.
 import Icon from './Icon.astro';
@@ -19,8 +19,8 @@ const lines = KINDS.map((k, i) => {
   <div class="routes-head">
     <div class="rm-head-copy">
       <div class="eyebrow mono">The route map</div>
-      <h2 id="routes-title" data-split>Three lines, <em>one depot.</em></h2>
-      <p data-reveal>Tales are the main line. Depot Files take campaigns apart. The Brand Positioning Lab is the strategy branch: original exercises in market context, competitors, consumer insight and the place a brand can credibly own. Every dot is a published stop.</p>
+      <h2 id="routes-title" data-split>Four lines, <em>one depot.</em></h2>
+      <p data-reveal>Tales are the main line. Depot Files take campaigns apart. The Brand Positioning Lab is the strategy branch: original exercises in market context, competitors, consumer insight and the place a brand can credibly own. The Cinema Notebook reads films, documentaries and series closely. Every dot is a published stop.</p>
     </div>
     <ol class="rm-podium" role="list" aria-label="Order of preference: Tales first, Depot Files second, Brand Positioning Lab third" data-reveal>
       {[lines[1], lines[0], lines[2]].map((l) => {

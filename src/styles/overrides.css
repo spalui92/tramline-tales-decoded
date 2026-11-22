@@ -172,3 +172,8 @@
   .alarm.ting .al-bell.r { animation: alBellR 0.5s ease-in-out 4; }
   .alarm.ting .al-time { animation: alFlare 0.5s ease-in-out 4; }
 }
+
+.ticket-cinema { --ticket-accent:#b74562; }
+/* four tickets: two by two on mid widths, one by one on phones */
+.ticket-stack:has(.ticket-cinema) { grid-template-columns:repeat(2,minmax(0,1fr)); }
+@media (max-width:850px) { .ticket-stack:has(.ticket-cinema) { grid-template-columns:minmax(0,1fr); } }

@@ -7,7 +7,7 @@ import RouteMap from '../components/RouteMap.astro';
 import Icon from '../components/Icon.astro';
 import Clip from '../components/Clip.astro';
 import { Image } from 'astro:assets';
-import { cfg, tales, newestFirst, piecesNewestFirst, SECTIONS, depotFiles, positioningStudies, href, absolute, shortDate, pad } from '../lib/site';
+import { cfg, tales, newestFirst, piecesNewestFirst, SECTIONS, depotFiles, positioningStudies, cinemaNotes, href, absolute, shortDate, pad } from '../lib/site';
 import { windows } from '../lib/kolkata';
 import '../styles/hero.css';
 
@@ -15,10 +15,11 @@ import '../styles/hero.css';
 // the tale lists further down still show tales only.
 const latest = piecesNewestFirst[0];
 const latestSec = SECTIONS[latest.kind];
-const latestWord = latest.kind === 'tale' ? 'tale' : latest.kind === 'depot' ? 'file' : 'study';
+const latestWord = latest.kind === 'tale' ? 'tale' : latest.kind === 'depot' ? 'file' : latest.kind === 'cinema' ? 'entry' : 'study';
 const recent = newestFirst.slice(0, 3);
 const latestDepot = depotFiles[depotFiles.length - 1];
 const latestStudy = positioningStudies[positioningStudies.length - 1];
+const latestCinema = cinemaNotes[cinemaNotes.length - 1];
 const latestTale = newestFirst[0];
 
 const jsonld = {
@@ -115,6 +116,17 @@ const jsonld = {
           : <a class="route-ticket ticket-positioning" href={href('positioning/')} data-cursor="link">
               <span class="ticket-stub"><strong>03</strong><span class="mono">BRAND<br />POSITIONING</span></span>
               <span class="ticket-body"><span class="mono ticket-category">THE STRATEGY WORKSHOP</span><span class="ticket-title">Brand Positioning Lab</span><span class="ticket-description">Market context, competitors, consumer insight and a fresh point of view.</span></span>
+              <span class="ticket-arrow" aria-hidden="true">↗</span>
+            </a>}
+        {latestCinema
+          ? <a class="route-ticket ticket-cinema" href={href(latestCinema.path)} data-cursor="Read" data-wipe={latestCinema.colour} data-wipe-to={latestCinema.title}>
+              <span class="ticket-stub"><strong>{pad(latestCinema.no)}</strong><span class="mono">CINEMA<br />NOTEBOOK</span></span>
+              <span class="ticket-body"><span class="mono ticket-category">FILMS. FRAMES. PERSPECTIVES.</span><span class="ticket-title">{latestCinema.title}</span><span class="ticket-description">Films, series and documentaries, read closely.</span></span>
+              <span class="ticket-arrow" aria-hidden="true">↗</span>
+            </a>
+          : <a class="route-ticket ticket-cinema" href={href('cinema/')} data-cursor="link">
+              <span class="ticket-stub"><strong>04</strong><span class="mono">CINEMA<br />NOTEBOOK</span></span>
+              <span class="ticket-body"><span class="mono ticket-category">FILMS. FRAMES. PERSPECTIVES.</span><span class="ticket-title">The Cinema Notebook</span><span class="ticket-description">Films, series and documentaries, read closely.</span></span>
               <span class="ticket-arrow" aria-hidden="true">↗</span>
             </a>}
       </div>

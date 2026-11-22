@@ -34,7 +34,7 @@ Only `title` is required.
 - `tag`: the small label above the title.
 - `note`: the handwritten scribble in the margin.
 - `summary`: shown on the home page, in Google and in shared links. If left out, the first lines of the article are used.
-- `kind` (optional): which line of the diary the piece belongs to. `tale` (the default, so existing articles need nothing), `depot` for a campaign teardown (shown as a **Depot File**), or `positioning` for an original brand-positioning study (shown in the **Brand Positioning Lab**). Each line has its own numbering, page (`/tales/`, `/depot/`, `/positioning/`), navbar link and stop on the home page's route map.
+- `kind` (optional): which line of the diary the piece belongs to. `tale` (the default, so existing articles need nothing), `depot` for a campaign teardown (shown as a **Depot File**), `positioning` for an original brand-positioning study (shown in the **Brand Positioning Lab**), or `cinema` for a film, series or documentary piece (shown in the **Cinema Notebook**). Each line has its own numbering, page (`/tales/`, `/depot/`, `/positioning/`, `/cinema/`), navbar link and stop on the home page's route map.
 - `cover` (optional): which of the article's photos stands for it on the home page, in lists and in shared links, e.g. `cover: images/photo.jpg`. Leave it out and the first photo is used.
 - `colour` (optional): the colour this tale wears on its page, its cursor, its page wipe and its card. Choose one of `sindoor`, `tram`, `taxi`, `chai`, `ganga` or `alta`. Leave it out and tales take turns through that list.
 
