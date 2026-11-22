@@ -58,9 +58,9 @@ export const SECTIONS: Record<Kind, {
     hail: 'Open the next study', first: 'Back to the first study', empty: 'The first brand is waiting to be selected.',
   },
   cinema: {
-    dir: 'cinema', label: 'Cinema Notebook', short: 'Cinema', singular: 'Notebook Entry', defaultColour: 'alta',
-    blurb: 'Films, documentaries and series, read closely. Reviews, scene essays and craft notes from an independent critic\'s notebook.',
-    hail: 'Turn to the next entry', first: 'Back to the first entry', empty: 'The first reel is still being threaded.',
+    dir: 'directors-cut', label: "Director's Cut", short: "Director's Cut", singular: 'Cut', defaultColour: 'alta',
+    blurb: 'Films, documentaries and series, read closely. Reviews, scene essays and craft notes from an independent critic\'s notebook, cut by the director\'s eye.',
+    hail: 'Roll the next cut', first: 'Back to the first cut', empty: 'The first reel is still being threaded.',
   },
 
 };
