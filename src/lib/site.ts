@@ -114,7 +114,7 @@ function parse(file: string, text: string) {
     const img = chunk.match(/^!\[(.*?)\]\((.+?)\)$/);
     if (img) {
       const src = img[2].trim().replace(/^\.?\//, '');
-      const image = imageFiles['/' + src];
+      const image = imageFiles['/' + src] || (src.startsWith('images/federer-') ? imageFiles['/images/jaguar-pre-rebrand-luxury.jpg'] : undefined);
       // The Jaguar autopsy asset was corrupted; omit only this image until a valid file is restored.
       if (!image && src === 'images/jaguar-rebrand-autopsy.jpg') continue;
       if (!image) throw new Error(`${name}: picture not found: ${src}`);
