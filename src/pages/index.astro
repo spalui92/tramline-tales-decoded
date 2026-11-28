@@ -110,7 +110,7 @@ const jsonld = {
       <div class="ticket-stack">
         {latestTale && <a class="route-ticket ticket-tale" href={href(latestTale.path)} data-cursor="Read" data-wipe={latestTale.colour} data-wipe-to={latestTale.title}>
               <span class="ticket-stub"><strong>{pad(latestTale.no)}</strong><span class="mono">TRAMLINE<br />TALES</span></span>
-              <span class="ticket-body"><span class="mono ticket-category">THE MAIN LINE</span><span class="ticket-title">{latestTale.title}</span><span class="ticket-description">Essays on brands, media and the stories that outlive them.</span></span>
+              <span class="ticket-body"><span class="mono ticket-category">THE MAIN LINE</span><span class="ticket-title">{latestTale.title}</span><span class="ticket-description">{latestTale.slug === '2026-11-28' ? 'Who owns the RF monogram?' : 'Essays on brands, media and the stories that outlive them.'}</span></span>
               <span class="ticket-arrow" aria-hidden="true">↗</span>
             </a>}
         {latestDepot
