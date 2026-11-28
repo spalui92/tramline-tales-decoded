@@ -21,7 +21,6 @@ const fit = (w: number, list: number[]) => { const ok = list.filter((x) => x <= 
         )}
         <span class="no mono">{showKind || mixed ? `${SECTIONS[t.kind].singular} ` : ''}No. {pad(t.no)}</span>
         <span class="t">{t.title}</span>
-        <span class="tag mono">{t.tag} · {t.minutes} min</span>
         <span class="d mono">{mixed && <><b class="kind">{SECTIONS[t.kind].label}</b> · </>}<time datetime={t.date}>{shortDate(t.date)}</time></span>
         <span class="sum">{t.summary}</span>
       </a>

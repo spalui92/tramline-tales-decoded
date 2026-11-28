@@ -54,7 +54,7 @@ const jsonld = {
   <section class="scoreboard" id="front-page" style={`--c:${latest.colour}`} aria-label={`Latest ${latestWord}`}>
     <div class="wrap editorial-rule mono" aria-hidden="true"><span>TRAMLINE TALES</span><span class="editorial-rule-center">THE FRONT PAGE</span><span>EST. KOLKATA</span></div>
     <div class="wrap sb">
-      <span class="sb-meta mono" data-reveal><b>Latest · {latestSec.singular} No. {pad(latest.no)}</b><span>{shortDate(latest.date)}</span>{latest.tag && <span>{latest.tag}</span>}</span>
+      <span class="sb-meta mono" data-reveal><b>Latest · {latestSec.singular} No. {pad(latest.no)}</b><span>{shortDate(latest.date)}</span></span>
       <a class="sb-main" href={href(latest.path)} data-cursor="Read" data-wipe={latest.colour} data-wipe-to={latest.title}>
         <span class="sb-title" data-reveal>{latest.title}</span>
         <span class="sb-side" data-reveal>
@@ -64,7 +64,17 @@ const jsonld = {
       </a>
       <div class="sb-desk">
         <span class="sb-ghost" aria-hidden="true">{pad(latest.no)}</span>
-        {latest.cover && (
+        {latest.slug === '2026-11-28' ? (
+          <a class="sb-cardlink" href={href(latest.path)} tabindex="-1" aria-hidden="true" data-cursor="Read" data-wipe={latest.colour} data-wipe-to={latest.title}>
+            <figure class="postcard sb-card" style={`--r:2.2deg;--clip:${latest.colour};--cx:62%`}>
+              <div class="card">
+                <Clip class="pclip" />
+                <div class="img"><img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/441585/sub/goods_441585_sub18_3x4.jpg?width=600" alt="The embroidered RF monogram on a Roger Federer cap." loading="eager" /></div>
+                <figcaption>Who owns the RF monogram? <small>Cap photograph: UNIQLO</small></figcaption>
+              </div>
+            </figure>
+          </a>
+        ) : latest.cover && (
           <a class="sb-cardlink" href={href(latest.path)} tabindex="-1" aria-hidden="true" data-cursor="Read" data-wipe={latest.colour} data-wipe-to={latest.title}>
             <figure class="postcard sb-card" style={`--r:2.2deg;--clip:${latest.colour};--cx:62%`}>
               <div class="card">

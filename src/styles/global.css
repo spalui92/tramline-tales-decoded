@@ -226,7 +226,7 @@ html.js.arriving .wipe { visibility: visible; }
 .tales-head h2 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: clamp(44px, 6vw, 96px); line-height: 0.88; letter-spacing: -0.03em; }
 .tale-list { list-style: none; margin: 0; padding: 0; }
 .tale-row { --c: var(--accent); position: relative; border-bottom: 1px solid var(--line); }
-.tale-row a { display: grid; grid-template-columns: 90px minmax(0, 1fr) 270px 110px; align-items: baseline; gap: 20px; padding: clamp(22px, 3vw, 42px) 0; position: relative; }
+.tale-row a { display: grid; grid-template-columns: 90px minmax(0, 1fr) 110px; align-items: baseline; gap: 20px; padding: clamp(22px, 3vw, 42px) 0; position: relative; }
 .tale-row .no { color: var(--c); }
 .tale-row .t { font-family: var(--f-display); font-size: clamp(34px, 4.6vw, 76px); line-height: 0.98; letter-spacing: -0.02em; transition: transform 0.6s var(--ease-out), color 0.4s; text-wrap: balance; }
 .tale-row .tag, .tale-row .d { color: var(--muted); }
@@ -239,7 +239,7 @@ html.js.arriving .wipe { visibility: visible; }
 }
 .tale-row .thumb { display: none; }
 /* a mixed list names each piece's line, so the number and date columns are a little wider */
-@media (min-width: 861px) { .tale-list.mixed .tale-row a { grid-template-columns: 130px minmax(0, 1fr) 250px 190px; } }
+@media (min-width: 861px) { .tale-list.mixed .tale-row a { grid-template-columns: 130px minmax(0, 1fr) 190px; } }
 .tale-row .d .kind { font-weight: 400; color: var(--c); }
 @media (max-width: 860px) {
   .tale-row a { grid-template-columns: 1fr auto; gap: 10px 16px; }

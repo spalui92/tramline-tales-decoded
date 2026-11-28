@@ -49,7 +49,6 @@ const jsonld = {
       <span class="bignum" aria-hidden="true" data-bignum>{pad(tale.no)}</span>
       <div class="tale-meta mono" data-reveal>
         <span class="no">{sec.singular} No. {pad(tale.no)}</span>
-        {tale.tag && <span>{tale.tag}</span>}
         <time datetime={tale.date}>{longDate(tale.date)}</time>
       </div>
       <h1 class="tale-title" data-split>{tale.title}</h1>
