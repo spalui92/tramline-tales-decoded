@@ -70,7 +70,7 @@ const jsonld = {
     <div class="prose" data-prose>
       {tale.body.map((b) => {
         if (b.t === 'p') return <p>{b.x}</p>;
-        if (b.t === 'h') return <h2><span class="sec">§ {pad(++section)}</span>{b.x}</h2>;
+        if (b.t === 'h') return <h2><span class="sec">§ {pad(++section)}</span> {b.x}</h2>;
         if (b.t === 'quote') return (
           <blockquote class="said" data-reveal>
             <span class="dd" aria-hidden="true">॥</span>
