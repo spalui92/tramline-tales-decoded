@@ -13,7 +13,7 @@ const siblings = byKind(tale.kind);
 const idx = siblings.findIndex((p) => p.slug === tale.slug);
 const next = siblings[(idx + 1) % siblings.length];
 const fit = (w: number, list: number[]) => { const ok = list.filter((x) => x <= w); return ok.length ? ok : [w]; };
-const og = tale.cover ? absolute((await getImage({ src: tale.cover.image, width: 1200, format: 'jpg' })).src.replace(import.meta.env.BASE_URL, '')) : undefined;
+const og = tale.cover ? (tale.cover.src === 'images/federer-clay.jpg' ? 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Federer_serves_on_clay.jpg' : absolute((await getImage({ src: tale.cover.image, width: 1200, format: 'jpg' })).src.replace(import.meta.env.BASE_URL, ''))) : undefined;
 
 // A few externally hosted source-quality images are used for the Jaguar case file.
 // They keep the exact same postcard/card/clip treatment as every Tale, while avoiding
@@ -33,7 +33,7 @@ const IMAGE_OVERRIDES: Record<string, string> = {
   'images/jaguar-heritage-red-f-type.jpg': 'https://www.jaguar.ca/content/dam/jdx/global/x152/21my/markets/us/X152_21MY_138_US.jpg.res/JLRHASHCC2E422378EAB21765D2F60323D83B6466C71C8F/X152_21MY_138_US.jpg',
   'images/federer-01.jpg': 'https://upload.wikimedia.org/wikipedia/commons/4/45/Roger_Federer.jpg',
   'images/federer-02.jpg': 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Roger_Federer_at_the_2010_Australian_Open_01.jpg',
-  'images/federer-clay.jpg': 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Federer_serves_on_clay.jpg',
+  'images/federer-clay.jpg': 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Federer_serves_on_clay.jpg',
   'images/federer-04.jpg': 'https://upload.wikimedia.org/wikipedia/commons/1/12/Roger_Federer_at_the_2009_Wimbledon_Championships_09.jpg',
   'images/federer-05.jpg': 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Roger_Federer_at_the_2010_Australian_Open_05.jpg',
   'images/federer-06.jpg': 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Roger_Federer_%287305445390%29.jpg',
@@ -101,7 +101,7 @@ const jsonld = {
         const cx = [18, 70, 30, 62][photo++ % 4];
         const override = IMAGE_OVERRIDES[b.src];
         const originalJpeg = ORIGINAL_JPEGS['/' + b.src];
-        const portrait = b.image.height > b.image.width * 1.08;
+        const portrait = ['images/federer-02.jpg', 'images/federer-05.jpg', 'images/federer-08.jpg'].includes(b.src) || b.image.height > b.image.width * 1.08;
         return (
           <figure class:list={["postcard", portrait && "is-portrait"]} style={`--r:${r}deg;--clip:${clipHex};--cx:${cx}%`} data-postcard>
             <div class="card">
