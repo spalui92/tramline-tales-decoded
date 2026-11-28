@@ -118,14 +118,14 @@ const jsonld = {
                       </>
                   : <Image src={b.image} alt={b.caption} widths={fit(b.image.width, [640, 1000, 1400])} sizes="(max-width: 760px) 100vw, 760px" loading="lazy" data-parallax />}
               </div>
-              <figcaption></figcaption>
+              <figcaption>{b.caption}</figcaption>
             </div>
           </figure>
         );
       })}
 
       <div class="signoff" data-signoff>
-        <div class="sign">&mdash; {cfg.initials}<small>{cfg.author} · {cfg.stampPlace}</small></div>
+        
         <Stamp date={tale.date} id={tale.slug} />
       </div>
       <div class="share mono">
