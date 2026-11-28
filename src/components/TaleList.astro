@@ -16,8 +16,8 @@ const fit = (w: number, list: number[]) => { const ok = list.filter((x) => x <= 
   {items.map((t, i) => (
     <li class="tale-row" style={`--c:${t.colour}`} data-row={t.slug} data-reveal>
       <a href={href(t.path)} data-cursor="Read" data-wipe={t.colour} data-wipe-to={t.title}>
-        {t.cover && t.kind !== 'depot' && (
-          <span class="thumb"><span class="pinned" style={`--r:${lean[i % lean.length]}deg`}><Clip /><Image src={t.cover.image} alt="" widths={fit(t.cover.image.width, [480, 900])} sizes="86vw" loading="lazy" /></span></span>
+        {(t.cover || t.slug === '2026-11-28') && t.kind !== 'depot' && (
+          <span class="thumb"><span class="pinned" style={`--r:${lean[i % lean.length]}deg`}><Clip />{t.slug === '2026-11-28' ? <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/441585/sub/goods_441585_sub18_3x4.jpg?width=600" alt="The RF monogram embroidered on a Roger Federer cap." loading="lazy" /> : <Image src={t.cover!.image} alt="" widths={fit(t.cover!.image.width, [480, 900])} sizes="86vw" loading="lazy" />}</span></span>
         )}
         <span class="no mono">{showKind || mixed ? `${SECTIONS[t.kind].singular} ` : ''}No. {pad(t.no)}</span>
         <span class="t">{t.title}</span>
@@ -28,9 +28,9 @@ const fit = (w: number, list: number[]) => { const ok = list.filter((x) => x <= 
   ))}
 </ol>
 {hoverPreview && <div class="peek" aria-hidden="true" data-peek>
-  {items.map((t, i) => t.cover && t.kind !== 'depot' && (
+  {items.map((t, i) => (t.cover || t.slug === '2026-11-28') && t.kind !== 'depot' && (
     <div class="pinned peek-card" data-peek-img={t.slug} style={`--c:${t.colour};--r:${lean[i % lean.length]}deg`}>
-      <Clip /><Image src={t.cover.image} alt={`Preview for ${t.title}`} widths={fit(t.cover.image.width, [640, 1000])} sizes="320px" loading="eager" decoding="async" />
+      <Clip />{t.slug === '2026-11-28' ? <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/441585/sub/goods_441585_sub18_3x4.jpg?width=600" alt="The RF monogram embroidered on a Roger Federer cap." loading="eager" /> : <Image src={t.cover!.image} alt={`Preview for ${t.title}`} widths={fit(t.cover!.image.width, [640, 1000])} sizes="320px" loading="eager" decoding="async" />}
     </div>
   ))}
 </div>}
