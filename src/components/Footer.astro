@@ -35,7 +35,7 @@ const showArchiveCard = still.length < 4;
               <a href={href(t.path)} data-cursor="Read" data-wipe={t.colour} data-wipe-to={t.title}>
                 <span class="mono no">No. {pad(t.no)} · {shortDate(t.date)}</span>
                 <span class="t">{t.title}</span>
-                <span class="mono tag">{t.tag ? `${t.tag} · ` : ''}{t.minutes} min</span>
+                <span class="mono tag">{t.minutes} min</span>
               </a>
             </li>
           ))}
@@ -82,6 +82,6 @@ const showArchiveCard = still.length < 4;
   </div>
   <div class="wrap foot-base mono">
     <span>© {year} {cfg.author}</span>
-    <span>Old tracks, new thoughts.</span>
+    <span><a href={href('image-credits/')}>Image acknowledgements</a> · Old tracks, new thoughts.</span>
   </div>
 </footer>
