@@ -4,6 +4,7 @@ import TaleList from '../components/TaleList.astro';
 import Frame from '../components/Frame.astro';
 import Heartbeat from '../components/Heartbeat.astro';
 import RouteMap from '../components/RouteMap.astro';
+import StudioCut from '../components/StudioCut.astro';
 import Icon from '../components/Icon.astro';
 import Clip from '../components/Clip.astro';
 import { Image } from 'astro:assets';
@@ -151,6 +152,9 @@ const jsonld = {
 
   <!-- THE ROUTE MAP: the two branch lines, one stop for every piece -->
   <RouteMap />
+
+  <!-- HOT TAKES: the cinema desk gets its own studio-floor space -->
+  <StudioCut />
 
   <!-- ABOUT THE DIARY, AND THE DIARY AT A GLANCE -->
   <section class="section wrap about" id="about" aria-labelledby="about-title">
