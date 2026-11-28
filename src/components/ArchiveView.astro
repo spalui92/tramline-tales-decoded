@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import TaleList from './TaleList.astro';
+import ArchiveTabs from './ArchiveTabs.astro';
+import { cfg, SECTIONS, pieces, piecesNewestFirst, byKind, pad, longDate, type Kind } from '../lib/site';
+
+interface Props { kind: Kind | 'all' }
+const { kind } = Astro.props;
+const items = kind === 'all' ? piecesNewestFirst : [...byKind(kind)].reverse();
+const sec = kind === 'all' ? null : SECTIONS[kind];
+const heading = kind === 'all' ? 'archive' : sec!.label.toLowerCase();
+const eyebrow = kind === 'all' ? 'Last stop · the depot' : `${sec!.singular} line · the depot`;
+const title = kind === 'all' ? 'The archive' : sec!.label;
+const sub = items.length === 0
+  ? sec!.empty
+  : kind === 'all'
+    ? `Every piece on every line, newest first, from ${longDate(items[items.length - 1].date)} to ${longDate(items[0].date)}.`
+    : `${sec!.blurb} Newest first${items.length > 1 ? `, from ${longDate(items[items.length - 1].date)} to ${longDate(items[0].date)}` : ''}.`;
+---
+<Base page="archive" title={title} description={kind === 'all' ? `Everything in ${cfg.name}, newest first.` : `${sec!.label} in ${cfg.name}. ${sec!.blurb}`}>
+  <header class="archive-hero wrap">
+    <div class="eyebrow mono">{eyebrow}</div>
+    <h1 class="archive-title" data-split>The <em>{heading}</em><sup class="mono">({pad(items.length)})</sup></h1>
+    <p class="archive-sub" data-reveal>{sub}</p>
+    <ArchiveTabs active={kind} />
+  </header>
+  <section class="wrap archive-list" id="tales" aria-label={`All ${heading}`}>
+    {items.length > 0
+      ? <TaleList items={items} showKind={kind === 'all'} hoverPreview={kind === 'tale'} />
+      : <p class="archive-empty mono">{sec ? sec.empty : 'Nothing here yet.'}</p>}
+  </section>
+</Base>

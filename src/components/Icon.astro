@@ -1,0 +1,58 @@
+---
+// Line drawings of the city, all in one place so they share a single hand.
+// They draw in currentColor, so each takes the colour of wherever it sits.
+interface Props { name: 'tram' | 'chai' | 'taxi' | 'rickshaw' | 'rosogolla' | 'arrow'; class?: string; title?: string }
+const { name, class: cls, title } = Astro.props;
+const label = title ? { role: 'img', 'aria-label': title } : { 'aria-hidden': 'true' };
+---
+{name === 'tram' && (
+  <svg class={cls} viewBox="0 0 64 34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" {...label}>
+    <path d="M30 9 44 1.5" /><path d="M41 3h6" />
+    <path d="M8 11.5 11 9h42l3 2.5" />
+    <rect x="5" y="11.5" width="54" height="15" rx="2.5" />
+    <path d="M10 15h7v5h-7zM20 15h7v5h-7zM37 15h7v5h-7zM47 15h7v5h-7z" />
+    <path d="M30 15h4v11.5h-4z" />
+    <path d="M5 23h54" />
+    <circle cx="16" cy="29" r="2.6" /><circle cx="48" cy="29" r="2.6" />
+    <path d="M2 32.5h60" />
+  </svg>
+)}
+{name === 'chai' && (
+  <svg class={cls} viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" {...label}>
+    <path d="M12 8c0-2 2-2.5 2-4.5M17 8c0-2 2-2.5 2-4.5" />
+    <path d="M6 12c0 1.4 20 1.4 20 0s-20-1.4-20 0Z" />
+    <path d="M6 12l3 15c.3 1.4 13.7 1.4 14 0l3-15" />
+    <path d="M8.4 18c4 1 11.2 1 15.2 0" />
+  </svg>
+)}
+{name === 'taxi' && (
+  <svg class={cls} viewBox="0 0 96 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" {...label}>
+    <path d="M40 8h12v4H40z" />
+    <path d="M6 32v-6c0-4 4-6 12-7l9-7h34l10 7c10 1 19 3 19 8v5" />
+    <path d="M29 13.5 23 19h16v-5.5zM44 13.5V19h18l-6.5-5.5z" />
+    <path d="M6 32h8m14 0h40m14 0h8" />
+    <circle cx="21" cy="33" r="6" /><circle cx="75" cy="33" r="6" />
+    <path d="M42 25h4" /><path d="M86 24h4" />
+  </svg>
+)}
+{name === 'rickshaw' && (
+  <svg class={cls} viewBox="0 0 80 44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" {...label}>
+    <path d="M10 18c0-12 22-12 22 0" />
+    <path d="M10 18h22v8H12z" />
+    <circle cx="24" cy="32" r="10" />
+    <path d="M24 22v20M14 32h20M17 25l14 14M31 25 17 39" />
+    <path d="M30 26 76 31" /><path d="M76 31v3" />
+  </svg>
+)}
+{name === 'rosogolla' && (
+  <svg class={cls} viewBox="0 0 64 44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" {...label}>
+    <circle cx="24" cy="18" r="8" /><circle cx="40" cy="18" r="8" /><circle cx="32" cy="11" r="7" />
+    <path d="M6 22h52c0 10-9 16-26 16S6 32 6 22Z" />
+    <path d="M24 40h16" />
+  </svg>
+)}
+{name === 'arrow' && (
+  <svg class={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" {...label}>
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+)}

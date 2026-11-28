@@ -1,0 +1,58 @@
+---
+import Base from '../../layouts/Base.astro';
+import TaleList from '../../components/TaleList.astro';
+import { positioningStudies, href, pad } from '../../lib/site';
+import '../../styles/positioning.css';
+const studies = [...positioningStudies].reverse();
+---
+<Base page="archive" title="Brand Positioning Lab" description="Independent brand-positioning studies: market context, competitor analysis, consumer insight and original strategic interpretation." accent="#7fb0d8">
+  <div class="positioning-lab">
+    <section class="pl-hero wrap" aria-labelledby="pl-title">
+      <div class="pl-hero-copy">
+        <div class="eyebrow mono">Line 03 · The strategy workshop</div>
+        <h1 id="pl-title" data-split>A brand is a choice.<br /><em>Let's find out why.</em></h1>
+        <p class="pl-intro">The work starts before the logo. Each study asks where a brand sits in its market, who it matters to, what it is up against, and what it can credibly own.</p>
+        <span class="pl-kicker mono">Research first. Interpretation second. Fresh take, always.</span>
+      </div>
+      <aside class="pl-ticket" aria-label="First study status">
+        <div class="pl-ticket-top mono"><span>FIELD NOTE</span><span>NO. 03 / 01</span></div>
+        <div class="pl-ticket-mark">BP</div><div class="pl-ticket-rule"></div>
+        <div class="pl-ticket-label mono">THE FIRST CASE</div><strong>Brand to be selected</strong>
+        <div class="pl-ticket-foot mono"><span>STATUS</span><b>ON THE BENCH</b></div>
+      </aside>
+    </section>
+    <section class="pl-method wrap" aria-labelledby="pl-method-title">
+      <div class="pl-heading"><span class="eyebrow mono">01 / The dissection</span><h2 id="pl-method-title">Five passes.<br /><em>One sharper position.</em></h2><p>A positioning decision is only as good as the understanding underneath it. The sequence stays consistent, even when the brand changes.</p></div>
+      <ol class="pl-steps">
+        <li><span class="pl-no mono">01</span><h3>Read the market</h3><p>Define the category, its rules, shifts, buying context and the real alternatives available to people.</p></li>
+        <li><span class="pl-no mono">02</span><h3>Map the competition</h3><p>Compare direct rivals, indirect substitutes and the claims each one is trying to own.</p></li>
+        <li><span class="pl-no mono">03</span><h3>Find the consumer insight</h3><p>Look for the need, friction or contradiction behind what people say and what they actually choose.</p></li>
+        <li><span class="pl-no mono">04</span><h3>Set the position</h3><p>Choose the audience, frame of reference, point of difference and reasons to believe.</p></li>
+        <li><span class="pl-no mono">05</span><h3>Add a fresh take</h3><p>Bring a clear point of view, test the obvious answer and explain what the brand could do differently.</p></li>
+      </ol>
+    </section>
+    <section class="pl-evidence wrap" aria-labelledby="pl-evidence-title">
+      <div class="pl-evidence-head"><span class="eyebrow mono">02 / Keep the thinking honest</span><h2 id="pl-evidence-title">Three layers.<br /><em>Never blurred.</em></h2></div>
+      <div class="pl-evidence-grid">
+        <article><span class="mono">A / Evidence</span><h3>What we can verify</h3><p>Public facts, product details, pricing, brand claims, campaign material, reports and dated sources.</p></article>
+        <article><span class="mono">B / Interpretation</span><h3>What the evidence may mean</h3><p>Patterns, competitive gaps and consumer tensions, clearly identified as analysis rather than fact.</p></article>
+        <article><span class="mono">C / Fresh take</span><h3>What I would challenge</h3><p>An original perspective, a strategic provocation or a possible move, with the reasoning made visible.</p></article>
+      </div>
+    </section>
+    <section class="pl-statement wrap" aria-labelledby="pl-statement-title">
+      <div class="pl-statement-top mono"><span>THE POSITIONING SENTENCE</span><span>WORKING TEMPLATE</span></div>
+      <h2 id="pl-statement-title">A place in the mind,<br />earned in the market.</h2>
+      <p class="pl-formula">For <b>[specific audience]</b>, <b>[brand]</b> is the <b>[frame of reference]</b> that <b>[meaningful difference]</b>, because <b>[reason to believe]</b>.</p>
+      <p class="pl-caveat">A working hypothesis, not a tagline. The final statement has to survive the competitor set, the consumer insight and the available proof.</p>
+    </section>
+    <section class="pl-current wrap" aria-labelledby="pl-current-title">
+      <div class="pl-current-head"><div><span class="eyebrow mono">03 / Current workbench</span><h2 id="pl-current-title">The first brand is <em>still to be picked.</em></h2></div><span class="mono pl-index">{pad(studies.length)} {studies.length === 1 ? 'study' : 'studies'} published</span></div>
+      {studies.length > 0 ? <TaleList items={studies} /> : <div class="pl-empty">
+        <div class="pl-empty-stamp mono">OPEN BENCH · 001</div>
+        <div><h3>No brand has been pre-selected.</h3><p>We will choose one with enough public material to investigate properly, build the competitor picture, look for a real consumer tension and then write the positioning argument. The point is not to reverse-engineer a slogan. It is to show how the decision was reached.</p></div>
+        <div class="pl-empty-status mono"><span>MARKET SCAN</span><b>PENDING</b><span>CONSUMER INSIGHT</span><b>PENDING</b></div>
+      </div>}
+    </section>
+    <section class="pl-closing wrap"><p>Not a client brief. Not a claim of commissioned work. An independent exercise in making the strategy visible.</p><a class="mono" href="#pl-method-title" data-cursor="link">Back to the method ↑</a></section>
+  </div>
+</Base>

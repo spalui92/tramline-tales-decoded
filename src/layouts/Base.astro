@@ -1,0 +1,108 @@
+---
+import '../styles/global.css';
+import '../styles/overrides.css';
+import '../styles/header.css';
+import '../styles/skins.css';
+import Icon from '../components/Icon.astro';
+import Footer from '../components/Footer.astro';
+import { cfg, SECTIONS, KINDS, href, absolute, tales, byKind, pad } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  accent?: string;
+  page: 'home' | 'tale' | 'archive' | 'lost';
+  article?: { date: string; tag: string };
+  wire?: boolean;
+  jsonld?: object;
+  skin?: string;
+}
+const { title, description = cfg.description, image, accent = '#f6c531', page, article, wire = true, jsonld, skin } = Astro.props;
+const fullTitle = title ? `${title} · ${cfg.name}` : `${cfg.name} · ${cfg.author}`;
+const canonical = absolute(Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), ''));
+const ogImage = image ?? absolute('og-cover.jpg');
+const favicon = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0c0b09"/><text x="32" y="45" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="38" fill="${accent}">T</text></svg>`)}`;
+---
+<!doctype html>
+<html lang="en" data-page={page} data-skin={skin || undefined} style={`--accent:${accent}`}>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<meta name="author" content={cfg.author} />
+<meta name="theme-color" content="#0c0b09" />
+<link rel="canonical" href={canonical} />
+<link rel="icon" href={favicon} />
+<link rel="alternate" type="application/rss+xml" title={cfg.name} href={href('rss.xml')} />
+<meta property="og:site_name" content={cfg.name} />
+<meta property="og:type" content={article ? 'article' : 'website'} />
+<meta property="og:title" content={title ?? `${cfg.name} · ${cfg.author}`} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta name="twitter:card" content="summary_large_image" />
+{article && <meta property="article:published_time" content={article.date} />}
+{article && <meta property="article:author" content={cfg.author} />}
+{jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld).replace(/</g, '\\u003c')} />}
+<script is:inline>
+  // Decide before the first paint what may animate, so nothing flashes.
+  (function () {
+    var h = document.documentElement, rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    h.classList.add('js', rm ? 'reduced' : 'motion');
+    try {
+      if (!rm && h.dataset.page === 'home' && !sessionStorage.getItem('tt-boarded')) h.classList.add('first-visit');
+      var w = sessionStorage.getItem('tt-wipe');
+      if (w && !rm) { h.classList.add('arriving'); h.style.setProperty('--wipe', JSON.parse(w).c); }
+    } catch (e) {}
+    // if the scripts never arrive, show everything as plain text
+    setTimeout(function () { if (!window.__tt) h.classList.remove('js', 'first-visit', 'arriving'); }, 4000);
+  })();
+</script>
+</head>
+<body class={wire ? 'has-wire' : undefined}>
+<a class="skip" href="#main">Skip to the reading</a>
+{wire && (
+  <div class="wire" aria-hidden="true"><div class="fill"></div><Icon name="tram" class="tram" /></div>
+)}
+<header class="site-header">
+  <a class="brand" href={href()} data-cursor="link" aria-label={`${cfg.name}, home`}>
+    <svg class="brand-tram" viewBox="0 0 48 52" aria-hidden="true"><path d="M10 6h28M24 6V2M14 10h20a4 4 0 0 1 4 4v22a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /><rect x="15" y="15" width="8" height="11" rx="1" fill="currentColor" opacity=".9" /><rect x="25" y="15" width="8" height="11" rx="1" fill="currentColor" opacity=".9" /><circle cx="24" cy="33" r="2.2" fill="currentColor" /><path d="M14 44l-3 6M34 44l3 6M11 47h26" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none" /></svg>
+    <span class="brand-text"><strong>Tramline Tales</strong><em>Notes from the depot</em></span>
+  </a>
+  <nav class="nav mono" id="site-nav" aria-label="Main">
+    {KINDS.map((k) => (
+      <a href={href(`${SECTIONS[k].dir}/`)} data-cursor="link" data-kind={k} aria-current={page === 'archive' && Astro.url.pathname.includes(`/${SECTIONS[k].dir}/`) ? 'page' : undefined}>{SECTIONS[k].short}</a>
+    ))}
+    <a class="nav-extra" href={href('#about')} data-cursor="link">About</a>
+    <a class="nav-extra nav-cta-m" href={href('archive/')} data-cursor="link">Enter the archive</a>
+  </nav>
+  <a class="nav-cta" href={href('archive/')} data-cursor="link">Enter the archive</a>
+  <button class="menu-btn" type="button" data-menu aria-label="Open menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+</header>
+
+<main id="main"><slot /></main>
+
+<Footer />
+
+<div class="cursor" aria-hidden="true"><div class="dot"></div><div class="label"></div></div>
+<div class="wipe" aria-hidden="true"><div class="stop"><Icon name="tram" class="tram" /><span class="mono">Next stop</span><span class="t" data-wipe-title></span></div></div>
+{page === 'home' && (
+  <div class="loader" aria-hidden="true">
+    <div class="ticket">
+      <div class="row"><span>C.T.C.</span><span>2nd class</span></div>
+      <div class="big">Tramline Tales</div>
+      <div class="row"><span>{cfg.stampPlace} &rarr; Esplanade</span><span>Fare: free</span></div>
+      <div class="rule"></div>
+      <div class="row" style="align-items:end"><span>Tales on board</span><span class="count" data-count data-total={tales.length}>000</span></div>
+      <span class="punch"><i></i><i></i><i></i></span>
+    </div>
+  </div>
+)}
+
+<script>
+  import '../scripts/main';
+</script>
+</body>
+</html>

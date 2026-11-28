@@ -1,0 +1,15 @@
+---
+// One Kolkata photograph. If its file has not been added yet, the slot shows
+// the place name on a dusk-coloured panel instead of a broken image.
+import { Image } from 'astro:assets';
+import type { Frame } from '../lib/kolkata';
+
+interface Props { frame: Frame; widths: number[]; sizes: string; class?: string }
+const { frame, widths, sizes, class: cls } = Astro.props;
+const fit = frame.image ? widths.filter((w) => w <= frame.image!.width) : [];
+---
+<div class:list={['frame', cls, !frame.image && 'is-empty']}>
+  {frame.image
+    ? <Image src={frame.image} alt={frame.alt} widths={fit.length ? fit : [frame.image.width]} sizes={sizes} loading="lazy" style={`object-position:${frame.pos}`} />
+    : <span class="frame-empty" role="img" aria-label={frame.alt}><span>{frame.place}</span></span>}
+</div>

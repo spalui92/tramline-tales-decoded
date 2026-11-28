@@ -1,0 +1,10 @@
+---
+import PieceView from '../../components/PieceView.astro';
+import { byKind } from '../../lib/site';
+
+export function getStaticPaths() {
+  return byKind('tale').map((piece) => ({ params: { slug: piece.slug }, props: { piece } }));
+}
+const { piece } = Astro.props;
+---
+<PieceView piece={piece} />

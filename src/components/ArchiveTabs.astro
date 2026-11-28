@@ -1,0 +1,18 @@
+---
+// The filter strip on every archive page: All · Tales · Depot Files · Brand Positioning Lab.
+// Plain links to plain pages, so it works with no script at all.
+import { SECTIONS, KINDS, href, pad, pieces, byKind, type Kind } from '../lib/site';
+interface Props { active: 'all' | Kind }
+const { active } = Astro.props;
+const tabs = [
+  { key: 'all', label: 'All', path: 'archive/', n: pieces.length },
+  ...KINDS.map((k) => ({ key: k, label: SECTIONS[k].label, path: `${SECTIONS[k].dir}/`, n: byKind(k).length })),
+];
+---
+<nav class="tabs mono" aria-label="Filter the archive">
+  {tabs.map((t) => (
+    <a href={href(t.path)} class={t.key === active ? 'on' : undefined} aria-current={t.key === active ? 'page' : undefined} data-cursor="link">
+      {t.label}<sup>{pad(t.n)}</sup>
+    </a>
+  ))}
+</nav>

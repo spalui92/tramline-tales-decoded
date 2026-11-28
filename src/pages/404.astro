@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { href } from '../lib/site';
+---
+<Base page="lost" title="Wrong stop" accent="#ec6f9b">
+  <section class="lost">
+    <Icon name="rosogolla" />
+    <h1>Wrong <em>stop.</em></h1>
+    <p>This page has stepped out for a rosogolla. The tales are all still on the line.</p>
+    <p><a class="ulink mono" href={href()} data-cursor="link">Back to the depot &rarr;</a></p>
+  </section>
+</Base>

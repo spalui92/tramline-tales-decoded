@@ -1,0 +1,19 @@
+---
+// The rubber stamp from the diary: FILED · TRAMLINE TALES · HOWRAH, with the date.
+import { cfg } from '../lib/site';
+interface Props { date: string; id: string }
+const { date, id } = Astro.props;
+const d = new Date(date + 'T00:00:00Z');
+const MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+const top = `${String(d.getUTCDate()).padStart(2, '0')} ${MON[d.getUTCMonth()]}`;
+const ring = `FILED · ${cfg.name.toUpperCase()} · ${cfg.stampPlace.toUpperCase()} ·`;
+const fs = Math.min(10.4, 270 / ring.length / 0.85).toFixed(1);
+---
+<svg class="stamp" viewBox="0 0 120 120" aria-hidden="true" data-stamp>
+  <defs><path id={`ring-${id}`} d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" /></defs>
+  <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="3" />
+  <circle cx="60" cy="60" r="33" fill="none" stroke="currentColor" stroke-width="1.4" />
+  <text font-family="Courier Prime, monospace" font-size={fs} letter-spacing="2" fill="currentColor"><textPath href={`#ring-${id}`} textLength="268" lengthAdjust="spacing">{ring}</textPath></text>
+  <text x="60" y="58" text-anchor="middle" font-family="Courier Prime, monospace" font-size="14" fill="currentColor">{top}</text>
+  <text x="60" y="75" text-anchor="middle" font-family="Courier Prime, monospace" font-size="12" fill="currentColor">{d.getUTCFullYear()}</text>
+</svg>

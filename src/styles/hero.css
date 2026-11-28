@@ -1,0 +1,110 @@
+/* ---------- hero: a night tram on an old iron bridge ----------
+   One composition: the photograph sits behind and a scrim keeps the left calm for the title. Nothing else is
+   laid on top, so the tram is the only picture. Everything is scoped to .hero so no other page is touched. */
+@font-face { font-family: 'Anton'; src: url('../assets/fonts/anton-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+
+.hero {
+  --amber: #d9a441; --parch: #e0cfa5; --paper-ink: #33261a; --red: #7a2a1f;
+  --display: 'Anton', 'Oswald Variable', 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  --head-h: calc(30px + var(--header-h));
+  --pad-x: clamp(20px, 4.6vw, 72px);
+  position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center;
+  min-height: max(100svh, 680px);
+  padding: calc(var(--head-h) + clamp(28px, 5vh, 64px)) var(--pad-x) clamp(90px, 12vh, 130px);
+  background: #0d0a07; color: var(--parch);
+}
+.hero-bg { position: absolute; inset: 0; z-index: -4; background: #0d0a07 url('../assets/hero/hero-bg.webp') 64% center / cover no-repeat;
+  filter: saturate(.88) brightness(.94) contrast(1.02); transform: scale(1.02); }
+/* keeps the left third dark and calm for the headline; the vignette keeps the edges hushed */
+.hero-scrim { position: absolute; inset: 0; z-index: -3;
+  background:
+    linear-gradient(90deg, rgba(9,6,3,.94) 0%, rgba(9,6,3,.82) 26%, rgba(9,6,3,.42) 50%, rgba(9,6,3,.06) 72%, transparent 100%),
+    linear-gradient(180deg, rgba(9,6,3,.55) 0%, transparent 22%, transparent 70%, rgba(9,6,3,.7) 100%),
+    radial-gradient(120% 100% at 60% 50%, transparent 55%, rgba(0,0,0,.55) 100%); }
+.hero-grain { position: absolute; inset: 0; z-index: -2; opacity: .22; mix-blend-mode: overlay; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .6  0 0 0 0 .5  0 0 0 0 .35  0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23n%29'/%3E%3C/svg%3E"); }
+
+.hero-copy { --h1: clamp(3.4rem, min(12.4vw, 19.5vh), 10.2rem); position: relative; z-index: 2; width: min(100%, clamp(300px, 50vw, 760px)); }
+
+/* the tag: a strip of yellowed parchment from a dusty drawer, an ink blot in one corner, two rusty nails.
+   Its size is locked to the title: 60% of the width of "Tramline" (which is about 3.67 times --h1). */
+.hero .tag { --tag-w: calc(var(--h1) * 2.2);
+  display: flex; align-items: center; justify-content: center; box-sizing: border-box; position: relative; isolation: isolate;
+  width: var(--tag-w); aspect-ratio: 1000 / 350; margin: 0 0 clamp(10px, 1.8vh, 20px) 2px; padding: 3% 9% 2%;
+  transform: rotate(-2.2deg); transform-origin: 15% 50%;
+  filter: drop-shadow(1px 5px 5px rgba(0,0,0,.55)) drop-shadow(0 1px 1px rgba(0,0,0,.5)); }
+.hero .tag .paper { position: absolute; inset: 0; z-index: -1; background: url('../assets/hero/tag-parchment.webp') center / 100% 100% no-repeat; }
+/* typed on an old machine, ink slightly heavy and settled into the paper */
+.hero .tag .txt { display: flex; flex-direction: column; align-items: center; gap: .26em; white-space: nowrap; text-align: center;
+  font-family: 'Special Elite', 'Courier Prime', monospace; font-size: calc(var(--tag-w) * .062); letter-spacing: .1em; text-transform: uppercase; line-height: 1;
+  color: rgba(30,20,10,.88); mix-blend-mode: multiply; text-shadow: 0 0 .7px rgba(30,20,10,.6), .5px .4px 0 rgba(30,20,10,.18); }
+.hero .tag .txt span + span { transform: translateX(3%) rotate(-.5deg); }
+
+/* the title scales with both the width and the height of the screen, so it never outgrows its column */
+.hero .title { margin: 0; font-family: var(--display); font-weight: 400; color: var(--parch); line-height: 1.04; letter-spacing: .012em; text-transform: uppercase;
+  text-shadow: 0 2px 0 rgba(0,0,0,.35), 0 10px 40px rgba(0,0,0,.5); }
+/* the title: hollow letters about 85% full of maroon ink, the surface never at rest.
+   The empty top of each letter is shaded inward, as if the letters were vessels with a lip that casts a shadow.
+   One wave rolls through while the level rises and falls like a tide; a dark band under the waterline gives it depth.
+   The letters stay real text: the ink is a background clipped to them. */
+.hero .title > span { display: block; position: relative; font-size: var(--h1); width: max-content; max-width: 100%;
+  color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: max(1px, .006em) rgba(224,207,165,.85); text-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='i' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='100'%3E%3Cstop offset='0' stop-color='%23b05a4b'/%3E%3Cstop offset='.15' stop-color='%23a85446'/%3E%3Cstop offset='.19' stop-color='%238a3a31'/%3E%3Cstop offset='.225' stop-color='%233e1210'/%3E%3Cstop offset='.33' stop-color='%2364221d'/%3E%3Cstop offset='.64' stop-color='%234d1816'/%3E%3Cstop offset='1' stop-color='%232a0b0a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,20 C24,19.1 44,14.8 66,14.8 C82,14.8 92,18.3 120,22.9 C160,25.7 206,22.9 240,20 V100 H0 Z' fill='url%28%23i%29'/%3E%3Cpath d='M0,20 C24,19.1 44,14.8 66,14.8 C82,14.8 92,18.3 120,22.9 C160,25.7 206,22.9 240,20' fill='none' stroke='rgba%28240,196,176,.45%29' stroke-width='1.1' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, #6f5a3c 0%, #6f5a3c 7.6%, #8d7650 8.6%, #b49d74 10.6%, #d2bf95 13.4%, var(--parch) 16.5%);
+  background-size: 3em 100%, 100% 100%; background-repeat: repeat-x, no-repeat; background-position: 0 0, 0 0;
+  -webkit-background-clip: text; background-clip: text;
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,.35)) drop-shadow(0 10px 22px rgba(0,0,0,.45));
+  animation: ink-drift 9s linear infinite, ink-tide 5.5s ease-in-out infinite alternate; }
+.hero .title > span + span { animation-delay: -3.1s, -4.6s; }
+@keyframes ink-drift { to { background-position-x: -3em, 0; } }
+@keyframes ink-tide { from { background-position-y: .03em, 0; } to { background-position-y: -.03em, 0; } }
+@media (prefers-reduced-motion: reduce) { .hero .title > span { animation: none; } }
+.hero .rule { display: block; width: clamp(90px, 10vw, 150px); height: 3px; background: var(--red); margin: clamp(14px, 2.4vh, 24px) 0; }
+
+/* The quote scales independently from the display headline, so tracking never pushes it beyond its column. */
+.hero .pull { position: relative; width: min(100%, 39rem); max-width: 100%; min-width: 0; box-sizing: border-box;
+  margin: 0 0 clamp(20px, 3.4vh, 34px); padding-left: clamp(14px, 1.05em, 22px);
+  font-size: clamp(.88rem, min(1.18vw, 1.9vh), 1.22rem); }
+.hero .pull::before { content: ''; position: absolute; left: 0; top: .12em; bottom: .12em; width: 3px; border-radius: 2px;
+  background: linear-gradient(180deg, var(--amber) 0%, rgba(217,164,65,.55) 60%, rgba(217,164,65,.12) 100%); }
+.hero .pull p { max-width: 40ch; margin: 0; font-family: var(--f-mono); letter-spacing: clamp(.035em, .42vw, .07em);
+  line-height: 1.42; text-wrap: balance; overflow-wrap: anywhere; text-transform: uppercase; color: var(--parch); }
+.hero .pull b { display: block; margin-top: .15em; color: var(--amber); letter-spacing: clamp(.03em, .38vw, .065em); }
+
+/* the quote: an editorial pull quote, serif italic, a hanging maroon quote mark, the punchline in rose, a typed credit.
+   Its size is locked to the title: 0.29 x --h1, so the first line ("The consumer isn't a moron.", about 10.3em of
+   this serif) spans about four-fifths of the width of "Tramline" on every screen. */
+.hero .pull.pull--ed { font-size: calc(var(--h1) * .29); width: auto; max-width: 100%; padding-left: 1.9em; margin-top: .2em; margin-bottom: 1.15em; }
+.hero .pull--ed::before { content: '\201C'; top: -.07em; bottom: auto; width: auto; height: auto; background: none; border-radius: 0;
+  font-family: 'Instrument Serif', Georgia, serif; font-size: 3.6em; line-height: 1; color: #b4574a; }
+.hero .pull.pull--ed p { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; text-transform: none; letter-spacing: .005em;
+  font-size: 1em; line-height: 1.16; max-width: none; color: var(--parch); }
+.hero .pull--ed b { font-weight: 400; letter-spacing: .005em; color: #d79482; margin-top: .06em; }
+.hero .pull--ed cite { display: flex; align-items: center; gap: 10px; margin-top: .9em; font-family: var(--f-mono); font-style: normal;
+  font-size: max(.6rem, calc(var(--h1) * .075)); letter-spacing: .24em; text-transform: uppercase; color: rgba(224,207,165,.62); }
+.hero .pull--ed cite::before { content: ''; width: 22px; height: 1px; background: currentColor; }
+
+
+.hero .cta { display: inline-flex; align-items: center; gap: 12px; padding: clamp(9px, 1.2vh, 12px) clamp(16px, 1.7vw, 24px);
+  font-family: var(--f-mono); font-size: clamp(.68rem, .82vw, .8rem); letter-spacing: .14em; text-transform: uppercase; color: var(--amber);
+  border: 1px solid rgba(217,164,65,.85); background: rgba(8,5,2,.35); transition: background .2s, color .2s, gap .2s; }
+.hero .cta:hover, .hero .cta:focus-visible { background: var(--amber); color: #0d0a07; gap: 16px; }
+
+/* a torn parchment edge along the bottom */
+.hero .torn { position: absolute; left: 0; right: 0; bottom: -1px; height: clamp(40px, 7vh, 74px); z-index: 3; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .35  0 0 0 0 .26  0 0 0 0 .14  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23n%29'/%3E%3C/svg%3E"), linear-gradient(180deg, #6f5d3c, #8f7b54 45%, #a69367);
+  clip-path: polygon(0 62%,2% 48%,5% 58%,8% 40%,12% 52%,15% 38%,19% 50%,23% 34%,27% 46%,31% 36%,36% 52%,40% 40%,44% 54%,49% 38%,53% 50%,58% 36%,62% 52%,66% 42%,71% 56%,75% 40%,80% 52%,84% 36%,88% 50%,92% 38%,96% 52%,100% 42%,100% 100%,0 100%);
+  filter: drop-shadow(0 -4px 8px rgba(0,0,0,.5)); }
+
+@media (max-width: 1100px) { .hero-copy { width: min(100%, 56vw); } }
+
+/* phones: the tram stays the star at the top and the copy sits under it */
+@media (max-width: 760px) {
+  .hero { flex-direction: column; align-items: stretch; justify-content: flex-start; min-height: 0; padding-top: calc(var(--head-h) + 22px); padding-bottom: calc(44px + 44px); }
+  .hero-bg { inset: 0 0 auto 0; height: 64svh; background-position: 80% 40%;
+    -webkit-mask-image: linear-gradient(#000 55%, transparent 100%); mask-image: linear-gradient(#000 55%, transparent 100%); }
+  .hero-scrim { background: radial-gradient(120% 40% at 70% 28%, transparent 50%, rgba(0,0,0,.5) 100%); }
+  .hero-copy { --h1: clamp(3.2rem, 17.5vw, 6.2rem); width: 100%; margin-top: 36svh; }
+  .hero .pull { width: 100%; max-width: 40rem; font-size: clamp(.82rem, 3.25vw, 1.02rem); margin-bottom: 22px; }
+  .hero .pull p { max-width: 39ch; }
+  .hero .torn { height: 44px; }
+}
