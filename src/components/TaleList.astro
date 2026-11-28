@@ -17,7 +17,7 @@ const fit = (w: number, list: number[]) => { const ok = list.filter((x) => x <= 
     <li class="tale-row" style={`--c:${t.colour}`} data-row={t.slug} data-reveal>
       <a href={href(t.path)} data-cursor="Read" data-wipe={t.colour} data-wipe-to={t.title}>
         {(t.cover || t.slug === '2026-11-28') && t.kind !== 'depot' && (
-          <span class="thumb"><span class="pinned" style={`--r:${lean[i % lean.length]}deg`}><Clip />{t.slug === '2026-11-28' ? <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Federer_serves_on_clay.jpg" alt="Roger Federer serving on clay at the 2016 Italian Open. Photograph by JC, CC BY-SA 2.0." loading="lazy" /> : <Image src={t.cover!.image} alt="" widths={fit(t.cover!.image.width, [480, 900])} sizes="86vw" loading="lazy" />}</span></span>
+          <span class="thumb"><span class="pinned" style={`--r:${lean[i % lean.length]}deg`}><Clip />{t.slug === '2026-11-28' ? <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Federer_serves_on_clay.jpg" alt="Roger Federer serving on clay at the 2016 Italian Open." loading="lazy" /> : <Image src={t.cover!.image} alt="" widths={fit(t.cover!.image.width, [480, 900])} sizes="86vw" loading="lazy" />}</span></span>
         )}
         <span class="no mono">{showKind || mixed ? `${SECTIONS[t.kind].singular} ` : ''}No. {pad(t.no)}</span>
         <span class="t">{t.title}</span>
